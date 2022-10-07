@@ -11,5 +11,5 @@ const API = axios.create({ baseURL: process.env.BASE_URL });
 
 // AUTH
 // export const signIn = (formData) => API.post("/auth/login", formData);
-export const login = (payload) => API.post("/auth/login", payload);
+
 
