@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Link from "next/link";
  import { useForm } from "react-hook-form";
 // import { useDispatch, useSelector } from "react-redux";
-import {  FormInput, FormPassword } from "../../components/shared";
-import { AuthLayout } from "../../components/layouts";
+import {  FormInput, FormPassword,AuthLayout } from "../../components";
+
 
 // import { authenticatedUser, login } from "../../redux/features/auth.slice";
 

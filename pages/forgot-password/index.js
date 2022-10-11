@@ -1,8 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import {  FormInput } from "../../components/shared";
-import { AuthLayout } from "../../components/layouts";
+import {  FormInput,AuthLayout } from "../../components";
+
 // import { forgotPassword } from "../../redux/features/auth.slice";
 
 const ForgotPassword = () => {
