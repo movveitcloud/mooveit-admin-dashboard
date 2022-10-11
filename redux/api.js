@@ -10,6 +10,9 @@ const API = axios.create({ baseURL: process.env.BASE_URL });
 // });
 
 // AUTH
-// export const signIn = (formData) => API.post("/auth/login", formData);
+ export const signIn = (payload) => API.post("/admin/login", payload);
+ export const forgotPassword = (payload) => API.post("/admin/forgot-password", payload);
+export const resetPassword = ({ payload, token }) => API.patch(`/admin/reset-password/${token}`, payload);
+export const verifyResetToken = (token) => API.get(`/admin/reset-password/${token}`);
 
 

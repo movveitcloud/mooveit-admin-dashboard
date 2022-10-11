@@ -3,11 +3,12 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import {  FormInput,AuthLayout } from "../../components";
 
-// import { forgotPassword } from "../../redux/features/auth.slice";
+ import { forgotPassword } from "../../redux/features/auth.slice";
 
 const ForgotPassword = () => {
-//   const { forgotLoading } = useSelector((state) => state.auth);
-//   const dispatch = useDispatch();
+  const { forgotLoading } = useSelector((state) => state.auth);
+  console.log(forgotLoading)
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -16,9 +17,9 @@ const ForgotPassword = () => {
   } = useForm();
 
   const onSubmit = (data, e) => {
-    // e.preventDefault();
-    // const payload = { ...data };
-    // dispatch(forgotPassword({ payload, reset }));
+     e.preventDefault();
+     const payload = { ...data };
+    dispatch(forgotPassword({ payload, reset }));
   };
 
   return (
@@ -37,12 +38,10 @@ const ForgotPassword = () => {
             errors={errors}
             errorMessage="Please add an email address"
           />
-          {/* <button className={`${forgotLoading && "loading"}  btn btn-block btn-primary mt-8`} type="submit">
+          <button className={`${forgotLoading && "loading"}  btn btn-block btn-primary mt-8`} type="submit">
             {forgotLoading ? "" : "Send Reset Link"}
-          </button> */}
-          <button className="  btn btn-block btn-primary mt-8" type="submit">
-            Send Reset Link
           </button>
+         
         </form>
       </div>
     </AuthLayout>

@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {  FormPassword, PageLoading,AuthLayout} from "../../components";
 import { errorPopUp } from "../../helpers/toastify";
 //import { authenticatedUser, resetPassword, verifyResetToken } from "../../redux/features/auth.slice";
-//import { login } from "../../redux/features/auth.slice";
+import { resetPassword, verifyResetToken } from "../../redux/features/auth.slice";
+import { login } from "../../redux/features/auth.slice";
 
 const ResetPassword = () => {
-  // const { verifyLoading, resetLoading, resetTokenData } = useSelector((state) => state.auth);
+  const { verifyLoading, resetLoading, resetTokenData } = useSelector((state) => state.auth);
   // const user = authenticatedUser();
-  // const dispatch = useDispatch();
+   const dispatch = useDispatch();
   const router = useRouter();
   const token = router.query.token;
   const {
@@ -23,30 +24,31 @@ const ResetPassword = () => {
   const onSubmit = (data, e) => {
     e.preventDefault();
 
-    // const { password, confirmPassword } = data;
-    // if (password !== confirmPassword) return errorPopUp({ msg: "Passwords do not match" });
-    // if (password == confirmPassword) {
-    //   const payload = { password: password };
-    //   dispatch(resetPassword({ payload, token, reset }));
-    // }
+    const { password, confirmPassword } = data;
+    if (password !== confirmPassword) return errorPopUp({ msg: "Passwords do not match" });
+    if (password == confirmPassword) {
+      const payload = { password: password };
+     dispatch(resetPassword({ payload, token, reset }));
+    }
   };
 
-  // useEffect(() => {
-  //   if (user) {
-  //     router.replace(user.role == "partner" ? "/listings" : "/your-storage");
-  //     return;
-  //   }
-  //   if (token !== undefined && !user) {
-  //     dispatch(verifyResetToken({ token }));
-  //   }
-  // }, [token]);
+  useEffect(() => {
+    // if (user) {
+    //   router.replace(user.role == "partner" ? "/listings" : "/your-storage");
+    //   return;
+    // }
+    if (token !== undefined ) {
+      console.log(token)
+       dispatch(verifyResetToken({ token }));
+      }
+  }, [token]);
 
-  // if (verifyLoading) {
-  //   return <PageLoading loading={verifyLoading} />;
-  // }
+   if (verifyLoading) {
+     return <PageLoading loading={verifyLoading} />;
+   }
 
   return (
-    // resetTokenData?.success && (
+    resetTokenData?.success && (
       <AuthLayout title="Reset Password">
         <div className="text-center">
           <div className="mb-8">
@@ -70,16 +72,16 @@ const ResetPassword = () => {
                 errorMessage="Please add a password"
               />
             </div>
-            {/* <button className={`${resetLoading && "loading"}  btn btn-block btn-primary mt-8`} type="submit">
+            <button className={`${resetLoading && "loading"}  btn btn-block btn-primary mt-8`} type="submit">
               {resetLoading ? "" : "Reset Password"}
-            </button> */}
-             <button className="btn btn-block btn-primary mt-8" type="submit">
-              Reset Password
             </button>
+             {/* <button className="btn btn-block btn-primary mt-8" type="submit">
+              Reset Password
+            </button> */}
           </form>
         </div>
       </AuthLayout>
-    // )
+   )
   );
 };
 
