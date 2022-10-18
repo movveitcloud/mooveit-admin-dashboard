@@ -65,6 +65,9 @@ const DashboardNavbar = ({ pathname }) => {
             {/* <h2 className="text-xs text-[#AAAAAA]">{`${userData?.email.slice(0, 22)}${
               userData?.email.length > 22 ? "..." : ""
             }`}</h2> */}
+            <h2 className="text-xs text-[#AAAAAA]">
+Admin@gmail.com
+            </h2>
           </div>
         </div>
         <ChevronDownIcon className="w-4" />

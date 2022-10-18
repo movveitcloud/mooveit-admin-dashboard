@@ -17,3 +17,7 @@ export { default as PageLayout } from "./layouts/PageLayout";
 export { default as DefaultLayout } from "./layouts/DefaultLayout";
 export { default as AuthLayout } from "./layouts/AuthLayout";
 export { default as DashboardLayout } from "./layouts/DashboardLayout"
+
+//DASHBOARD
+export { default as Users } from "./dashboard/ManageAccounts/Users"
+export { default as Partners } from "./dashboard/ManageAccounts/Partners"

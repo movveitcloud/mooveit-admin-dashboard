@@ -21,9 +21,15 @@ const TitleBar = ({ pageTitle, pathname, menuOpen, setMenuOpen }) => {
           <input
             type="text"
             // placeholder={isPartner ? "Looking for something" : "Search listings by location  or partner"}
-            placeholder="Looking for something"
+            placeholder="Search listings by location  or partner"
             className="w-full bg-transparent h-full pr-6 outline-none text-base placeholder:text-[#A5A5A5]"
           />
+        </div>
+        <div className="flex items-center gap-6">
+          
+          <div className="justify-center items-center border border-[#DCDCFF] rounded p-3 cursor-pointer  hidden sm:flex">
+            <BellIcon className="w-6 text-[#222222]" />
+          </div>
         </div>
 
        
