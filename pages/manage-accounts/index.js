@@ -5,6 +5,7 @@ import {Users,Partners} from '../../components'
 import { ChevronDownIcon, SearchIcon, DownloadIcon } from "@heroicons/react/outline";
 const ManageAccounts = () => {
   const [activeButton,setActiveButton]=useState("users")
+  const [value, setValue] = useState("");
 
   const Search = (e) => {
     
@@ -43,7 +44,7 @@ const ManageAccounts = () => {
                 <SearchIcon className="text-primary w-5 md:w-6 mr-1" />
                 <input
                   type="text"
-                  value=""
+                  value={value}
                   onChange={Search}
                   placeholder="Search..."
                   
@@ -78,8 +79,8 @@ const ManageAccounts = () => {
                 <SearchIcon className="text-primary w-5 md:w-6 mr-1" />
                 <input
                   type="text"
-                  value=""
-                  onChange=""
+                  value={value}
+                  onChange={Search}
                   placeholder="Search..."
                   
                   className="w-full h-full  outline-none text-base placeholder:text-[#959595] placeholder:text-base"
