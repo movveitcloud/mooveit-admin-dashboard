@@ -11,6 +11,7 @@ const Users = () => {
   return (
     <div className=''> 
     <div className='overflow-auto rounded-lg '>
+
         <table className="w-full p-4 mb-6 ">
             <thead className="bg-white text-black border border-[#DCDCFF] rounded-md p-6 ">
               <tr className='p-4'>
@@ -66,6 +67,7 @@ const Users = () => {
                 ))}
             </tbody>
           </table>
+          </div>
 
           <div className='text-center text-[#959595]   flex justify-center items-center mb-6  '>
             <div className='flex justify-between w-full  lg:w-1/3 md:w-2/3 p-2 px-4 '>
@@ -86,7 +88,7 @@ const Users = () => {
             </div>
             </div>
             </div>
-          </div>
+         
 
     </div>
   )
