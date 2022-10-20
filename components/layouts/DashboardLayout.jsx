@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { dashboardNavLinks } from "../../helpers/data";
 import { motion } from "framer-motion";
-// import { authenticatedUser } from "../../redux/features/auth.slice";
+import { authenticatedUser } from "../../redux/features/auth.slice";
 import { DashboardNavbar, Meta, TitleBar, PageLoading } from "../index";
 
 const DashboardLayout = ({ children, name, userInfo }) => {
@@ -12,37 +12,38 @@ const DashboardLayout = ({ children, name, userInfo }) => {
   const [pageTitle, setPageTitle] = useState("");
   const [hasPermission, setHasPermission] = useState(false);
   const router = useRouter();
-//   const user = authenticatedUser();
+  const user = authenticatedUser();
 
-//   const getPageTitle = () => {
-//     dashboardNavLinks?.map(({ path, title }) =>
-//       path == router?.asPath ? setPageTitle(title) : name ? setPageTitle(name) : ""
-//     );
-//   };
+  //   const getPageTitle = () => {
+  //     dashboardNavLinks?.map(({ path, title }) =>
+  //       path == router?.asPath ? setPageTitle(title) : name ? setPageTitle(name) : ""
+  //     );
+  //   };
 
-//   const authorizeUser = (role) => {
-//     //BOUNCE UNAUTHORIZED USERS
-//     const item = dashboardNavLinks?.find((a) => router?.asPath.includes(a.path));
-//     //  const sub =  dashboardNavLinks?.subMenus?.find((a) => router?.asPath.includes(a.path));
-//     if (item && !item?.permission.includes(role))
-//       return router.replace(`${user.role == "partner" ? "/listings" : "/your-storage"}`);
-//     setHasPermission(true);
-//   };
+  //   const authorizeUser = (role) => {
+  //     //BOUNCE UNAUTHORIZED USERS
+  //     const item = dashboardNavLinks?.find((a) => router?.asPath.includes(a.path));
+  //     //  const sub =  dashboardNavLinks?.subMenus?.find((a) => router?.asPath.includes(a.path));
+  //     if (item && !item?.permission.includes(role))
+  //       return router.replace(`${user.role == "partner" ? "/listings" : "/your-storage"}`);
+  //     setHasPermission(true);
+  //   };
 
-//   useEffect(() => {
-//     if (!user) {
-//       router.push("/login");
-//     }
-//     if (user && !user.isVerified) {
-//       router.push("/verify");
-//     }
-//     if (user && user.isVerified) {
-//       authorizeUser(user.role);
-//     }
-//     getPageTitle();
-//     setPageReady(true);
-//     setLoading(false);
-//   }, []);
+  useEffect(() => {
+    if (!user) {
+      router.push("/");
+    }
+
+    // getPageTitle();
+    setPageReady(true);
+    setLoading(false);
+    // if (user && !user.isVerified) {
+    //   router.push("/verify");
+    // }
+    // if (user && user.isVerified) {
+    //   authorizeUser(user.role);
+    // }
+  }, []);
 
   // if (loading) {
   //   return <PageLoading loading={loading} />;
@@ -51,7 +52,7 @@ const DashboardLayout = ({ children, name, userInfo }) => {
   return (
     <>
       <Meta title={`Dashboard | ${pageTitle}`} />
-      {/* {pageReady && ( */}
+      {pageReady && (
         <div className="h-screen flex justify-content items-center text-black">
           <aside className="hidden bg-white h-screen w-3/12 overflow-y-auto lg:block border-r">
             <DashboardNavbar pathname={router.asPath} />
@@ -70,7 +71,7 @@ const DashboardLayout = ({ children, name, userInfo }) => {
             </motion.div>
           </div>
         </div>
-      {/* )} */}
+      )}
     </>
   );
 };

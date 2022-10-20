@@ -1,12 +1,12 @@
 import React from 'react'
 import { DashboardLayout } from '../../components'
 
-const Payments = () => {
+const ManagePayments = () => {
   return (
     <DashboardLayout>
-      Payments
+      ManagePayments
       </DashboardLayout>
   )
 }
 
-export default Payments
+export default ManagePayments
