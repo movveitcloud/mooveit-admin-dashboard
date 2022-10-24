@@ -14,7 +14,7 @@ import { PulseLoader } from "react-spinners";
 import { getListings } from "../../../redux/features/listings.slice";
 import { useDispatch, useSelector } from "react-redux";
 
-const PendingLayout = ({ content }) => {
+const PendingLayout = () => {
   const [option, setOption] = useState("");
   const dispatch = useDispatch();
 

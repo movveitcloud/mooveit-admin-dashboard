@@ -2,12 +2,12 @@ import axios from "axios";
 
 const API = axios.create({ baseURL: process.env.BASE_URL });
 
-// API.interceptors.request.use((req) => {
-//   if (localStorage.getItem("user")) {
-//     req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem("user")).token}`;
-//   }
-//   return req;
-// });
+API.interceptors.request.use((req) => {
+  if (localStorage.getItem("admin")) {
+    req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem("admin")).token}`;
+  }
+  return req;
+});
 
 // AUTH
 export const signIn = (payload) => API.post("/admin/login", payload);
@@ -16,5 +16,7 @@ export const resetPassword = ({ payload, token }) => API.patch(`/admin/reset-pas
 export const verifyResetToken = (token) => API.get(`/admin/reset-password/${token}`);
 
 //LISTINGS
-
 export const getListings = () => API.get("/users/listings");
+
+//USERS
+export const getUsers = () => API.get("/admin/users");

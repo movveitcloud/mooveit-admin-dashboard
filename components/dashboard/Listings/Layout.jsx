@@ -5,7 +5,7 @@ import { ChevronLeftIcon, ChevronRightIcon, DotsVerticalIcon, EyeIcon, TrashIcon
 import { getListings } from "../../../redux/features/listings.slice";
 import { PulseLoader } from "react-spinners";
 
-const Layout = ({ content, name }) => {
+const Layout = () => {
   const [option, setOption] = useState("");
 
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ const Layout = ({ content, name }) => {
     dispatch(getListings());
   }, []);
   const { listings } = useSelector((state) => state.listing);
+  console.log(listings);
   const { listingLoading } = useSelector((state) => state.listing);
 
   return (

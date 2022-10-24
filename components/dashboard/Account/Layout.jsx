@@ -1,9 +1,22 @@
 import { ChevronLeftIcon, MailIcon, DotsVerticalIcon, EyeIcon, TrashIcon } from "@heroicons/react/outline";
-
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { getUsers } from "../../../redux/features/users.slice";
+import { getListings } from "../../../redux/features/listings.slice";
 
-const Layout = ({ content, name }) => {
+const Layout = ({ name }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // dispatch(getListings());
+    dispatch(getUsers());
+  }, []);
+  const { users } = useSelector((state) => state.user);
+  console.log(users);
+
+  // const { listings } = useSelector((state) => state.listing);
+  // console.log(listings);
   const [option, setOption] = useState("");
 
   return (
@@ -29,75 +42,82 @@ const Layout = ({ content, name }) => {
             </tr>
           </thead>
           <tbody className="w-full   ">
-            {content &&
-              content.map(({ User, Email, Phone, Status, Last, id }, index) => (
-                <tr className="capitalize cursor-pointer border border-[#DCDCFF]   " key={index}>
-                  <td className="px-4 pr-0 ">
-                    <div className="border border-[#DCDCFF] w-4 h-4 rounded-sm mr-2"> </div>
-                  </td>
-                  <td className=" w-[30%]  p-4 ">
-                    <div className="flex justify-start items-center">
-                      {/* <div className="rounded-full w-8 h-8 mr-2  ">
+            {users?.map(
+              ({ User, firstName, lastName, email, role, id }, index) =>
+                role === name && (
+                  <tr className="capitalize cursor-pointer border border-[#DCDCFF]   " key={index}>
+                    <td className="px-4 pr-0 ">
+                      <div className="border border-[#DCDCFF] w-4 h-4 rounded-sm mr-2"> </div>
+                    </td>
+                    <td className=" w-[30%]  p-4 ">
+                      <div className="flex justify-start items-center">
+                        {/* <div className="rounded-full w-8 h-8 mr-2  ">
                         <img className="w-full object-fit h-full rounded-full" src="/auth-image.png" alt="user-image" />
                       </div> */}
-                      <p className="text-sm">{User}</p>
-                    </div>
-                  </td>
+                        <p className="text-sm">
+                          {firstName} {lastName}
+                        </p>
+                      </div>
+                    </td>
 
-                  <td className="w-[15%] p-4 text-sm ">{Email}</td>
-                  <td className="w-[15%] p-4 text-sm">{Phone}</td>
-                  <td className="w-[10%] p-4 text-sm ">
-                    <span
+                    <td className="w-[15%] p-4 text-sm ">{email}</td>
+                    <td className="w-[15%] p-4 text-sm">08066198765</td>
+                    <td className="w-[10%] p-4 text-sm ">
+                      {/* <span
                       className={`${
                         Status === "Verified" ? "bg-[#BBF7D0] text-[#11A13A] " : "bg-[#FECACA] text-[#D12C2C]"
                       }  rounded-full  text-center items-center p-2 px-4`}>
                       {Status}
-                    </span>
-                  </td>
-                  <td className="w-[10%] p-4 text-sm">{Last}</td>
-                  <td className="pr-4  w-[10%]      ">
-                    {name === "users" ? (
-                      <div tabIndex="0" className="dropdown dropdown-left top-1">
-                        <DotsVerticalIcon className="w-4  " />
+                    </span> */}
+                      <span className="bg-[#BBF7D0] text-[#11A13A] rounded-full  text-center items-center p-2 px-4">
+                        Verified
+                      </span>
+                    </td>
+                    <td className="w-[10%] p-4 text-sm">Last</td>
+                    <td className="pr-4  w-[10%]      ">
+                      {name === "customer" ? (
+                        <div tabIndex="0" className="dropdown dropdown-left top-1">
+                          <DotsVerticalIcon className="w-4  " />
 
-                        <div
-                          tabIndex="0"
-                          className="  bg-white rounded-sm shadow w-auto p-4 px-4 dropdown-content menu   ">
-                          <div className="text-[12px] flex whitespace-nowrap ">
-                            <EyeIcon className="w-4 mr-4 mb-4 " />
-                            <p>View History</p>
-                          </div>
-                          <div className="text-[12px] flex">
-                            <TrashIcon className="w-4 mr-4 " />
-                            <p>Delete User</p>
+                          <div
+                            tabIndex="0"
+                            className="  bg-white rounded-sm shadow w-auto p-4 px-4 dropdown-content menu   ">
+                            <div className="text-[12px] flex whitespace-nowrap ">
+                              <EyeIcon className="w-4 mr-4 mb-4 " />
+                              <p>View History</p>
+                            </div>
+                            <div className="text-[12px] flex">
+                              <TrashIcon className="w-4 mr-4 " />
+                              <p>Delete User</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ) : (
-                      <div tabIndex="0" className="dropdown dropdown-left dropdown-down z-10 top-1">
-                        <DotsVerticalIcon className="w-4  " />
+                      ) : (
+                        <div tabIndex="0" className="dropdown dropdown-left dropdown-down z-10 top-1">
+                          <DotsVerticalIcon className="w-4  " />
 
-                        <div
-                          tabIndex="0"
-                          className="  bg-white rounded-sm shadow w-auto p-4 px-4 dropdown-content -top-10 menu   ">
-                          <div className="text-[12px] flex whitespace-nowrap ">
-                            <MailIcon className="w-4 mr-4 mb-4 " />
-                            <p>Message Partner</p>
-                          </div>
-                          <div className="text-[12px] flex whitespace-nowrap ">
-                            <EyeIcon className="w-4 mr-4 mb-4 " />
-                            <p>View Listings</p>
-                          </div>
-                          <div className="text-[12px] flex">
-                            <TrashIcon className="w-4 mr-4 " />
-                            <p>Delete Partner</p>
+                          <div
+                            tabIndex="0"
+                            className="  bg-white rounded-sm shadow w-auto p-4 px-4 dropdown-content -top-10 menu   ">
+                            <div className="text-[12px] flex whitespace-nowrap ">
+                              <MailIcon className="w-4 mr-4 mb-4 " />
+                              <p>Message Partner</p>
+                            </div>
+                            <div className="text-[12px] flex whitespace-nowrap ">
+                              <EyeIcon className="w-4 mr-4 mb-4 " />
+                              <p>View Listings</p>
+                            </div>
+                            <div className="text-[12px] flex">
+                              <TrashIcon className="w-4 mr-4 " />
+                              <p>Delete Partner</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    )}
-                  </td>
-                </tr>
-              ))}
+                      )}
+                    </td>
+                  </tr>
+                )
+            )}
           </tbody>
         </table>
       </div>

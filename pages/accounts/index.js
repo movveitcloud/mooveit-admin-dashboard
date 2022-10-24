@@ -17,7 +17,7 @@ const ManageAccounts = () => {
           className={`${
             activeButton === "users" ? "bg-[#DCDCFF] text-[#4543A5]" : "bg-[#EEEEEE] text-[#BBBBBB] "
           } bg-[#DCDCFF] py-2 px-4 rounded-md  flex items-center align-middle justify-center text-sm md:text-base `}>
-          Users
+          Customer
           <div
             className={` ${
               activeButton === "users" ? "bg-[#4543A5]" : "bg-[#BBBBBB]"

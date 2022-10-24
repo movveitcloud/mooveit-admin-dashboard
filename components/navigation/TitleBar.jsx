@@ -11,8 +11,6 @@ const TitleBar = ({ pageTitle, pathname, menuOpen, setMenuOpen }) => {
   const router = useRouter();
   // const user = authenticatedUser();
 
-  
-
   return (
     <div className="py-5 px-4 lg:px-8 lg:py-5 w-full border-b">
       <div className="flex justify-between items-center gap-4">
@@ -26,14 +24,11 @@ const TitleBar = ({ pageTitle, pathname, menuOpen, setMenuOpen }) => {
           />
         </div>
         <div className="flex items-center gap-6">
-          
           <div className="justify-center items-center border border-[#DCDCFF] rounded p-3 cursor-pointer  hidden sm:flex">
             <BellIcon className="w-6 text-[#222222]" />
           </div>
         </div>
 
-       
-        
         <MenuAlt3Icon className="lg:hidden w-8 text-black cursor-pointer" onClick={() => setMenuOpen(true)} />
       </div>
 
@@ -61,4 +56,3 @@ const TitleBar = ({ pageTitle, pathname, menuOpen, setMenuOpen }) => {
 };
 
 export default TitleBar;
-
