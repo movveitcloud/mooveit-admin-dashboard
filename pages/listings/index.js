@@ -73,7 +73,7 @@ const Listings = () => {
             </div>
           </div>
 
-          <div className="border border-[#DCDCFF] p-2 py-3 bg-white whitespace-nowrap rounded-md text-sm  flex items-center">
+          <div className="border border-[#DCDCFF] p-2 py-3 bg-white whitespace-nowrap rounded-md text-sm  flex items-center cursor-pointer">
             <DownloadIcon className="w-4 mr-2 text-[#222222]  " />
             Download CSV
           </div>
@@ -113,7 +113,7 @@ const Listings = () => {
                 className="w-full h-full  outline-none text-base placeholder:text-[#959595] placeholder:text-base"
               />
             </div>
-            <div className="border border-[#DCDCFF]  p-2 bg-white whitespace-nowrap rounded-md   flex items-center">
+            <div className="border border-[#DCDCFF]  p-2 bg-white whitespace-nowrap rounded-md pointer  flex items-center">
               <DownloadIcon className="w-4 text-[#222222] mr-2 " />
               Download CSV
             </div>
