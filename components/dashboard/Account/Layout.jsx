@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon, DotsVerticalIcon, EyeIcon, TrashIcon } from "@heroicons/react/outline";
+import { ChevronLeftIcon, MailIcon, DotsVerticalIcon, EyeIcon, TrashIcon } from "@heroicons/react/outline";
 
 import React from "react";
 import { useState } from "react";
@@ -81,7 +81,7 @@ const Layout = ({ content, name }) => {
                           tabIndex="0"
                           className="  bg-white rounded-sm shadow w-auto p-4 px-4 dropdown-content -top-10 menu   ">
                           <div className="text-[12px] flex whitespace-nowrap ">
-                            <EyeIcon className="w-4 mr-4 mb-4 " />
+                            <MailIcon className="w-4 mr-4 mb-4 " />
                             <p>Message Partner</p>
                           </div>
                           <div className="text-[12px] flex whitespace-nowrap ">

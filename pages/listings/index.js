@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Approved, DashboardLayout, Pending } from "../../components";
 import { useState } from "react";
 import { Users, Partners } from "../../components";
 import { ChevronDownIcon, SearchIcon, DownloadIcon } from "@heroicons/react/outline";
+
 const Listings = () => {
   const [activeButton, setActiveButton] = useState("approved");
   const [value, setValue] = useState("");
@@ -40,7 +41,7 @@ const Listings = () => {
         </button>
       </div>
 
-      <div className="bg-white p-8 shadow ">
+      <div className="bg-white p-8  shadow ">
         <div className="hidden md:flex justify-between mb-10 text-sm ">
           <div className="flex justify-start xl:w-2/3 mr-4   ">
             <div className="flex items-center  justify-start w-fit border border-[#DCDCFF] lg:mr-8 md:mr-2    rounded-md">
@@ -55,7 +56,7 @@ const Listings = () => {
                 <p>Packing</p>
                 <ChevronDownIcon className="w-4 text-[#222222] font-normal ml-2" />
               </div>
-              <div className="flex items-center justify-start  p-3 border border-r-[#DCDCFF] py-3 whitespace-nowrap cursor-pointer">
+              <div className="flex items-center justify-start  p-3 border border-r-[#DCDCFF]  py-3 whitespace-nowrap cursor-pointer">
                 <p>Last Active</p>
                 <ChevronDownIcon className="w-4 text-[#222222] font-normal ml-2" />
               </div>
@@ -73,28 +74,31 @@ const Listings = () => {
           </div>
 
           <div className="border border-[#DCDCFF] p-2 py-3 bg-white whitespace-nowrap rounded-md text-sm  flex items-center">
-            <DownloadIcon className="w-4 mr-2 text-[#222222] m-0 " />
+            <DownloadIcon className="w-4 mr-2 text-[#222222]  " />
             Download CSV
           </div>
         </div>
 
         {/* mobile */}
-        <div className="md:hidden mb-4 text-sm">
-          <div className="flex items-center  justify-start w-full border border-[#DCDCFF] lg:mr-8 md:mr-2 text-center    rounded-md">
-            <div className="bg-[#4543A5] border border-l-[#DCDCFF] rounded-l-md border-r-none p-2 text-white whitespace-nowrap cursor-pointer w-1/3 text-center font-normal">
-              View All
-            </div>
-            <div className="flex items-center justify-center border border-r-[#DCDCFF]  p-2 cursor-pointer w-1/3 text-center">
-              <p>Moving</p>
-              <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
-            </div>
-            <div className="flex items-center justify-center border border-r-[#DCDCFF]  p-2 cursor-pointer w-1/3 text-center">
-              <p>Packing</p>
-              <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
-            </div>
-            <div className="flex items-center justify-center  p-2 border border-r-[#DCDCFF] whitespace-nowrap cursor-pointer w-1/3 text-center ">
-              <p>Last Active</p>
-              <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
+
+        <div className="md:hidden mb-4  text-sm">
+          <div className="overflow-auto">
+            <div className="flex items-center  justify-start w-fit border border-[#DCDCFF] lg:mr-8 md:mr-2 text-center    rounded-md">
+              <div className="bg-[#4543A5] border border-l-[#DCDCFF] rounded-l-md border-r-none p-2 text-white whitespace-nowrap cursor-pointer w-fit text-center font-normal">
+                View All
+              </div>
+              <div className="flex items-center justify-center border border-r-[#DCDCFF]  p-2 cursor-pointer w-fit text-center">
+                <p>Moving</p>
+                <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
+              </div>
+              <div className="flex items-center justify-center border border-r-[#DCDCFF]  p-2 cursor-pointer w-fit text-center">
+                <p>Packing</p>
+                <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
+              </div>
+              <div className="flex items-center justify-center  p-2 border border-r-[#DCDCFF] whitespace-nowrap cursor-pointer  text-center ">
+                <p>Last Active</p>
+                <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
+              </div>
             </div>
           </div>
 
@@ -110,11 +114,12 @@ const Listings = () => {
               />
             </div>
             <div className="border border-[#DCDCFF]  p-2 bg-white whitespace-nowrap rounded-md   flex items-center">
-              <DownloadIcon className="w-6 text-[#222222] m-0 " />
+              <DownloadIcon className="w-4 text-[#222222] mr-2 " />
               Download CSV
             </div>
           </div>
         </div>
+
         {/* end of mobile */}
 
         {activeButton === "approved" ? <Approved /> : <Pending />}

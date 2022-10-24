@@ -8,6 +8,7 @@ const ManageAccounts = () => {
   const [value, setValue] = useState("");
 
   const Search = (e) => {};
+
   return (
     <DashboardLayout>
       <div className="flex space-x-5 mb-4">

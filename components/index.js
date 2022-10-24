@@ -24,3 +24,4 @@ export { default as Partners } from "./dashboard/Account/Partners";
 export { default as Users } from "./dashboard/Account/Users";
 export { default as Approved } from "./dashboard/Listings/Approved";
 export { default as Pending } from "./dashboard/Listings/Pending";
+export { default as ApprovalLayout } from "./dashboard/Listings/ApprovalLayout";
