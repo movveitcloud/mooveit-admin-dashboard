@@ -7,7 +7,7 @@ const Approve = () => {
   const router = useRouter();
   const statefunc = () => router.push("/listings");
 
-  return <ApprovalLayout state="Approve" func={listing} statefunc={statefunc} stating="approving" />;
+  return <ApprovalLayout state="Approve" func="listing" statefunc={statefunc} stating="approving" />;
 };
 
 export default Approve;
