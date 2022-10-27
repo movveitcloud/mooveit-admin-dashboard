@@ -14,14 +14,17 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: "#26348c",
+          // primary: "#26348c",
           "primary-content": "#ffffff",
           "primary-focus": "#26348c",
           secondary: "#0095f6",
           "secondary-focus": "#0095f6",
-          accent: "#f68634",
-          "accent-content": "#ffffff",
-          "accent-focus": "#f68634",
+          // accent: "#f68634",
+          // "accent-content": "#ffffff",
+          // "accent-focus": "#f68634",
+          accent: "#FEF08A",
+          "accent-content": "#12181F",
+          "accent-focus": "#EDCC5B",
         },
       },
     ],

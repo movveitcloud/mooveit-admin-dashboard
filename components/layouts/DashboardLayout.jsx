@@ -51,7 +51,7 @@ const DashboardLayout = ({ children, name, userInfo }) => {
 
   return (
     <>
-      <Meta title={`Dashboard | ${pageTitle}`} />
+      <Meta title={`Admin-Dashboard | ${pageTitle}`} />
       {pageReady && (
         <div className="h-screen flex justify-content items-center text-black">
           <aside className="hidden bg-white h-screen w-3/12 overflow-y-auto lg:block border-r">

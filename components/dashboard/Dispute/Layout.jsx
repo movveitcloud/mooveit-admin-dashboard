@@ -29,14 +29,14 @@ const Layout = () => {
         <div className="overflow-auto rounded-lg">
           <table className=" w-full p-4 mb-8 ">
             <thead className="bg-white  border border-accent rounded-md p-6 ">
-              <tr className="p-4 ">
-                <th className="items-center ml-6 my-4 text-start w-[30%] px-4">Listing</th>
+              <tr className="p-4 py-4">
+                <th className="items-center ml-6 my-4 text-start w-[30%] p-4 ">Ticket Number</th>
 
-                <th className="w-[15%] whitespace-nowrap text-start p-4">Location</th>
+                <th className="w-[15%] whitespace-nowrap text-start p-4">Partner</th>
 
-                <th className="w-[15%] whitespace-nowrap text-start p-4">With Moving</th>
-                <th className="w-[10%] whitespace-nowrap text-start p-4">With Packing</th>
-                <th className="w-[10%] whitespace-nowrap text-start p-4">Last Active</th>
+                <th className="w-[15%] whitespace-nowrap text-start p-4">User</th>
+                <th className="w-[10%] whitespace-nowrap text-start p-4">Date Created</th>
+
                 <th className="w-[10%]"></th>
                 {/* <th className="w-[10%]"></th> */}
               </tr>
@@ -61,10 +61,10 @@ const Layout = () => {
 
                       <td className="w-[10%] p-4 text-sm">{`${parking === false ? "False" : "True"}`}</td>
 
-                      <td className="w-[10%] p-4 text-sm">Today</td>
                       <td className="w-[15%] p-4  mr-0 ">
                         <div className="flex">
                           <EyeIcon className="w-4 mr-4  " />
+                          <p className="whitespace-nowrap mr-4">View Dispute</p>
                           <DotsVerticalIcon className="w-4  " />
                         </div>
                       </td>

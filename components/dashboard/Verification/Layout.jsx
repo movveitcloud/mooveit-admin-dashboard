@@ -14,7 +14,7 @@ import { PulseLoader } from "react-spinners";
 import { getListings } from "../../../redux/features/listings.slice";
 import { useDispatch, useSelector } from "react-redux";
 
-const PendingLayout = () => {
+const Layout = () => {
   const [option, setOption] = useState("");
   const dispatch = useDispatch();
 
@@ -41,13 +41,13 @@ const PendingLayout = () => {
           <table className=" w-full p-4 mb-8 ">
             <thead className="bg-white text-black border border-accent rounded-md p-6 ">
               <tr className="p-4 ">
-                <th className="items-center ml-6 my-4 text-start w-[30%] p-4 text-[#222222]">Listing</th>
+                <th className="items-center ml-6 my-4 text-start w-[30%] p-4 text-[#222222]">Users</th>
 
-                <th className="w-[15%] whitespace-nowrap text-start p-4">Location</th>
+                <th className="w-[15%] whitespace-nowrap text-start px-4">Email Address</th>
 
-                <th className="w-[15%] whitespace-nowrap text-start p-4">With Moving</th>
-                <th className="w-[10%]  whitespace-nowrap text-start p-4">With Packing</th>
-                <th className="w-[10%] whitespace-nowrap text-start p-4"></th>
+                <th className="w-[15%] whitespace-nowrap text-start px-4">Phone Number</th>
+                <th className="w-[10%]  whitespace-nowrap text-start px-4">Identification</th>
+                <th className="w-[10%] whitespace-nowrap text-start px-4"></th>
               </tr>
             </thead>
             <tbody className="w-full   ">
@@ -70,16 +70,16 @@ const PendingLayout = () => {
                       {/* <td className="w-[10%] p-4">Approved</td> */}
                       <td className="w-[10%] p-4">
                         <div className="flex">
-                          <div className="flex text-[#11A131]  " onClick={approve}>
+                          <div className="flex text-[#11A131]  ">
                             <CheckCircleIcon className="w-4  mr-4 " />
-                            Approved
+                            Approve
                           </div>
-                          <div className="flex ml-4 text-[#D12C2C]" onClick={deny}>
+                          <div className="flex ml-4 text-[#D12C2C]">
                             <XCircleIcon className="w-4 mr-4  " />
                             Deny
                           </div>
-                          <div className="flex text-[#4543A5] ">
-                            <EyeIcon className="w-4 ml-4  " />
+                          <div className="flex text-accent-content ">
+                            <DotsVerticalIcon className="w-4 ml-4 " />
                           </div>
                         </div>
                       </td>
@@ -94,4 +94,4 @@ const PendingLayout = () => {
   );
 };
 
-export default PendingLayout;
+export default Layout;

@@ -28,15 +28,16 @@ const Layout = () => {
       ) : (
         <div className="overflow-auto rounded-lg">
           <table className=" w-full p-4 mb-8 ">
-            <thead className="bg-white  border border-accent rounded-md p-6 ">
-              <tr className="p-4 ">
-                <th className="items-center ml-6 my-4 text-start w-[30%] px-4">Listing</th>
+            <thead className="bg-white  border border-accent-focus rounded-md p-6 ">
+              <tr className="p-4 py-4">
+                <th className="items-center ml-6 my-4 text-start w-[30%] p-4 ">Listing</th>
 
-                <th className="w-[15%] whitespace-nowrap text-start p-4">Location</th>
+                <th className="w-[15%] whitespace-nowrap text-start p-4">Partner</th>
 
-                <th className="w-[15%] whitespace-nowrap text-start p-4">With Moving</th>
+                <th className="w-[15%] whitespace-nowrap text-start p-4">User</th>
+                <th className="w-[10%] whitespace-nowrap text-start p-4">With Moving</th>
                 <th className="w-[10%] whitespace-nowrap text-start p-4">With Packing</th>
-                <th className="w-[10%] whitespace-nowrap text-start p-4">Last Active</th>
+
                 <th className="w-[10%]"></th>
                 {/* <th className="w-[10%]"></th> */}
               </tr>
@@ -45,7 +46,7 @@ const Layout = () => {
               {listings?.map(
                 ({ status, address, parking, delivery }, index) =>
                   status === "approved" && (
-                    <tr className="capitalize cursor-pointer border border-accent text-[#666666]  " key={index}>
+                    <tr className="capitalize cursor-pointer border border-accent-focus text-[#666666]  " key={index}>
                       <td className=" w-[30%]  p-4 ">
                         <div className="flex justify-start items-center">
                           {/* <div className="rounded-full w-8 h-8 mr-2  ">
@@ -60,11 +61,12 @@ const Layout = () => {
                       <td className="w-[10%] p-4 text-sm ">{`${delivery === false ? "False" : "True"}`}</td>
 
                       <td className="w-[10%] p-4 text-sm">{`${parking === false ? "False" : "True"}`}</td>
+                      <td className="w-[20%] p-4 text-sm">{address}</td>
 
-                      <td className="w-[10%] p-4 text-sm">Today</td>
                       <td className="w-[15%] p-4  mr-0 ">
-                        <div className="flex">
+                        <div className="flex justify-end">
                           <EyeIcon className="w-4 mr-4  " />
+
                           <DotsVerticalIcon className="w-4  " />
                         </div>
                       </td>

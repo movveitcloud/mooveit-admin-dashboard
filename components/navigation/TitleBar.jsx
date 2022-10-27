@@ -24,7 +24,7 @@ const TitleBar = ({ pageTitle, pathname, menuOpen, setMenuOpen }) => {
           />
         </div>
         <div className="flex items-center gap-6">
-          <div className="justify-center items-center border border-[#DCDCFF] rounded p-3 cursor-pointer  hidden sm:flex">
+          <div className="justify-center items-center border border-[#FEF08A] rounded p-3 cursor-pointer  hidden sm:flex">
             <BellIcon className="w-6 text-[#222222]" />
           </div>
         </div>

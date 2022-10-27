@@ -7,7 +7,7 @@ const Deny = () => {
   const router = useRouter();
   const statefunc = () => router.push("/listings");
 
-  return <ApprovalLayout state="Deny" statefunc={statefunc} stating="denying" />;
+  return <ApprovalLayout state="Deny" func={listing} statefunc={statefunc} stating="denying" />;
 };
 
 export default Deny;
