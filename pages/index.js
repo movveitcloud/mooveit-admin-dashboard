@@ -48,7 +48,7 @@ const Login = () => {
               <a className="text-red-500 text-sm">Forgot Password?</a>
             </Link>
           </div>
-          <button className={`${loading && "loading"}  btn btn-block btn-primary mt-8`} type="submit">
+          <button className={`${loading && "loading"} btn btn-block btn-primary mt-8`} type="submit">
             {loading ? "" : "Log in"}
           </button>
          

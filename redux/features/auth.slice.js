@@ -79,7 +79,7 @@ export const authenticatedUser = () => {
   }
   if (localStorage.getItem("admin")) {
     const userPersist = JSON.parse(localStorage.getItem("admin"));
-    console.log(userPersist);
+   
     const bytes = userPersist !== "null" ? crypto.AES.decrypt(userPersist.response, ENCRYPTION_KEY) : "";
     const userObject = bytes ? bytes.toString(crypto.enc.Utf8) : null;
     return JSON.parse(userObject);

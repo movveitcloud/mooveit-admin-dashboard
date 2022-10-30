@@ -34,3 +34,9 @@ export { default as ApprovedPayment } from "./dashboard/Payment/ApprovedPayment"
 export { default as RefundLayout } from "./dashboard/Payment/RefundLayout";
 export { default as ApprovedBooking } from "./dashboard/Bookings/ApprovedBooking";
 export { default as ApproveLayout } from "./dashboard/Payment/ApproveLayout";
+
+//LISTINGS
+export { default as Address } from "./dashboard/Listings/Address"
+export { default as Type } from "./dashboard/Listings/Type"
+export { default as Services } from "./dashboard/Listings/Services"
+

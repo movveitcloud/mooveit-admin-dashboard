@@ -24,6 +24,7 @@ const PendingLayout = () => {
   const { listings } = useSelector((state) => state.listing);
   const { listingLoading } = useSelector((state) => state.listing);
   const router = useRouter();
+  const view = (_id) => router.push(`/listings/${_id}`);
   const approve = () => router.push("/listings/approve");
   const deny = () => router.push("/listings/deny");
 
@@ -47,14 +48,14 @@ const PendingLayout = () => {
 
                 <th className="w-[15%] whitespace-nowrap text-start p-4">With Moving</th>
                 <th className="w-[10%]  whitespace-nowrap text-start p-4">With Packing</th>
-                <th className="w-[10%] whitespace-nowrap text-start p-4"></th>
+                {/* <th className="w-[10%] whitespace-nowrap text-start p-4"></th> */}
               </tr>
             </thead>
             <tbody className="w-full   ">
               {listings?.map(
-                ({ status, address, parking, delivery }, index) =>
+                ({_id, status, address, parking, delivery }, index) =>
                   status === "pending" && (
-                    <tr className="capitalize cursor-pointer border border-accent text-[#666666]  " key={index}>
+                    <tr className="capitalize cursor-pointer border border-accent text-[#666666]" onClick={(()=>view(_id))} key={index}>
                       <td className=" w-[20%]  text-sm  p-4 ">
                         <div className="flex justify-start items-center">
                           <p>Shift Man Van LTD</p>
@@ -68,7 +69,7 @@ const PendingLayout = () => {
                       <td className="w-[10%] p-4 text-sm">{`${parking === false ? "False" : "True"}`}</td>
 
                       {/* <td className="w-[10%] p-4">Approved</td> */}
-                      <td className="w-[10%] p-4">
+                      {/* <td className="w-[10%] p-4">
                         <div className="flex">
                           <div className="flex text-[#11A131]  " onClick={approve}>
                             <CheckCircleIcon className="w-4  mr-4 " />
@@ -82,7 +83,7 @@ const PendingLayout = () => {
                             <EyeIcon className="w-4 ml-4  " />
                           </div>
                         </div>
-                      </td>
+                      </td> */}
                     </tr>
                   )
               )}

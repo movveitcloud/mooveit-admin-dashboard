@@ -15,7 +15,7 @@ const Bookings = () => {
         <button
           onClick={() => setActiveButton("approved")}
           className={`${
-            activeButton === "approved" ? "bg-accent text-[#12181F]" : "bg-[#EEEEEE] text-[#BBBBBB] "
+            activeButton === "approved" ? "bg-accent-focus text-[#12181F]" : "bg-[#EEEEEE] text-[#BBBBBB] "
           }  py-2 px-4 rounded-md  flex items-center align-middle justify-center text-sm md:text-base `}>
           Approved
           <div
@@ -29,7 +29,7 @@ const Bookings = () => {
         <button
           onClick={() => setActiveButton("pending")}
           className={`${
-            activeButton === "pending" ? " bg-accent text-[#12181F]" : "bg-[#EEEEEE] text-[#BBBBBB]"
+            activeButton === "pending" ? " bg-accent-focus text-[#12181F]" : "bg-[#EEEEEE] text-[#BBBBBB]"
           }  py-2 px-4 rounded-md  flex items-center align-middle justify-center text-sm md:text-base`}>
           Pending
           <div

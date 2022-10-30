@@ -12,6 +12,15 @@ export const getListings = createAsyncThunk("/listings", async ({}, { rejectWith
     return rejectWithValue(err.response.data);
   }
 });
+export const getSingleListing = createAsyncThunk("/listing/listingId", async ({ id }, { rejectWithValue }) => {
+  try {
+    const response = await api.getSingleListing(id);
+    return response.data;
+  } catch (err) {
+    errorPopUp({ msg: err.response.data.error });
+    return rejectWithValue(err.response.data);
+  }
+});
 
 const listingSlice = createSlice({
   name: "listing",
@@ -19,6 +28,8 @@ const listingSlice = createSlice({
     listings: [],
     loading: false,
     listingLoading: false,
+    singleListing: {},
+    singleListingLoading: false,
   },
 
   extraReducers: {
@@ -31,6 +42,16 @@ const listingSlice = createSlice({
     },
     [getListings.rejected]: (state, action) => {
       state.listingLoading = false;
+    },
+    [getSingleListing.pending]: (state) => {
+      state.singleListingLoading = true;
+    },
+    [getSingleListing.fulfilled]: (state, action) => {
+      state.singleListingLoading = false;
+      state.singleListing = action.payload.data;
+    },
+    [getSingleListing.rejected]: (state, action) => {
+      state.singleListingLoading = false;
     },
   },
 });
