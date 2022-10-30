@@ -11,9 +11,9 @@ import {
     // BookingDetails,
     // Calendar,
     DashboardLayout,
-    // Description,
-    // Dimension,
-    // Media,
+    Description,
+     Dimension,
+    Media,
     // Pricing,
      Services,
     // StreetView,
@@ -69,6 +69,11 @@ const View = () => {
             <Address Address={List.address} />
             <Type storageType={List.storageType} storageFloor={List.storageFloor}storageFeatures={List.storageFeatures} />
             <Services delivery={List.delivery} parking={List.parking} />
+          </>
+          <>
+          <Dimension storageSize={List.storageSize} />
+          <Media image={List.image} />
+          <Description storageTitle={List.storageTitle} description={List.description} />
           </>
           {/* <>
             <Dimension />
