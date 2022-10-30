@@ -83,19 +83,19 @@ const Listings = () => {
 
         <div className="md:hidden mb-4  text-sm">
           <div className="overflow-auto">
-            <div className="flex items-center  justify-start w-fit border border-[#DCDCFF] lg:mr-8 md:mr-2 text-center    rounded-md">
+            <div className="flex items-center  justify-start w-fit border border-accent lg:mr-8 md:mr-2 text-center    rounded-md">
               <div className="bg-accent-content border border-l-[#DCDCFF] rounded-l-md border-r-none p-2 text-white whitespace-nowrap cursor-pointer w-fit text-center font-normal">
                 View All
               </div>
-              <div className="flex items-center justify-center border border-r-[#DCDCFF]  p-2 cursor-pointer w-fit text-center">
+              <div className="flex items-center justify-center border border-r-accent  p-2 cursor-pointer w-fit text-center">
                 <p>Moving</p>
                 <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
               </div>
-              <div className="flex items-center justify-center border border-r-[#DCDCFF]  p-2 cursor-pointer w-fit text-center">
+              <div className="flex items-center justify-center border border-r-accent  p-2 cursor-pointer w-fit text-center">
                 <p>Packing</p>
                 <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
               </div>
-              <div className="flex items-center justify-center  p-2 border border-r-[#DCDCFF] whitespace-nowrap cursor-pointer  text-center ">
+              <div className="flex items-center justify-center  p-2 border border-r-accent whitespace-nowrap cursor-pointer  text-center ">
                 <p>Last Active</p>
                 <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
               </div>
@@ -103,7 +103,7 @@ const Listings = () => {
           </div>
 
           <div className="flex mt-4 space-x-2 justify-between items-center  ">
-            <div className="flex w-2/3  space-x-2  items-center border border-[#DCDCFF] bg-white rounded-md p-2">
+            <div className="flex w-2/3  space-x-2  items-center border border-accent bg-white rounded-md p-2">
               <SearchIcon className="text-accent-content w-5 md:w-6 mr-1" />
               <input
                 type="text"

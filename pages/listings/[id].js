@@ -6,17 +6,16 @@ import { PulseLoader } from "react-spinners";
 import { motion } from "framer-motion";
 import { ArrowNarrowLeftIcon } from "@heroicons/react/outline";
 import {
-    // Access,
+     Access,
     Address,
-    // BookingDetails,
+    BookingDetails,
     // Calendar,
     DashboardLayout,
     Description,
      Dimension,
     Media,
-    // Pricing,
+   Pricing,
      Services,
-    // StreetView,
     Type,
    
   } from "../../components";
@@ -75,18 +74,12 @@ const View = () => {
           <Media image={List.image} />
           <Description storageTitle={List.storageTitle} description={List.description} />
           </>
-          {/* <>
-            <Dimension />
-           
-            <Media />
-            <Description />
-          </>
           <>
-            <Calendar />
-            <Access />
-            <BookingDetails />
+          <Access storageAccessPeriod={List.storageAccessPeriod} storageAccessType={List.storageAccessType}parkingInstruction={List.parkingInstruction}parkingPermit={List.parkingPermit} />
+          <BookingDetails bookingDuration={List.bookingDuration} bookingNotice={List.bookingNotice} />
           </>
-          <Pricing /> */}
+          <Pricing hourlyRate={List.hourlyRate} monthlyRate={List.monthlyRate} /> 
+         
 
           {/* <div className="flex justify-end">
             <div className="flex gap-4">

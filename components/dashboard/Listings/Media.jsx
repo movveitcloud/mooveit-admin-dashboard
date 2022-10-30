@@ -10,7 +10,7 @@ const Media = ({image}) => {
     <Accordion title="image">
       <div className="flex flex-row flex-grow gap-4 items-center border border-[#959595] rounded-lg px-4 py-3">
       
-       {image.map((val,index)=>
+       {image?.map((val,index)=>
   <div key={index}>
        <img src={val} alt="Storage Image"/>
        </div>

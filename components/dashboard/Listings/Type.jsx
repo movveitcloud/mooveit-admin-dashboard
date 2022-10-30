@@ -29,8 +29,10 @@ const Type = ({storageType,storageFloor,storageFeatures}) => {
           <h3 className="mb-3">Features</h3>
           
          <div className="items-center border border-[#959595] rounded-lg px-4 py-3">
-         {storageFeatures?.map((val)=>
+         {storageFeatures?.map((val,index)=>
+         <div key={index}>
               <p>{val}</p>
+              </div>
               )}
               </div>
         
