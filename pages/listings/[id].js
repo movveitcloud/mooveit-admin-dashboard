@@ -1,6 +1,6 @@
 import React,  {  useEffect, useState } from 'react'
 import { useRouter } from "next/router";
-import { getSingleListing } from '../../redux/features/listings.slice';
+import { getSingleListing,approveListing } from '../../redux/features/listings.slice';
 import { useDispatch, useSelector } from "react-redux";
 import { PulseLoader } from "react-spinners";
 import { motion } from "framer-motion";
@@ -31,19 +31,23 @@ const View = () => {
 
   useEffect(() => {
     if (query) {
-        console.log(query)
+       
       dispatch(getSingleListing({ id: query }));
     }
   }, [query]);
   useEffect(() => {
     if (singleListing) {
-        console.log(singleListing)
+      
        setList(singleListing)
        singleListing.status==="pending" ? (setOption(true)) : ""
-       console.log(option)
+      
       } 
    
   }, [singleListing]);
+
+  const approve = () => {
+  dispatch(approveListing({ id: query }));
+  router.push("/listings");}
  
   return (
     <DashboardLayout>
@@ -80,21 +84,22 @@ const View = () => {
           </>
           <Pricing hourlyRate={List.hourlyRate} monthlyRate={List.monthlyRate} /> 
          
-
-          {/* <div className="flex justify-end">
+        {option===true &&
+          <div className="flex justify-end">
             <div className="flex gap-4">
-              <button className={`btn btn-outline btn-primary hover:btn-accent w-[175px]`} onClick={discardChanges}>
-                Discard Changes
+              <button className={`btn btn-outline btn-primary hover:btn-accent w-[175px]`} onClick={approve}  >
+                Approve
               </button>
               <button
-                className={`${
-                  loading && "loading"
-                } btn btn-primary w-[175px] disabled:bg-[#ccc] disabled:text-primary`}
-                onClick={saveChanges}>
-                {loading ? "" : "Save"}
+                className="btn btn-primary w-[175px] disabled:bg-[#ccc] disabled:text-primary"
+                
+             
+                >
+               Deny
               </button>
             </div>
-          </div> */}
+          </div>
+          }
         </div>
       </motion.div>
      )

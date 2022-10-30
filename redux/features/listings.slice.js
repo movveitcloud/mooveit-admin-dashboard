@@ -21,6 +21,16 @@ export const getSingleListing = createAsyncThunk("/listing/listingId", async ({ 
     return rejectWithValue(err.response.data);
   }
 });
+export const approveListing = createAsyncThunk("/admin/listings/listingId", async ({ id }, { rejectWithValue }) => {
+  try {
+    const response = await api.approveListing(id);
+    
+    return response.data;
+  } catch (err) {
+    errorPopUp({ msg: err.response.data.error });
+    return rejectWithValue(err.response.data);
+  }
+});
 
 const listingSlice = createSlice({
   name: "listing",
@@ -30,6 +40,8 @@ const listingSlice = createSlice({
     listingLoading: false,
     singleListing: {},
     singleListingLoading: false,
+    approveListing: {},
+    approveListingLoading: false,
   },
 
   extraReducers: {
@@ -52,6 +64,16 @@ const listingSlice = createSlice({
     },
     [getSingleListing.rejected]: (state, action) => {
       state.singleListingLoading = false;
+    },
+    [approveListing.pending]: (state) => {
+      state.approveListingLoading = true;
+    },
+    [approveListing.fulfilled]: (state, action) => {
+      state.approveListingLoading = false;
+      state.approveListing = action.payload.data;
+    },
+    [approveListing.rejected]: (state, action) => {
+      state.approveListingLoading = false;
     },
   },
 });
