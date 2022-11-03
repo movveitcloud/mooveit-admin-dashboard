@@ -20,7 +20,7 @@ const Dimensions = ({storageSize}) => {
       <div className="space-y-6">
         <div className="mb-5">
        
-          <div className="items-center border border-[#959595] rounded-lg px-4 py-3 mb-5">
+          <div className="items-center">
               {storageSize}
           
           </div>

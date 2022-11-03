@@ -25,7 +25,7 @@ const Accordion = ({ title, open, children }) => {
         className="overflow-hidden"
         animate={{ height: active ? "auto" : 0 }}
         transition={{ duration: 0.5, ease: [0.7, 0, 0.3, 1] }}>
-        <div className="w-full text-[#222222] px-4 md:px-6 pt-3 pb-6">{children}</div>
+        <div className="w-full text-[#222222] px-4 md:px-6 pb-6">{children}</div>
       </motion.div>
     </div>
   );

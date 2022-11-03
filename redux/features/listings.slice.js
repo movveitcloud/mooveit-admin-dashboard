@@ -21,10 +21,12 @@ export const getSingleListing = createAsyncThunk("/listing/listingId", async ({ 
     return rejectWithValue(err.response.data);
   }
 });
-export const approveListing = createAsyncThunk("/admin/listings/listingId", async ({ id }, { rejectWithValue }) => {
+export const approveListing = createAsyncThunk("/admin/listings/listingId", async ({ payload,id }, { rejectWithValue }) => {
+  
   try {
-    const response = await api.approveListing(id);
-    
+    const response = await api.approveListing({payload,id});
+    console.log(response.data)
+    console.log(payload)
     return response.data;
   } catch (err) {
     errorPopUp({ msg: err.response.data.error });

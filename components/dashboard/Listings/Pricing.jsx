@@ -11,18 +11,18 @@ const Pricing = ({hourlyRate,monthlyRate}) => {
       <div className="flex gap-4 flex-col">
         <div
           >
-          <div className="flex  justify-between items-center gap-3 mb-6">
+          <div className=" justify-between items-center gap-3">
             <h2 className=" ">Hourly Rate</h2>
-           {hourlyRate}
+         ${hourlyRate}
           </div>
         
         </div>
 
         <div
          >
-          <div className="flex justify-between items-center gap-3">
+          <div className="justify-between items-center gap-3">
             <h2 className=" ">Monthly Rate</h2>
-            {monthlyRate}
+            ${monthlyRate}
            
           </div>
          

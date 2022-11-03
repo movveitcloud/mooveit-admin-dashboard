@@ -10,14 +10,14 @@ const BookingDetails = ({bookingDuration,bookingNotice}) => {
       <div className="space-y-6">
         <div>
           <h3 className="mb-3">Booking Duration</h3>
-          <div className="items-center border border-[#959595] rounded-lg px-4 py-3">
+          <div className="items-center ">
             {bookingDuration}
           </div>
         </div>
 
         <div>
           <h3 className="mb-3">Notice before a customer arrives</h3>
-          <div className="items-center border border-[#959595] rounded-lg px-4 py-3">
+          <div className="items-center ">
             {bookingNotice}
           </div>
         </div>

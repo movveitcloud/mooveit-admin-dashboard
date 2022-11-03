@@ -3,22 +3,28 @@ import React from "react";
 
 import Accordion from "../../shared/Accordion";
 
-const Media = ({image}) => {
+const Media = ({images}) => {
   
 
   return (
     <Accordion title="image">
-      <div className="flex flex-row flex-grow gap-4 items-center border border-[#959595] rounded-lg px-4 py-3">
+      <div className=" grid gap-4 grid-cols-3 items-center  ">
+   
+       {images?.map((val,index)=>
+    (
       
-       {image?.map((val,index)=>
-  <div key={index}>
-       <img src={val} alt="Storage Image"/>
+      <div key={index} className=" ">
+        <div className=" w-full  h-[200px]">
+  
+       <img src={val} alt="Storage Image" className="w-full h-full"/>
+     
        </div>
+       </div>))
        
-       )}
+       }
        
       </div>
-     
+    
     
     </Accordion>
   );

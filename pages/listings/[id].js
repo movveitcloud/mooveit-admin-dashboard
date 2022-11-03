@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { PulseLoader } from "react-spinners";
 import { motion } from "framer-motion";
 import { ArrowNarrowLeftIcon } from "@heroicons/react/outline";
+import { getValue,getValueArray } from "../../helpers/utils";
+import { howAccessListing,storageFeatures,whenAccessListing, spaceDuration,arrivalNoticeOpts, storageFloors, storageKinds, storageSize } from "../../helpers/data";
 import {
      Access,
     Address,
@@ -28,6 +30,7 @@ const View = () => {
   const { singleListing, singleListingLoading } = useSelector((state) => state.listing);
   const[List,setList]=useState({})
   const[option,setOption]=useState(false)
+  
 
   useEffect(() => {
     if (query) {
@@ -46,7 +49,9 @@ const View = () => {
   }, [singleListing]);
 
   const approve = () => {
-  dispatch(approveListing({ id: query }));
+    const id=query
+   const payload={status:"approved"} 
+  dispatch(approveListing({ id: id,payload:payload }));
   router.push("/listings");}
  
   return (
@@ -70,32 +75,31 @@ const View = () => {
         <div className="w-[80%] mx-auto">
           <>
             <Address Address={List.address} />
-            <Type storageType={List.storageType} storageFloor={List.storageFloor}storageFeatures={List.storageFeatures} />
+            <Type storageType={getValue({ options: storageKinds, key: List?.storageType })} storageFloor={getValue({ options: storageFloors, key: List?.storageFloor })}storageFeatures={getValueArray({ options: storageFeatures, key: List?.storageFeatures })} />
             <Services delivery={List.delivery} parking={List.parking} />
           </>
           <>
-          <Dimension storageSize={List.storageSize} />
-          <Media image={List.image} />
+          <Dimension storageSize={getValue({ options: storageSize, key:List?.storageSize })} />
+          <Media images={List.media} />
           <Description storageTitle={List.storageTitle} description={List.description} />
           </>
           <>
-          <Access storageAccessPeriod={List.storageAccessPeriod} storageAccessType={List.storageAccessType}parkingInstruction={List.parkingInstruction}parkingPermit={List.parkingPermit} />
-          <BookingDetails bookingDuration={List.bookingDuration} bookingNotice={List.bookingNotice} />
+          <Access storageAccessPeriod={getValue({ options: whenAccessListing, key: List?.storageAccessPeriod })} storageAccessType={getValue({ options: howAccessListing, key: List?.storageAccessType })}parkingInstruction={List.parkingInstruction}parkingPermit={List?.parkingPermit ? "Available" : "N/A"} />
+          <BookingDetails bookingDuration={getValue({ options: spaceDuration, key: List?.bookingDuration })} bookingNotice={getValue({ options: arrivalNoticeOpts, key: List?.bookingNotice })} />
           </>
           <Pricing hourlyRate={List.hourlyRate} monthlyRate={List.monthlyRate} /> 
          
         {option===true &&
           <div className="flex justify-end">
             <div className="flex gap-4">
-              <button className={`btn btn-outline btn-primary hover:btn-accent w-[175px]`} onClick={approve}  >
-                Approve
-              </button>
+              
               <button
-                className="btn btn-primary w-[175px] disabled:bg-[#ccc] disabled:text-primary"
-                
+                className="btn btn-primary w-[175px] disabled:bg-[#ccc] disabled:text-primary" onClick={approve}   >
+                Approve
              
-                >
-               Deny
+              </button>
+              <button className={`btn btn-outline btn-primary hover:btn-accent w-[175px]`}  >
+              Deny
               </button>
             </div>
           </div>
