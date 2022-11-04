@@ -39,11 +39,11 @@ const Layout = ({ approvedCounts }) => {
                   <th className="w-[20%]  text-start p-4">Location</th>
 
                   <th className="w-[15%] whitespace-nowrap text-start p-4">Partner</th>
-                  <th className="w-[10%] whitespace-nowrap text-start p-4">Listing Id</th>
+                  <th className="w-[10%] whitespace-nowrap text-start p-4">Price</th>
                 </tr>
               </thead>
               {listings?.map(
-                ({ _id, status, address, storageTitle, parking, delivery, user }, index) =>
+                ({ _id, status, address, storageTitle, parking, delivery, user, monthlyRate, hourlyRate }, index) =>
                   status === "approved" && (
                     <tbody className="w-full   " key={index}>
                       <tr
@@ -63,7 +63,20 @@ const Layout = ({ approvedCounts }) => {
 
                         <td className="w-[10%] p-4 text-sm ">{`${user.firstName} ${user.lastName}`}</td>
 
-                        <td className="w-[10%] p-4 text-sm">{_id}</td>
+                        <td className="w-[10%] p-4 text-sm">
+                          <div className="flex flex-row space-x-6 items-center mt-2 font-normal text-sm">
+                            {monthlyRate && (
+                              <p className="flex">
+                                {`$${monthlyRate}`} <span className="lowercase">/month</span>
+                              </p>
+                            )}
+                            {hourlyRate && (
+                              <p className="flex">
+                                {`$${hourlyRate}`} <span className="lowercase">/hour</span>
+                              </p>
+                            )}
+                          </div>
+                        </td>
                       </tr>
                     </tbody>
                   )
