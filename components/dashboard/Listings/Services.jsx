@@ -23,7 +23,7 @@ const Services = ({delivery,parking}) => {
               <div className="flex gap-5 items-center">
               {parking=== false? "":   (<div className="flex flex-row items-center gap-2 text-[#107E7E]">
                 <span className="rounded-full p-[6px] bg-accent">
-                 <TruckIcon className="text-primary w-4" />
+                 <ArchiveIcon className="text-primary w-4" />
                </span>
                 <span className="text-[#222222] text-base">Parking</span>
               </div>)}
