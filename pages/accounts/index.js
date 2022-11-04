@@ -17,7 +17,7 @@ const ManageAccounts = () => {
           className={`${
             activeButton === "users" ? "bg-accent-focus  text-accent-content" : "bg-[#EEEEEE] text-[#BBBBBB] "
           }  py-2 px-4 rounded-md  flex items-center align-middle justify-center text-sm md:text-base `}>
-          Customer
+          Customers
           <div
             className={` ${
               activeButton === "users" ? "bg-accent-content" : "bg-[#BBBBBB]"

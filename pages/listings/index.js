@@ -3,34 +3,27 @@ import { Approved, DashboardLayout, Pending } from "../../components";
 import { useState } from "react";
 import { Users, Partners } from "../../components";
 import { ChevronDownIcon, SearchIcon, DownloadIcon } from "@heroicons/react/outline";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import libTypedarrays from "crypto-js/lib-typedarrays";
 
 const Listings = () => {
   const [activeButton, setActiveButton] = useState("approved");
   const [value, setValue] = useState("");
-   const [approvedCount, setapprovedCount] = useState(0);
-   const [pendingCount, setpendingCount] = useState(0);
+  const [approvedCount, setapprovedCount] = useState(0);
+  const [pendingCount, setpendingCount] = useState(0);
   const { listings } = useSelector((state) => state.listing);
 
+  useEffect(() => {
+    let apprcount = 0;
+    listings?.map(({ status }) => (status === "approved" ? (apprcount += 1) : ""));
+    setapprovedCount(apprcount);
 
-useEffect(()=>{
-  let apprcount=0
-  listings?.map(({status})=>
-  status==="approved"? apprcount+=1:"")
- setapprovedCount(apprcount)
-
- let pendcount=0
-  listings?.map(({status})=>
-  status==="pending" ? pendcount+=1:"")
-  setpendingCount(pendcount)
-  // status==="approved" ? console.log("app"):console.log(status))
-
-
-},[listings])
-
-  
+    let pendcount = 0;
+    listings?.map(({ status }) => (status === "pending" ? (pendcount += 1) : ""));
+    setpendingCount(pendcount);
+    // status==="approved" ? console.log("app"):console.log(status))
+  }, [listings]);
 
   const Search = (e) => {};
   return (
@@ -40,33 +33,32 @@ useEffect(()=>{
           onClick={() => setActiveButton("approved")}
           className={`${
             activeButton === "approved" ? "bg-accent-focus text-accent-content" : "bg-[#EEEEEE] text-[#BBBBBB] "
-          }  py-2 px-4 rounded-md flex items-center align-middle justify-center text-sm md:text-base `}>
+          }  py-2 px-4 rounded-md flex items-center align-middle justify-center text-sm md:text-base active:scale-95 transition-transform duration-300 `}>
           Approved
-          {approvedCount!=0 &&
-          <div
-            className={` ${
-              activeButton === "approved" ? "bg-accent-content" : "bg-[#BBBBBB]"
-            } ml-2 text-white md:text-[10px] text-[10px] rounded-sm p-2 h-4 flex align-middle items-center`}>
-          {approvedCount}
-          </div>
-          }
+          {approvedCount != 0 && (
+            <div
+              className={` ${
+                activeButton === "approved" ? "bg-accent-content" : "bg-[#BBBBBB]"
+              } ml-2 text-white md:text-[10px] text-[10px] rounded-sm p-2 h-4 flex align-middle items-center`}>
+              {approvedCount}
+            </div>
+          )}
         </button>
 
         <button
           onClick={() => setActiveButton("pending")}
           className={`${
             activeButton === "pending" ? "bg-accent-focus text-accent-content" : "bg-[#EEEEEE] text-[#BBBBBB]"
-          }  py-2 px-4 rounded-md  flex items-center align-middle justify-center text-sm md:text-base`}>
+          }  py-2 px-4 rounded-md  flex items-center align-middle justify-center text-sm md:text-base active:scale-95 transition-transform duration-300 `}>
           Pending
-          
-          {pendingCount!=0 &&
-          <div
-            className={` ${
-              activeButton === "pending" ? "bg-accent-content" : "bg-[#BBBBBB]"
-            } ml-2 text-white  text-[10px] rounded-sm  p-2  h-4 flex align-middle items-center`}>
-           {pendingCount}
-          </div>
-          }
+          {pendingCount != 0 && (
+            <div
+              className={` ${
+                activeButton === "pending" ? "bg-accent-content" : "bg-[#BBBBBB]"
+              } ml-2 text-white  text-[10px] rounded-sm  p-2  h-4 flex align-middle items-center`}>
+              {pendingCount}
+            </div>
+          )}
         </button>
       </div>
 
@@ -151,7 +143,11 @@ useEffect(()=>{
 
         {/* end of mobile */}
 
-        {activeButton === "approved" ? <Approved approvedCount={approvedCount} /> : <Pending pendingCount={pendingCount} />}
+        {activeButton === "approved" ? (
+          <Approved approvedCount={approvedCount} />
+        ) : (
+          <Pending pendingCount={pendingCount} />
+        )}
       </div>
     </DashboardLayout>
   );

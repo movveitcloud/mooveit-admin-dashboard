@@ -34,7 +34,7 @@ const Layout = ({ name }) => {
             <thead className="bg-white text-black-50 border  rounded-md p-6 ">
               <tr className="p-4 ">
                 <th className="items-center ml-6 my-4 text-start w-[30%] px-4">
-                  {`${name === "users" ? "Users" : "Partners"}`}
+                  {`${name === "users" ? "User" : "Partner"}`}
                 </th>
 
                 <th className="w-[15%] whitespace-nowrap text-start p-4">Email Address</th>
@@ -49,7 +49,7 @@ const Layout = ({ name }) => {
               {users?.map(
                 ({ User, firstName, lastName, email, role, id }, index) =>
                   role === name && (
-                    <tr className="capitalize cursor-pointer border    " key={index}>
+                    <tr className="capitalize cursor-pointer border" key={index}>
                       <td className=" w-[30%]  p-4 ">
                         <div className="flex justify-start items-center">
                           {/* <div className="rounded-full w-8 h-8 mr-2  ">
