@@ -1,12 +1,11 @@
 import React from "react";
-import Layout from "./Layout";
 import PendingLayout from "./PendingLayout";
 
-const Pending = () => {
+const Pending = ({pendingCount}) => {
   return (
     <div>
-      {/* <Layout content={pending} name="pending" /> */}
-      <PendingLayout name="pending" />
+     
+      <PendingLayout name="pending" pendingCounts={pendingCount} />
     </div>
   );
 };

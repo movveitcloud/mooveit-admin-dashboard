@@ -39,7 +39,7 @@ const Layout = () => {
         <div className="overflow-auto rounded-lg">
           {/* <table className="table table-compact w-full p-4 mb-8 "> */}
           <table className=" w-full p-4 mb-8 ">
-            <thead className="bg-white text-black border border-accent rounded-md p-6 ">
+            <thead className="bg-white text-black border  rounded-md p-6 ">
               <tr className="p-4 ">
                 <th className="items-center ml-6 my-4 text-start w-[30%] p-4 text-[#222222]">Users</th>
 
@@ -54,7 +54,7 @@ const Layout = () => {
               {listings?.map(
                 ({ status, address, parking, delivery }, index) =>
                   status === "pending" && (
-                    <tr className="capitalize cursor-pointer border border-accent text-[#666666]  " key={index}>
+                    <tr className="capitalize cursor-pointer border  text-[#666666]  " key={index}>
                       <td className=" w-[20%]  text-sm  p-4 ">
                         <div className="flex justify-start items-center">
                           <p>Shift Man Van LTD</p>

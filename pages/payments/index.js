@@ -65,16 +65,16 @@ const Payment = () => {
       <div className="bg-white p-8 shadow ">
         <div className="hidden md:flex justify-between mb-10 text-sm ">
           <div className="flex justify-start xl:w-2/3 mr-4   ">
-            <div className="flex items-center  justify-start w-fit border border-accent lg:mr-8 md:mr-2    rounded-md">
-              <div className="bg-accent-content border border-l-[#DCDCFF] rounded-l-md border-r-none p-3 py-3 text-white whitespace-nowrap cursor-pointer  ">
+            <div className="flex items-center  justify-start w-fit border  lg:mr-8 md:mr-2    rounded-md">
+              <div className="bg-accent-content border  rounded-l-md border-r-none p-3 py-3 text-white whitespace-nowrap cursor-pointer  ">
                 View All
               </div>
-              <div className="flex items-center border border-r-accent justify-start p-3 py-3 cursor-pointer">
+              <div className="flex items-center border  justify-start p-3 py-3 cursor-pointer">
                 <p>Most Recent</p>
                 <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
               </div>
             </div>
-            <div className="flex w-1/2   space-x-2  items-center border border-accent bg-white rounded-md p-3 py-3">
+            <div className="flex w-1/2   space-x-2  items-center border  bg-white rounded-md p-3 py-3">
               <SearchIcon className="text-accent-content w-5 md:w-6 mr-1" />
               <input
                 type="text"
@@ -86,7 +86,7 @@ const Payment = () => {
             </div>
           </div>
 
-          <div className="border border-accent p-2 py-3 bg-white whitespace-nowrap rounded-md text-sm  flex items-center">
+          <div className="border  p-2 py-3 bg-white whitespace-nowrap rounded-md text-sm  flex items-center">
             <DownloadIcon className="w-4 mr-2 text-[#222222] m-0 " />
             Download CSV
           </div>
@@ -98,18 +98,18 @@ const Payment = () => {
             <div className="bg-accent-content border border-l-accent rounded-l-md border-r-none p-2 text-white whitespace-nowrap cursor-pointer w-1/3 text-center font-normal">
               View All
             </div>
-            <div className="flex items-center justify-center border border-r-accent  p-2 cursor-pointer w-1/3 text-center">
+            <div className="flex items-center justify-center border   p-2 cursor-pointer w-1/3 text-center">
               <p>Status</p>
               <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
             </div>
-            <div className="flex items-center justify-center  p-2 border border-r-accent whitespace-nowrap cursor-pointer w-1/3 text-center ">
+            <div className="flex items-center justify-center  p-2 border whitespace-nowrap cursor-pointer w-1/3 text-center ">
               <p>Last Active</p>
               <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
             </div>
           </div>
 
           <div className="flex mt-4 space-x-2 justify-between items-center  ">
-            <div className="flex w-2/3  space-x-2  items-center border border-accent bg-white rounded-md p-2">
+            <div className="flex w-2/3  space-x-2  items-center border  bg-white rounded-md p-2">
               <SearchIcon className="text-accent-content w-5 md:w-6 mr-1" />
               <input
                 type="text"
@@ -119,7 +119,7 @@ const Payment = () => {
                 className="w-full h-full  outline-none text-base placeholder:text-[#959595] placeholder:text-base"
               />
             </div>
-            <div className="border border-accent  p-2 bg-white whitespace-nowrap rounded-md   flex items-center">
+            <div className="border   p-2 bg-white whitespace-nowrap rounded-md   flex items-center">
               <DownloadIcon className="w-6 text-[#222222] m-0 " />
               Download CSV
             </div>

@@ -6,15 +6,18 @@ import { getListings } from "../../../redux/features/listings.slice";
 import { PulseLoader } from "react-spinners";
 import { useRouter } from "next/router";
 
-const Layout = () => {
-  const [option, setOption] = useState("");
+const Layout = ({approvedCounts}) => {
+ 
   const router = useRouter();
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     dispatch(getListings());
   }, []);
   const { listings } = useSelector((state) => state.listing);
+  
+  
 
   const { listingLoading } = useSelector((state) => state.listing);
   const view = (_id) => router.push(`/listings/${_id}`);
@@ -29,7 +32,8 @@ const Layout = () => {
         </div>
       ) : (
         <div className="overflow-auto rounded-lg">
-          <table className=" w-full p-4 mb-8 ">
+          {approvedCounts!=0 ?
+            <table className=" w-full p-4 mb-8 ">
             <thead className="bg-white  border  rounded-md p-6 ">
               <tr className="p-4 ">
                 <th className="items-center ml-6 my-4 text-start w-[20%] px-4">Listing</th>
@@ -38,15 +42,16 @@ const Layout = () => {
 
                 <th className="w-[15%] whitespace-nowrap text-start p-4">With Moving</th>
                 <th className="w-[10%] whitespace-nowrap text-start p-4">With Packing</th>
-                {/* <th className="w-[10%] whitespace-nowrap text-start p-4">Last Active</th> */}
                
-                {/* <th className="w-[10%]"></th> */}
               </tr>
             </thead>
-            <tbody className="w-full   ">
-              {listings?.map(
+          {listings?.map(
                 ({ _id,status, address,storageTitle, parking, delivery }, index) =>
                   status === "approved" && (
+              
+
+            <tbody className="w-full   " key={index}>
+              
                     <tr className="capitalize cursor-pointer border  text-[#666666]" onClick={(()=>view(_id))} key={index}>
                       <td className=" w-[20%]  p-4 ">
                         <div className="flex justify-start items-center">
@@ -63,13 +68,18 @@ const Layout = () => {
 
                       <td className="w-[10%] p-4 text-sm">{`${parking === false ? "False" : "True"}`}</td>
 
-                      {/* <td className="w-[10%] p-4 text-sm">Today</td> */}
+                    
                      
                     </tr>
-                  )
-              )}
+               
             </tbody>
-          </table>
+        
+      
+             ) 
+           
+             )}
+               </table> :<div className="font-bold text-xl text-center ">NO APPROVED LISTINGS</div>
+}
         </div>
       )}
     </div>

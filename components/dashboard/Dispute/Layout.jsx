@@ -28,7 +28,7 @@ const Layout = () => {
       ) : (
         <div className="overflow-auto rounded-lg">
           <table className=" w-full p-4 mb-8 ">
-            <thead className="bg-white  border border-accent rounded-md p-6 ">
+            <thead className="bg-white  border  rounded-md p-6 ">
               <tr className="p-4 py-4">
                 <th className="items-center ml-6 my-4 text-start w-[30%] p-4 ">Ticket Number</th>
 
@@ -45,7 +45,7 @@ const Layout = () => {
               {listings?.map(
                 ({ status, address, parking, delivery }, index) =>
                   status === "approved" && (
-                    <tr className="capitalize cursor-pointer border border-accent text-[#666666]  " key={index}>
+                    <tr className="capitalize cursor-pointer border  text-[#666666]  " key={index}>
                       <td className=" w-[30%]  p-4 ">
                         <div className="flex justify-start items-center">
                           {/* <div className="rounded-full w-8 h-8 mr-2  ">

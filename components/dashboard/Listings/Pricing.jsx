@@ -12,8 +12,8 @@ const Pricing = ({hourlyRate,monthlyRate}) => {
         <div
           >
           <div className=" justify-between items-center gap-3">
-            <h2 className=" ">Hourly Rate</h2>
-         ${hourlyRate}
+            <h2 className="font-bold ">Hourly Rate</h2>
+         {hourlyRate}
           </div>
         
         </div>
@@ -21,8 +21,8 @@ const Pricing = ({hourlyRate,monthlyRate}) => {
         <div
          >
           <div className="justify-between items-center gap-3">
-            <h2 className=" ">Monthly Rate</h2>
-            ${monthlyRate}
+            <h2 className="font-bold ">Monthly Rate</h2>
+            {monthlyRate}
            
           </div>
          

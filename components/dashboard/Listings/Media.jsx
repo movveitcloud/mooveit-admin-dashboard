@@ -8,7 +8,7 @@ const Media = ({images}) => {
 
   return (
     <Accordion title="image">
-      <div className=" grid gap-4 grid-cols-3 items-center  ">
+      <div className=" grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center  ">
    
        {images?.map((val,index)=>
     (

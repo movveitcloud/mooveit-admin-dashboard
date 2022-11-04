@@ -14,7 +14,7 @@ import { PulseLoader } from "react-spinners";
 import { getListings } from "../../../redux/features/listings.slice";
 import { useDispatch, useSelector } from "react-redux";
 
-const PendingLayout = () => {
+const PendingLayout = ({pendingCounts}) => {
   const [option, setOption] = useState("");
   const dispatch = useDispatch();
 
@@ -27,6 +27,7 @@ const PendingLayout = () => {
   const view = (_id) => router.push(`/listings/${_id}`);
   const approve = () => router.push("/listings/approve");
   const deny = () => router.push("/listings/deny");
+  
 
   return (
     <div className="">
@@ -37,9 +38,10 @@ const PendingLayout = () => {
           </div>
         </div>
       ) : (
+      
         <div className="overflow-auto rounded-lg">
-          {/* <table className="table table-compact w-full p-4 mb-8 "> */}
-          <table className=" w-full p-4 mb-8 ">
+          {pendingCounts!=0 ?
+           <table className=" w-full p-4 mb-8 ">
             <thead className="bg-white text-black border  rounded-md p-6 ">
               <tr className="p-4 ">
                 <th className="items-center ml-6 my-4 text-start w-[30%] p-4 text-[#222222]">Listing</th>
@@ -48,13 +50,17 @@ const PendingLayout = () => {
 
                 <th className="w-[20%] whitespace-nowrap text-start p-4">With Moving</th>
                 <th className="w-[20%]  whitespace-nowrap text-start p-4">With Packing</th>
-                {/* <th className="w-[10%] whitespace-nowrap text-start p-4"></th> */}
+              
               </tr>
             </thead>
-            <tbody className="w-full text-sm   ">
-              {listings?.map(
+        
+          {
+          listings?.map(
                 ({_id, status,storageTitle, address, parking, delivery }, index) =>
                    status==="pending" && (
+         
+            <tbody className="w-full text-sm   " key={index}>
+             
                     <tr className="capitalize cursor-pointer border  text-[#666666]" onClick={(()=>view(_id))} key={index}>
                       <td className=" w-[30%]   text-sm  p-4 ">
                         <div className="flex justify-start items-center">
@@ -69,11 +75,15 @@ const PendingLayout = () => {
                       <td className="w-[20%] p-4 text-sm">{`${parking === false ? "False" : "True"}`}</td>
 
                     </tr>
-                  )
-                
-              )}
+                 
             </tbody>
-          </table>
+           
+         
+          )
+                
+          ) }
+           </table> :<div className="font-bold text-xl text-center">NO PENDING LISTINGS</div>
+}
         </div>
       )}
     </div>

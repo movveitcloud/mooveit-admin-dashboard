@@ -84,10 +84,10 @@ const View = () => {
           <Description storageTitle={List.storageTitle} description={List.description} />
           </>
           <>
-          <Access storageAccessPeriod={getValue({ options: whenAccessListing, key: List?.storageAccessPeriod })} storageAccessType={getValue({ options: howAccessListing, key: List?.storageAccessType })}parkingInstruction={List.parkingInstruction}parkingPermit={List?.parkingPermit ? "Available" : "N/A"} />
+          <Access storageAccessPeriod={getValue({ options: whenAccessListing, key: List?.storageAccessPeriod })} storageAccessType={getValue({ options: howAccessListing, key: List?.storageAccessType })}parkingInstruction={List.parkingInstruction? List.parkingInstruction:"N/A" }parkingPermit={List?.parkingPermit ? "Available" : "N/A"} />
           <BookingDetails bookingDuration={getValue({ options: spaceDuration, key: List?.bookingDuration })} bookingNotice={getValue({ options: arrivalNoticeOpts, key: List?.bookingNotice })} />
           </>
-          <Pricing hourlyRate={List.hourlyRate} monthlyRate={List.monthlyRate} /> 
+          <Pricing hourlyRate={List?.hourlyRate ?`$${List.hourlyRate}` : "N/A"} monthlyRate={List?.monthlyRate ?`$${List.monthlyRate}` : "N/A"} /> 
          
         {option===true &&
           <div className="flex justify-end">
