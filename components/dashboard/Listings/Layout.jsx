@@ -18,8 +18,6 @@ const Layout = ({ approvedCounts }) => {
   const { listingLoading } = useSelector((state) => state.listing);
   const view = (_id) => router.push(`/listings/${_id}`);
 
-  console.log(listings);
-
   return (
     <div className="">
       {listingLoading ? (
@@ -64,16 +62,20 @@ const Layout = ({ approvedCounts }) => {
                         <td className="w-[10%] p-4 text-sm ">{`${user.firstName} ${user.lastName}`}</td>
 
                         <td className="w-[10%] p-4 text-sm">
-                          <div className="flex flex-row space-x-6 items-center mt-2 font-normal text-sm">
-                            {monthlyRate && (
+                          <div className="flex flex-row space-x-2 items-center mt-2 font-normal text-sm">
+                            {monthlyRate ? (
                               <p className="flex">
                                 {`$${monthlyRate}`} <span className="lowercase">/month</span>
                               </p>
+                            ) : (
+                              ""
                             )}
-                            {hourlyRate && (
+                            {hourlyRate ? (
                               <p className="flex">
                                 {`$${hourlyRate}`} <span className="lowercase">/hour</span>
                               </p>
+                            ) : (
+                              ""
                             )}
                           </div>
                         </td>
@@ -83,7 +85,16 @@ const Layout = ({ approvedCounts }) => {
               )}
             </table>
           ) : (
-            <div className="font-bold text-xl text-center ">NO APPROVED LISTINGS</div>
+            <div className="font-bold text-xl text-center ">
+              <div className="flex justify-center">
+                <div className="bg-white rounded-lg w-full md:w-[60%] flex justify-center mt-8">
+                  <div className="px-4 py-24 flex flex-col space-y-4 items-center">
+                    <img src="emptyStorage.svg" alt="empty storage icon" className="w-16 md:w-20" />
+                    <p className="text-center text-[#AAAAAA]">No approved listing at this time.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
         </div>
       )}

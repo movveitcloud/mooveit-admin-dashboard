@@ -86,7 +86,7 @@ const View = () => {
             </>
             <>
               <Dimension storageSize={getValue({ options: storageSize, key: List?.storageSize })} />
-              <Media images={List.media} />
+              <Media images={singleListing?.media} />
               <Description storageTitle={List.storageTitle} description={List.description} />
             </>
             <>

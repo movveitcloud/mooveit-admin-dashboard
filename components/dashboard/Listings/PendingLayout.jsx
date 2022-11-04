@@ -42,17 +42,17 @@ const PendingLayout = ({ pendingCounts }) => {
             <table className=" w-full p-4 mb-8 ">
               <thead className="bg-white text-black border  rounded-md p-6 ">
                 <tr className="p-4 ">
-                  <th className="items-center ml-6 my-4 text-start w-[30%] p-4 text-[#222222]">Listing</th>
+                  <th className="items-center ml-6 my-4 text-start w-[30%] p-4 text-[#222222]">Title</th>
 
                   <th className="w-[30%] whitespace-nowrap text-start p-4">Location</th>
 
-                  <th className="w-[20%] whitespace-nowrap text-start p-4">With Moving</th>
-                  <th className="w-[20%]  whitespace-nowrap text-start p-4">With Packing</th>
+                  <th className="w-[20%] whitespace-nowrap text-start p-4">Partner</th>
+                  <th className="w-[20%]  whitespace-nowrap text-start p-4">Price</th>
                 </tr>
               </thead>
 
               {listings?.map(
-                ({ _id, status, storageTitle, address, parking, delivery }, index) =>
+                ({ _id, status, storageTitle, address, parking, user, delivery, monthlyRate, hourlyRate }, index) =>
                   status === "pending" && (
                     <tbody className="w-full text-sm   " key={index}>
                       <tr
@@ -67,9 +67,26 @@ const PendingLayout = ({ pendingCounts }) => {
 
                         <td className="w-[30%] p-4  ">{address}</td>
 
-                        <td className="w-[20%] p-4 text-sm text-blue">{`${delivery === false ? "False" : "True"}`}</td>
+                        <td className="w-[20%] p-4 text-sm text-blue">{`${user.firstName} ${user.lastName}`}</td>
 
-                        <td className="w-[20%] p-4 text-sm">{`${parking === false ? "False" : "True"}`}</td>
+                        <td className="w-[20%] p-4 text-sm">
+                          <div className="flex flex-row space-x-2 items-center mt-2 font-normal text-sm">
+                            {monthlyRate ? (
+                              <p className="flex">
+                                {`$${monthlyRate}`} <span className="lowercase">/month</span>
+                              </p>
+                            ) : (
+                              ""
+                            )}
+                            {hourlyRate ? (
+                              <p className="flex">
+                                {`$${hourlyRate}`} <span className="lowercase">/hour</span>
+                              </p>
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        </td>
                       </tr>
                     </tbody>
                   )
