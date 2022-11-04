@@ -1,54 +1,47 @@
 import React, { useEffect, useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { LogoutIcon } from "@heroicons/react/outline";
-// import { authenticatedUser, logout } from "../../redux/features/auth.slice";
+import { logout } from "../../redux/features/auth.slice";
 import { dashboardNavLinks } from "../../helpers/data";
 
-
 const DashboardNavbar = ({ pathname }) => {
- const [userData, setUserData] = useState(null);
-//   const dispatch = useDispatch();
-//   const { user } = useSelector((state) => state.auth);
+  const [userData, setUserData] = useState(null);
+  const dispatch = useDispatch();
+  //   const { user } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
-    // dispatch(logout());
-    // location.assign("/login");
+    dispatch(logout());
+    location.assign("/");
   };
 
-//   useEffect(() => {
-//     if (authenticatedUser()) {
-//       setUserData(authenticatedUser());
-//     }
-//   }, [user]);
+  //   useEffect(() => {
+  //     if (authenticatedUser()) {
+  //       setUserData(authenticatedUser());
+  //     }
+  //   }, [user]);
 
   return (
     <div className="flex flex-col justify-between h-full relative py-6 overflow-y-auto ">
-         
       <div>
         <div className="flex justify-between items-center gap-2 p-3 mx-5 lg:mx-8">
           <img src="/logo.png" alt="Mooveit" className="max-h-8" />
         </div>
 
         <div className="flex flex-col mt-8">
-         
-          {dashboardNavLinks?.map(
-            ({ path, title, icon, iconActive, permission, subMenus }, i) =>
+          {dashboardNavLinks?.map(({ path, title, icon, iconActive, permission, subMenus }, i) => (
             //  permission.includes(userData?.role) &&
-            
-                <a
-                  key={i}
-                  href={path}
-                  className={`flex gap-5 items-center px-7 lg:pl-10 lg:pr-5 py-2 mb-2 w-full hover:text-primary cursor-pointer ${
-                    pathname?.includes(path) ? "text-primary font-semibold border-r-2 border-primary" : "text-[#959595]"
-                  }`}>
-                  <p className="w-6">{pathname?.includes(path) ? iconActive : icon}</p>
-                  <h2 className="text-sm">{title}</h2>
-                </a>
-           
-            
-        )}
-       
+
+            <a
+              key={i}
+              href={path}
+              className={`flex gap-5 items-center px-7 lg:pl-10 lg:pr-5 py-2 mb-2 w-full hover:text-primary cursor-pointer ${
+                pathname?.includes(path) ? "text-primary font-semibold border-r-2 border-primary" : "text-[#959595]"
+              }`}>
+              <p className="w-6">{pathname?.includes(path) ? iconActive : icon}</p>
+              <h2 className="text-sm">{title}</h2>
+            </a>
+          ))}
         </div>
       </div>
 
@@ -59,15 +52,13 @@ const DashboardNavbar = ({ pathname }) => {
           <span className="w-8 h-8 rounded-full bg-[#C4C4C4]"></span>
           <div>
             <h2 className="text-[#222222]">
-               Admin
+              Admin
               {/* {userData?.firstName} {userData?.lastName} */}
             </h2>
             {/* <h2 className="text-xs text-[#AAAAAA]">{`${userData?.email.slice(0, 22)}${
               userData?.email.length > 22 ? "..." : ""
             }`}</h2> */}
-            <h2 className="text-xs text-[#AAAAAA]">
-Admin@gmail.com
-            </h2>
+            <h2 className="text-xs text-[#AAAAAA]">Admin@gmail.com</h2>
           </div>
         </div>
         <ChevronDownIcon className="w-4" />

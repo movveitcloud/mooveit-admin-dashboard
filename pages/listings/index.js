@@ -69,7 +69,7 @@ const Listings = () => {
               <div className="bg-accent-content border border-l-accent rounded-l-md border-r-none p-3 py-3 text-white whitespace-nowrap cursor-pointer  ">
                 View All
               </div>
-              <div className="flex items-center border border-r-accent justify-start p-3 py-3 cursor-pointer">
+              <div className="flex items-center border  justify-start p-3 py-3 cursor-pointer">
                 <p>Moving</p>
                 <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
               </div>
@@ -105,7 +105,7 @@ const Listings = () => {
         <div className="md:hidden mb-4  text-sm">
           <div className="overflow-auto">
             <div className="flex items-center  justify-start w-fit border  lg:mr-8 md:mr-2 text-center    rounded-md">
-              <div className="bg-accent-content border border-l-[#DCDCFF] rounded-l-md border-r-none p-2 text-white whitespace-nowrap cursor-pointer w-fit text-center font-normal">
+              <div className="bg-accent-content border  rounded-l-md border-r-none p-2 text-white whitespace-nowrap cursor-pointer w-fit text-center font-normal">
                 View All
               </div>
               <div className="flex items-center justify-center border   p-2 cursor-pointer w-fit text-center">

@@ -79,7 +79,7 @@ export const authenticatedUser = () => {
   }
   if (localStorage.getItem("admin")) {
     const userPersist = JSON.parse(localStorage.getItem("admin"));
-   
+
     const bytes = userPersist !== "null" ? crypto.AES.decrypt(userPersist.response, ENCRYPTION_KEY) : "";
     const userObject = bytes ? bytes.toString(crypto.enc.Utf8) : null;
     return JSON.parse(userObject);
@@ -95,6 +95,13 @@ const authSlice = createSlice({
     resetLoading: false,
     verifyLoading: false,
     resetTokenData: null,
+  },
+
+  reducers: {
+    logout: (state) => {
+      localStorage.removeItem("admin");
+      state.admin = null;
+    },
   },
 
   extraReducers: {
@@ -140,4 +147,5 @@ const authSlice = createSlice({
     },
   },
 });
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;
