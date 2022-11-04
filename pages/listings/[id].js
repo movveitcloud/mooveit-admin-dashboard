@@ -56,7 +56,7 @@ const View = () => {
     dispatch(approveListing({ id: id, payload: payload }));
     router.push("/listings");
   };
-
+  console.log(singleListing, "lks");
   return (
     <DashboardLayout>
       {singleListingLoading ? (
@@ -72,7 +72,7 @@ const View = () => {
               <ArrowNarrowLeftIcon className="w-4" />
               Back
             </button>
-            <h2 className="font-bold text-xl">{singleListing?.address}</h2>
+            <h2 className="font-bold text-xl">{singleListing?.storageTitle}</h2>
           </div>
           <div className="w-[80%] mx-auto">
             <>
@@ -82,7 +82,7 @@ const View = () => {
                 storageFloor={getValue({ options: storageFloors, key: List?.storageFloor })}
                 storageFeatures={getValueArray({ options: storageFeatures, key: List?.storageFeatures })}
               />
-              <Services delivery={List.delivery} parking={List.parking} />
+              <Services delivery={singleListing?.delivery} packing={singleListing?.packing} />
             </>
             <>
               <Dimension storageSize={getValue({ options: storageSize, key: List?.storageSize })} />
@@ -105,7 +105,8 @@ const View = () => {
               hourlyRate={List?.hourlyRate ? `$${List.hourlyRate}` : "N/A"}
               monthlyRate={List?.monthlyRate ? `$${List.monthlyRate}` : "N/A"}
             />
-            {option === true && (
+
+            {singleListing.status !== "approved" && (
               <div className="flex justify-end">
                 <div className="flex gap-4">
                   <button
