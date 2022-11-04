@@ -16,7 +16,7 @@ export const resetPassword = ({ payload, token }) => API.patch(`/admin/reset-pas
 export const verifyResetToken = (token) => API.get(`/admin/reset-password/${token}`);
 
 //LISTINGS
-export const getListings = () => API.get("/users/listings");
+export const getListings = () => API.get("/admin/listings");
 export const getSingleListing = (id) => API.get(`/users/listings/${id}`);
 export const approveListing = ({ payload, id }) => API.patch(`/admin/listings/${id}`, payload);
 
