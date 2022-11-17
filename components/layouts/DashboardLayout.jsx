@@ -14,11 +14,11 @@ const DashboardLayout = ({ children, name, userInfo }) => {
   const router = useRouter();
   const user = authenticatedUser();
 
-  //   const getPageTitle = () => {
-  //     dashboardNavLinks?.map(({ path, title }) =>
-  //       path == router?.asPath ? setPageTitle(title) : name ? setPageTitle(name) : ""
-  //     );
-  //   };
+  const getPageTitle = () => {
+    dashboardNavLinks?.map(({ path, title }) =>
+      path == router?.asPath ? setPageTitle(title) : name ? setPageTitle(name) : ""
+    );
+  };
 
   //   const authorizeUser = (role) => {
   //     //BOUNCE UNAUTHORIZED USERS
@@ -34,9 +34,10 @@ const DashboardLayout = ({ children, name, userInfo }) => {
       router.push("/");
     }
 
-    // getPageTitle();
+    getPageTitle();
     setPageReady(true);
     setLoading(false);
+    console.log(pageTitle);
     // if (user && !user.isVerified) {
     //   router.push("/verify");
     // }
