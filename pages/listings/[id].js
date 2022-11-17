@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { getSingleListing, approveListing } from "../../redux/features/listings.slice";
+import { getSingleListing, disapproveListing, approveListing } from "../../redux/features/listings.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { PulseLoader } from "react-spinners";
 import { motion } from "framer-motion";
@@ -28,6 +28,7 @@ import {
   Pricing,
   Services,
   Type,
+  DenyListingModal,
 } from "../../components";
 
 const View = () => {
@@ -37,6 +38,8 @@ const View = () => {
   const { singleListing, singleListingLoading } = useSelector((state) => state.listing);
   const [List, setList] = useState({});
   const [option, setOption] = useState(false);
+
+  const id = query;
 
   useEffect(() => {
     if (query) {
@@ -56,6 +59,7 @@ const View = () => {
     dispatch(approveListing({ id: id, payload: payload }));
     router.push("/listings");
   };
+
   console.log(singleListing, "lks");
   return (
     <DashboardLayout>
@@ -114,10 +118,14 @@ const View = () => {
                     onClick={approve}>
                     Approve
                   </button>
-                  <button className={`btn btn-outline btn-primary hover:btn-accent w-[175px]`}>Deny</button>
+
+                  <label htmlFor="deny" className={`btn text-black btn-outline btn-primary hover:btn-accent w-[175px]`}>
+                    Deny
+                  </label>
                 </div>
               </div>
             )}
+            <DenyListingModal id={id} />
           </div>
         </motion.div>
       )}

@@ -50,9 +50,6 @@ const Layout = ({ approvedCounts }) => {
                         key={index}>
                         <td className=" w-[20%]  p-4 ">
                           <div className="flex justify-start items-center">
-                            {/* <div className="rounded-full w-8 h-8 mr-2  ">
-                        <img className="w-full object-fit h-full rounded-full" src="/auth-image.png" alt="user-image" />
-                      </div> */}
                             <p className=" text-sm">{storageTitle}</p>
                           </div>
                         </td>
@@ -90,7 +87,7 @@ const Layout = ({ approvedCounts }) => {
                 <div className="bg-white rounded-lg w-full md:w-[60%] flex justify-center mt-8">
                   <div className="px-4 py-24 flex flex-col space-y-4 items-center">
                     <img src="emptyStorage.svg" alt="empty storage icon" className="w-16 md:w-20" />
-                    <p className="text-center text-[#AAAAAA]">No approved listing at this time.</p>
+                    <p className="text-center text-[#AAAAAA] text-xl font-bold">No approved listing at this time.</p>
                   </div>
                 </div>
               </div>

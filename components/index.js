@@ -36,13 +36,15 @@ export { default as ApprovedBooking } from "./dashboard/Bookings/ApprovedBooking
 export { default as ApproveLayout } from "./dashboard/Payment/ApproveLayout";
 
 //LISTINGS
-export { default as Address } from "./dashboard/Listings/Address"
-export { default as Type } from "./dashboard/Listings/Type"
-export { default as Services } from "./dashboard/Listings/Services"
-export { default as Dimension } from "./dashboard/Listings/Dimension.jsx"
-export { default as Media } from "./dashboard/Listings/Media.jsx"
-export { default as Description } from "./dashboard/Listings/Description.jsx"
-export { default as Access } from "./dashboard/Listings/Access.jsx"
-export { default as BookingDetails } from "./dashboard/Listings/BookingDetails.jsx"
-export { default as Pricing } from "./dashboard/Listings/Pricing.jsx"
+export { default as Address } from "./dashboard/Listings/Address";
+export { default as Type } from "./dashboard/Listings/Type";
+export { default as Services } from "./dashboard/Listings/Services";
+export { default as Dimension } from "./dashboard/Listings/Dimension.jsx";
+export { default as Media } from "./dashboard/Listings/Media.jsx";
+export { default as Description } from "./dashboard/Listings/Description.jsx";
+export { default as Access } from "./dashboard/Listings/Access.jsx";
+export { default as BookingDetails } from "./dashboard/Listings/BookingDetails.jsx";
+export { default as Pricing } from "./dashboard/Listings/Pricing.jsx";
 
+//MODALS
+export { default as DenyListingModal } from "./modals/DenyListingModal";

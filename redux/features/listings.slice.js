@@ -5,7 +5,6 @@ import * as api from "../api";
 export const getListings = createAsyncThunk("/listings", async ({}, { rejectWithValue }) => {
   try {
     const response = await api.getListings();
-
     return response.data;
   } catch (err) {
     errorPopUp({ msg: err.response.data.error });
@@ -21,18 +20,31 @@ export const getSingleListing = createAsyncThunk("/listing/listingId", async ({ 
     return rejectWithValue(err.response.data);
   }
 });
-export const approveListing = createAsyncThunk("/admin/listings/listingId", async ({ payload,id }, { rejectWithValue }) => {
-  
-  try {
-    const response = await api.approveListing({payload,id});
-    console.log(response.data)
-    console.log(payload)
-    return response.data;
-  } catch (err) {
-    errorPopUp({ msg: err.response.data.error });
-    return rejectWithValue(err.response.data);
+export const approveListing = createAsyncThunk(
+  "/admin/listings/listingId",
+  async ({ payload, id }, { rejectWithValue }) => {
+    try {
+      const response = await api.approveListing({ payload, id });
+      return response.data;
+    } catch (err) {
+      errorPopUp({ msg: err.response.data.error });
+      return rejectWithValue(err.response.data);
+    }
   }
-});
+);
+export const disapproveListing = createAsyncThunk(
+  "/admin/listings/Id",
+  async ({ payload, id }, { rejectWithValue }) => {
+    try {
+      const response = await api.disapproveListing({ payload, id });
+
+      return response.data;
+    } catch (err) {
+      errorPopUp({ msg: err.response.data.error });
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 const listingSlice = createSlice({
   name: "listing",
@@ -44,6 +56,8 @@ const listingSlice = createSlice({
     singleListingLoading: false,
     approveListing: {},
     approveListingLoading: false,
+    disapproveListing: {},
+    disapproveListingLoading: false,
   },
 
   extraReducers: {
@@ -76,6 +90,16 @@ const listingSlice = createSlice({
     },
     [approveListing.rejected]: (state, action) => {
       state.approveListingLoading = false;
+    },
+    [disapproveListing.pending]: (state) => {
+      state.disapproveListingLoading = true;
+    },
+    [disapproveListing.fulfilled]: (state, action) => {
+      state.disapproveListingLoading = false;
+      state.disapproveListing = action.payload.data;
+    },
+    [disapproveListing.rejected]: (state, action) => {
+      state.disapproveListingLoading = false;
     },
   },
 });

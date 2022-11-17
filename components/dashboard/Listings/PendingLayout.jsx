@@ -15,7 +15,6 @@ import { getListings } from "../../../redux/features/listings.slice";
 import { useDispatch, useSelector } from "react-redux";
 
 const PendingLayout = ({ pendingCounts }) => {
-  const [option, setOption] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,8 +24,6 @@ const PendingLayout = ({ pendingCounts }) => {
   const { listingLoading } = useSelector((state) => state.listing);
   const router = useRouter();
   const view = (_id) => router.push(`/listings/${_id}`);
-  const approve = () => router.push("/listings/approve");
-  const deny = () => router.push("/listings/deny");
 
   return (
     <div className="">
@@ -97,7 +94,7 @@ const PendingLayout = ({ pendingCounts }) => {
               <div className="bg-white rounded-lg w-full md:w-[60%] flex justify-center mt-8">
                 <div className="px-4 py-24 flex flex-col space-y-4 items-center">
                   <img src="emptyStorage.svg" alt="empty storage icon" className="w-16 md:w-20" />
-                  <p className="text-center text-[#AAAAAA]">No pending listing at this time.</p>
+                  <p className="text-center text-[#AAAAAA] text-xl font-bold">No pending listing at this time.</p>
                 </div>
               </div>
             </div>
