@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { DashboardLayout } from "../../components";
 import { useState } from "react";
 import { Users, Partners } from "../../components";
+import { useSelector } from "react-redux";
 import { ChevronDownIcon, SearchIcon, DownloadIcon } from "@heroicons/react/outline";
 const ManageAccounts = () => {
   const [activeButton, setActiveButton] = useState("users");
   const [value, setValue] = useState("");
+  const { users } = useSelector((state) => state.user);
+  const [customercount, setcustomerCount] = useState(0);
+  const [partnercount, setpartnerCount] = useState(0);
+  console.log(users);
+
+  useEffect(() => {
+    let customercount = 0;
+    users?.map(({ role }) => (role === "customer" ? (customercount += 1) : ""));
+    setcustomerCount(customercount);
+
+    let partnercount = 0;
+    users?.map(({ role }) => (role === "partner" ? (partnercount += 1) : ""));
+    setpartnerCount(partnercount);
+  }, [users]);
 
   const Search = (e) => {};
 
@@ -22,7 +37,7 @@ const ManageAccounts = () => {
             className={` ${
               activeButton === "users" ? "bg-accent-content" : "bg-[#BBBBBB]"
             } ml-2 text-white md:text-[10px] text-[10px] rounded-sm p-2 h-4 flex align-middle items-center`}>
-            32.8k
+            {customercount}
           </div>
         </button>
 
@@ -36,7 +51,7 @@ const ManageAccounts = () => {
             className={` ${
               activeButton === "partners" ? "bg-accent-content" : "bg-[#BBBBBB]"
             } ml-2 text-white  text-[10px] rounded-sm  p-2  h-4 flex align-middle items-center`}>
-            16.8k
+            {partnercount}
           </div>
         </button>
       </div>

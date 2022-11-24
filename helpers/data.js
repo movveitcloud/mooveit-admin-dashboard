@@ -69,6 +69,13 @@ export const dashboardNavLinks = [
     icon: <BadgeCheckIcon className="w-full" />,
     iconActive: <BadgeCheckIconSolid className="w-full" />,
   },
+  {
+    name: "Configurations",
+    path: "/configurations",
+    title: "configurations",
+    icon: <BadgeCheckIcon className="w-full" />,
+    iconActive: <BadgeCheckIconSolid className="w-full" />,
+  },
 ];
 export const storageKinds = [
   { name: "Garage & Lock Up", value: "garage&lockup" },
@@ -91,10 +98,10 @@ export const storageFloors = [
   { name: "Multiple Floors", value: "multipleFloors" },
 ];
 export const storageFeatures = [
-  {name: "CCTV", value: "cctv", },
-  { name: "Alarm", value: "alarm",},
-  {name: "Padlock", value: "padlock", },
-  { name: "Onsite Staff", value: "onsiteStaff", },
+  { name: "CCTV", value: "cctv" },
+  { name: "Alarm", value: "alarm" },
+  { name: "Padlock", value: "padlock" },
+  { name: "Onsite Staff", value: "onsiteStaff" },
 ];
 export const whenAccessListing = [
   { name: "Any Time", value: "anyTime" },
@@ -139,4 +146,3 @@ export const storageSize = [
     value: "150 sq ft - One and Half garages or 2 Luton Van Loads",
   },
 ];
-

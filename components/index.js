@@ -48,3 +48,17 @@ export { default as Pricing } from "./dashboard/Listings/Pricing.jsx";
 
 //MODALS
 export { default as DenyListingModal } from "./modals/DenyListingModal";
+export { default as AddFeatureModal } from "./modals/AddFeatureModal";
+export { default as AddStorageTypeModal } from "./modals/AddStorageTypeModal";
+export { default as AddStorageAccessModal } from "./modals/AddStorageAccessModal";
+export { default as AddStorageFloorModal } from "./modals/AddStorageFloorModal";
+export { default as AdditionalServicesModal } from "./modals/AdditionalServicesModal";
+export { default as StorageDimensionModal } from "./modals/StorageDimensionModal";
+
+//CONFIGURATIONS
+export { default as StorageFeatures } from "./dashboard/Configurations/StorageFeatures";
+export { default as StorageAccess } from "./dashboard/Configurations/StorageAccess";
+export { default as StorageDimensions } from "./dashboard/Configurations/StorageDimensions";
+export { default as AdditionalServices } from "./dashboard/Configurations/AdditionalServices";
+export { default as StorageType } from "./dashboard/Configurations/StorageType";
+export { default as StorageFloor } from "./dashboard/Configurations/StorageFloor";
