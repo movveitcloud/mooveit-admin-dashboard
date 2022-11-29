@@ -1,19 +1,38 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-
+import { uploadConfiguration, getConfigurations } from "../../redux/features/configurations.slice";
 import { XIcon } from "@heroicons/react/outline";
 
-const AdditionalServicesModal = ({ id }) => {
+const AdditionalServicesModal = () => {
+  const { configurations } = useSelector((state) => state.configuration);
   const dispatch = useDispatch();
-
+  const [id, setId] = useState("");
   const [additionalservice, setAdditionaservice] = useState("");
   const router = useRouter();
   const disableBtn = !additionalservice;
-  const handleSave = () => {
+  const closeModal = useRef(null);
+
+  const refreshConfigurations = () => {
+    dispatch(getConfigurations());
+  };
+
+  useEffect(() => {
+    configurations?.map(({ _id }) => setId(_id));
+  }, [configurations]);
+  const handleSave = (e) => {
     const payload = {
-      service: additionalservice,
+      services: { [additionalservice]: false },
     };
+    console.log(payload);
+    dispatch(
+      uploadConfiguration({
+        id: id,
+        payload: payload,
+        refreshConfigurations: refreshConfigurations,
+        closeModal: closeModal,
+      })
+    );
   };
 
   return (
@@ -45,7 +64,7 @@ const AdditionalServicesModal = ({ id }) => {
           </div>
         </label>
       </label>
-      <label htmlFor="additionalservices" className="hidden" />
+      <label htmlFor="additionalservices" className="hidden" ref={closeModal} />
     </>
   );
 };

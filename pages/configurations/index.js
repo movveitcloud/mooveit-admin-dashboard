@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getSingleListing, disapproveListing, approveListing } from "../../redux/features/listings.slice";
+import { getConfigurations } from "../../redux/features/configurations.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { PulseLoader } from "react-spinners";
 import { motion } from "framer-motion";
@@ -19,6 +20,7 @@ import {
   StorageDimensions,
   AdditionalServices,
   StorageDimensionModal,
+  Testing,
 } from "../../components";
 
 import { DashboardLayout } from "../../components";
@@ -27,11 +29,18 @@ const Configurations = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const query = router.query.id;
+  const { configurations, configurationLoading } = useSelector((state) => state.configuration);
   const { singleListing, singleListingLoading } = useSelector((state) => state.listing);
+
   const [List, setList] = useState({});
   const [option, setOption] = useState(false);
 
   const id = query;
+  useEffect(() => {
+    dispatch(getConfigurations());
+  }, []);
+  // console.log(configurationLoading);
+  console.log(configurations);
 
   useEffect(() => {
     if (query) {
@@ -55,10 +64,10 @@ const Configurations = () => {
   console.log(singleListing, "lks");
   return (
     <DashboardLayout>
-      {singleListingLoading ? (
+      {configurationLoading ? (
         <div className="relative">
           <div className="h-[400px] flex justify-center items-center">
-            <PulseLoader loading={singleListingLoading} color="#EDCC5B" />
+            <PulseLoader loading={configurationLoading} color="#EDCC5B" />
           </div>
         </div>
       ) : (
@@ -71,10 +80,10 @@ const Configurations = () => {
               <StorageFloor />
               <StorageDimensions />
               <AdditionalServices />
+              {/* <Testing /> */}
             </>
 
-            {/* {singleListing.status !== "approved" && ( */}
-            <div className="flex justify-end">
+            {/* <div className="flex justify-end">
               <div className="flex gap-4">
                 <button className="btn btn-white text-black border-3 border-accent w-[175px] hover:btn-accent ">
                   Discard Changes
@@ -84,14 +93,13 @@ const Configurations = () => {
                   Save
                 </label>
               </div>
-              <AddFeatureModal id={id} />
-              <AddStorageTypeModal id={id} />
-              <AddStorageAccessModal id={id} />
-              <AddStorageFloorModal id={id} />
-              <StorageDimensionModal id={id} />
-              <AdditionalServicesModal id={id} />
-            </div>
-            {/* )} */}
+              </div> */}
+            <AddFeatureModal id={id} />
+            <AddStorageTypeModal id={id} />
+            <AddStorageAccessModal id={id} />
+            <AddStorageFloorModal id={id} />
+            <StorageDimensionModal id={id} />
+            <AdditionalServicesModal id={id} />
           </div>
         </motion.div>
       )}

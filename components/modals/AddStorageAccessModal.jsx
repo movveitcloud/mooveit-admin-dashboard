@@ -1,19 +1,37 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-
+import { uploadConfiguration, getConfigurations } from "../../redux/features/configurations.slice";
 import { XIcon } from "@heroicons/react/outline";
 
-const AddStorageAccess = ({ id }) => {
+const AddStorageAccess = () => {
   const dispatch = useDispatch();
-
+  const { configurations } = useSelector((state) => state.configuration);
   const [storageaccess, setStorageaccess] = useState("");
   const router = useRouter();
   const disableBtn = !storageaccess;
-  const handleSave = () => {
+  const closeModal = useRef(null);
+  const [id, setId] = useState("");
+  const refreshConfigurations = () => {
+    dispatch(getConfigurations());
+  };
+
+  useEffect(() => {
+    configurations?.map(({ _id }) => setId(_id));
+  }, [configurations]);
+  const handleSave = (e) => {
     const payload = {
-      name: storageaccess,
+      storageAccessType: storageaccess,
     };
+    console.log(payload);
+    dispatch(
+      uploadConfiguration({
+        id: id,
+        payload: payload,
+        refreshConfigurations: refreshConfigurations,
+        closeModal: closeModal,
+      })
+    );
   };
 
   return (
@@ -45,7 +63,7 @@ const AddStorageAccess = ({ id }) => {
           </div>
         </label>
       </label>
-      <label htmlFor="addfeatureaccess" className="hidden" />
+      <label htmlFor="addfeatureaccess" className="hidden" ref={closeModal} />
     </>
   );
 };

@@ -62,3 +62,4 @@ export { default as StorageDimensions } from "./dashboard/Configurations/Storage
 export { default as AdditionalServices } from "./dashboard/Configurations/AdditionalServices";
 export { default as StorageType } from "./dashboard/Configurations/StorageType";
 export { default as StorageFloor } from "./dashboard/Configurations/StorageFloor";
+export { default as Testing } from "./dashboard/Configurations/Testing";

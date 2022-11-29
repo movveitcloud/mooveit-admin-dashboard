@@ -1,6 +1,6 @@
 import {
   CalendarIcon,
-  ClockIcon,
+  // CogSixToothIcon,
   CreditCardIcon,
   CubeIcon,
   LightBulbIcon,
@@ -14,6 +14,7 @@ import {
   CheckCircleIcon,
   ChevronDownIcon,
   BadgeCheckIcon,
+  CogIcon,
 } from "@heroicons/react/outline";
 import {
   CubeIcon as CubeIconSolid,
@@ -22,6 +23,7 @@ import {
   CreditCardIcon as CreditCardIconSolid,
   DocumentTextIcon as DocumentTextIconSolid,
   BadgeCheckIcon as BadgeCheckIconSolid,
+  CogIcon as CodeIconSolid,
 } from "@heroicons/react/solid";
 
 export const dashboardNavLinks = [
@@ -73,8 +75,8 @@ export const dashboardNavLinks = [
     name: "Configurations",
     path: "/configurations",
     title: "configurations",
-    icon: <BadgeCheckIcon className="w-full" />,
-    iconActive: <BadgeCheckIconSolid className="w-full" />,
+    icon: <CogIcon className="w-full" />,
+    iconActive: <CodeIconSolid className="w-full" />,
   },
 ];
 export const storageKinds = [

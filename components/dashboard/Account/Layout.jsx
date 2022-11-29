@@ -10,14 +10,11 @@ const Layout = ({ name }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(getListings());
     dispatch(getUsers());
   }, []);
   const { users } = useSelector((state) => state.user);
   const { userLoading } = useSelector((state) => state.user);
 
-  // const { listings } = useSelector((state) => state.listing);
-  // console.log(listings);
   const [option, setOption] = useState("");
 
   return (
@@ -52,9 +49,6 @@ const Layout = ({ name }) => {
                     <tr className="capitalize cursor-pointer border" key={index}>
                       <td className=" w-[30%]  p-4 ">
                         <div className="flex justify-start items-center">
-                          {/* <div className="rounded-full w-8 h-8 mr-2  ">
-                        <img className="w-full object-fit h-full rounded-full" src="/auth-image.png" alt="user-image" />
-                      </div> */}
                           <p className="text-sm">
                             {firstName} {lastName}
                           </p>
@@ -64,12 +58,6 @@ const Layout = ({ name }) => {
                       <td className="w-[15%] p-4 text-sm ">{email}</td>
                       <td className="w-[15%] p-4 text-sm">08066198765</td>
                       <td className="w-[10%] p-4 text-sm ">
-                        {/* <span
-                      className={`${
-                        Status === "Verified" ? "bg-[#BBF7D0] text-[#11A13A] " : "bg-[#FECACA] text-[#D12C2C]"
-                      }  rounded-full  text-center items-center p-2 px-4`}>
-                      {Status}
-                    </span> */}
                         <span className="bg-[#BBF7D0] text-[#11A13A] rounded-full  text-center items-center p-2 px-4">
                           Verified
                         </span>

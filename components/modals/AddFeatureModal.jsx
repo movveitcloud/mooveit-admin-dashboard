@@ -1,31 +1,40 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { disapproveListing } from "../../redux/features/listings.slice";
+
+import { uploadConfigurationImage } from "../../redux/features/configurations.slice";
 import { PhotographIcon, XIcon } from "@heroicons/react/outline";
 import { errorPopUp } from "../../helpers/toastify";
 
-const AddFeatureModal = ({ id }) => {
+const AddFeatureModal = () => {
+  const { configurations } = useSelector((state) => state.configuration);
   const { disapproveListingLoading } = useSelector((state) => state.listing);
-
+  const { uploadImageLoading } = useSelector((state) => state.configuration);
   const dispatch = useDispatch();
-  const [value, setValue] = useState("");
+  const [id, setId] = useState("");
   const [featurename, setFeaturename] = useState("");
 
   const router = useRouter();
   const [image, setImage] = useState("");
   const disableBtn = !featurename || !image;
 
-  const handleDisapprove = () => {
-    const payload = {
-      status: "disapproved",
-      message: value,
-    };
-    if (value != "") {
-      dispatch(disapproveListing({ id: id, payload: payload }));
-      router.push("/listings");
-    }
-  };
+  useEffect(() => {
+    configurations?.map(({ _id }) => setId(_id));
+  }, [configurations]);
+
+  // console.log(uploadImageLoading);
+  // console.log(id);
+
+  // const handleDisapprove = () => {
+  //   const payload = {
+  //     status: "disapproved",
+  //     message: value,
+  //   };
+  //   if (value != "") {
+  //     dispatch(disapproveListing({ id: id, payload: payload }));
+  //     router.push("/listings");
+  //   }
+  // };
   const handleSave = () => {
     const payload = {
       name: featurename,
@@ -34,7 +43,11 @@ const AddFeatureModal = ({ id }) => {
   };
   const handleChange = (e) => {
     const img = e.target.files[0];
+
     setImage(img);
+    console.log(img);
+    const payload = { media: img, key: "media" };
+    dispatch(uploadConfigurationImage({ id, payload }));
     // if (img.size > 1000) {
     //   setImage("");
     //   errorPopUp({ msg: "Image greater than 1mb" });
@@ -76,9 +89,7 @@ const AddFeatureModal = ({ id }) => {
                   <PhotographIcon className="w-8" />
                 )}
               </div>
-              {/* <button className="btn btn-white text-black border-3 border-accent w-[175px] hover:btn-accent ">
-                UPLOAD ICON
-              </button> */}
+
               <label
                 htmlFor="upload"
                 className="btn btn-white text-black border-3 border-accent w-[175px] hover:btn-accent ">

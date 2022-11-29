@@ -3,26 +3,27 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Accordion from "../../shared/Accordion";
 
-const StorageFloor = () => {
+const Testing = ({ id }) => {
   const { configurations } = useSelector((state) => state.configuration);
   return (
-    <Accordion title="Storage Floor">
+    <Accordion title="Storage Type">
       <div className="flex justify-between items-center mb-6">
-        <p>Add Storage Floor </p>
+        <p>Add a Storage type </p>
         <label
-          htmlFor="addstoragefloor"
+          htmlFor={id}
           className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent w-[175px]`}>
-          ADD FLOOR
+          ADD TYPE
         </label>
       </div>
-
-      {configurations?.map(({ storageFloor }) =>
-        storageFloor.map((val, indx) => (
-          <div className="bg-[#F9F9F9] border-l-4 border-accent rounded-lg px-6 py-4 flex justify-between items-center text-sm mb-6">
+      {configurations?.map(({ storageType }) =>
+        storageType.map((val, indx) => (
+          <div
+            key={indx}
+            className="bg-[#F9F9F9] border-l-4 border-accent rounded-lg px-6 py-4 flex justify-between items-center text-sm mb-6">
             <div className="flex  items-center">
-              <p className=" capitalize ">{val}</p>
+              <p className=" uppercase">{val}</p>
             </div>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2">
               <div className="flex items-center cursor-pointer ">
                 <PencilAltIcon className="text-primary w-4 mr-2 " />
                 <p>Edit</p>
@@ -39,4 +40,4 @@ const StorageFloor = () => {
   );
 };
 
-export default StorageFloor;
+export default Testing;
