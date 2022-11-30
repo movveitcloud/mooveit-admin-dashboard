@@ -5,7 +5,6 @@ import { getConfigurations } from "../../redux/features/configurations.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { PulseLoader } from "react-spinners";
 import { motion } from "framer-motion";
-import { ArrowNarrowLeftIcon } from "@heroicons/react/outline";
 import { getValue, getValueArray } from "../../helpers/utils";
 import {
   AddFeatureModal,
@@ -20,7 +19,6 @@ import {
   StorageDimensions,
   AdditionalServices,
   StorageDimensionModal,
-  Testing,
 } from "../../components";
 
 import { DashboardLayout } from "../../components";
@@ -28,40 +26,13 @@ import { DashboardLayout } from "../../components";
 const Configurations = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const query = router.query.id;
   const { configurations, configurationLoading } = useSelector((state) => state.configuration);
-  const { singleListing, singleListingLoading } = useSelector((state) => state.listing);
-
-  const [List, setList] = useState({});
-  const [option, setOption] = useState(false);
-
-  const id = query;
   useEffect(() => {
     dispatch(getConfigurations());
   }, []);
-  // console.log(configurationLoading);
-  console.log(configurations);
 
-  useEffect(() => {
-    if (query) {
-      dispatch(getSingleListing({ id: query }));
-    }
-  }, [query]);
-  useEffect(() => {
-    if (singleListing) {
-      setList(singleListing);
-      singleListing.status === "pending" ? setOption(true) : "";
-    }
-  }, [singleListing]);
+  // console.log(configurations);
 
-  const approve = () => {
-    const id = query;
-    const payload = { status: "approved" };
-    dispatch(approveListing({ id: id, payload: payload }));
-    router.push("/listings");
-  };
-
-  console.log(singleListing, "lks");
   return (
     <DashboardLayout>
       {configurationLoading ? (
@@ -80,7 +51,6 @@ const Configurations = () => {
               <StorageFloor />
               <StorageDimensions />
               <AdditionalServices />
-              {/* <Testing /> */}
             </>
 
             {/* <div className="flex justify-end">
@@ -94,12 +64,12 @@ const Configurations = () => {
                 </label>
               </div>
               </div> */}
-            <AddFeatureModal id={id} />
-            <AddStorageTypeModal id={id} />
-            <AddStorageAccessModal id={id} />
-            <AddStorageFloorModal id={id} />
-            <StorageDimensionModal id={id} />
-            <AdditionalServicesModal id={id} />
+            <AddFeatureModal />
+            <AddStorageTypeModal />
+            <AddStorageAccessModal />
+            <AddStorageFloorModal />
+            <StorageDimensionModal />
+            <AdditionalServicesModal />
           </div>
         </motion.div>
       )}

@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authReducer, listingReducer, userReducer, configurationReducer } from "./features";
+import { authReducer, listingReducer, userReducer, configurationReducer, adminReducer } from "./features";
 
 export const store = configureStore({
   reducer: {
@@ -7,5 +7,6 @@ export const store = configureStore({
     listing: listingReducer,
     user: userReducer,
     configuration: configurationReducer,
+    admin: adminReducer,
   },
 });

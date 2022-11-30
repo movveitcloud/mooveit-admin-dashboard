@@ -28,3 +28,7 @@ export const getUsers = () => API.get("/admin/users");
 export const getConfigurations = () => API.get("/admin/configurations");
 export const uploadConfigurationImage = ({ id, payload }) => API.patch(`/admin/configurations/${id}/upload`, payload);
 export const uploadConfiguration = ({ id, payload }) => API.patch(`/admin/configurations/${id}`, payload);
+
+//ADMIN
+export const createAdmin = (payload) => API.post("/admin/register", payload);
+export const getAdmins = () => API.get("/admin");

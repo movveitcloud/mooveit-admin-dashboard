@@ -16,7 +16,7 @@ const StorageDimensions = () => {
         </label>
       </div>
 
-      {configurations?.forEach(({ storageSize }) =>
+      {configurations?.forEach(({ storageSize }, i) =>
         storageSize.map((val, indx) => (
           <div
             key={indx}

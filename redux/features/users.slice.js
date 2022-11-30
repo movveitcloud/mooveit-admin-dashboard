@@ -5,7 +5,6 @@ import * as api from "../api";
 export const getUsers = createAsyncThunk("/users", async ({}, { rejectWithValue }) => {
   try {
     const response = await api.getUsers();
-    console.log(response.data);
     return response.data;
   } catch (err) {
     errorPopUp({ msg: err.response.data.error });

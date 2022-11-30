@@ -15,6 +15,7 @@ import {
   ChevronDownIcon,
   BadgeCheckIcon,
   CogIcon,
+  UserIcon,
 } from "@heroicons/react/outline";
 import {
   CubeIcon as CubeIconSolid,
@@ -24,6 +25,7 @@ import {
   DocumentTextIcon as DocumentTextIconSolid,
   BadgeCheckIcon as BadgeCheckIconSolid,
   CogIcon as CodeIconSolid,
+  UserIcon as UserIconSolid,
 } from "@heroicons/react/solid";
 
 export const dashboardNavLinks = [
@@ -65,6 +67,13 @@ export const dashboardNavLinks = [
     iconActive: <CreditCardIconSolid className="w-full" />,
   },
   {
+    name: "Admin",
+    path: "/admin",
+    title: "Admin",
+    icon: <UserIcon className="w-full" />,
+    iconActive: <UserIconSolid className="w-full" />,
+  },
+  {
     name: "Verification",
     path: "/verification",
     title: "Verification",
@@ -74,7 +83,7 @@ export const dashboardNavLinks = [
   {
     name: "Configurations",
     path: "/configurations",
-    title: "configurations",
+    title: "Configurations",
     icon: <CogIcon className="w-full" />,
     iconActive: <CodeIconSolid className="w-full" />,
   },

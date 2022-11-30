@@ -80,7 +80,7 @@ const View = () => {
           </div>
           <div className="w-[80%] mx-auto">
             <>
-              <Address Address={List.address} />
+              <Address Address={List?.address} />
               <Type
                 storageType={getValue({ options: storageKinds, key: List?.storageType })}
                 storageFloor={getValue({ options: storageFloors, key: List?.storageFloor })}
@@ -91,13 +91,13 @@ const View = () => {
             <>
               <Dimension storageSize={getValue({ options: storageSize, key: List?.storageSize })} />
               <Media images={singleListing?.media} />
-              <Description storageTitle={List.storageTitle} description={List.description} />
+              <Description storageTitle={List?.storageTitle} description={List?.description} />
             </>
             <>
               <Access
                 storageAccessPeriod={getValue({ options: whenAccessListing, key: List?.storageAccessPeriod })}
                 storageAccessType={getValue({ options: howAccessListing, key: List?.storageAccessType })}
-                parkingInstruction={List.parkingInstruction ? List.parkingInstruction : "N/A"}
+                parkingInstruction={List?.parkingInstruction ? List?.parkingInstruction : "N/A"}
                 parkingPermit={List?.parkingPermit ? "Available" : "N/A"}
               />
               <BookingDetails

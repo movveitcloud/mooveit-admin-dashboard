@@ -16,7 +16,7 @@ const StorageAccess = () => {
         </label>
       </div>
 
-      {configurations?.map(({ storageAccessType }) =>
+      {configurations?.map(({ storageAccessType }, i) =>
         storageAccessType.map((val, indx) => (
           <div
             key={indx}

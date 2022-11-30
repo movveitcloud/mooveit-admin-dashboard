@@ -56,7 +56,7 @@ const Layout = ({ approvedCounts }) => {
 
                         <td className="w-[20%] p-4 text-sm">{address}</td>
 
-                        <td className="w-[10%] p-4 text-sm ">{`${user.firstName} ${user.lastName}`}</td>
+                        <td className="w-[10%] p-4 text-sm ">{`${user?.firstName} ${user?.lastName}`}</td>
 
                         <td className="w-[10%] p-4 text-sm">
                           <div className="flex flex-row space-x-2 items-center mt-2 font-normal text-sm">

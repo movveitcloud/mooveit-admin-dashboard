@@ -15,7 +15,8 @@ const StorageType = () => {
           ADD TYPE
         </label>
       </div>
-      {configurations?.map(({ storageType }) =>
+
+      {configurations?.map(({ storageType }, i) =>
         storageType.map((val, indx) => (
           <div
             key={indx}

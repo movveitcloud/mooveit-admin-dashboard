@@ -18,7 +18,7 @@ const StorageFeatures = () => {
         </label>
       </div>
 
-      {configurations?.map(({ storageFeatures }) =>
+      {configurations?.map(({ storageFeatures }, i) =>
         storageFeatures.map(({ name, image }, indx) => (
           <div
             key={indx}
