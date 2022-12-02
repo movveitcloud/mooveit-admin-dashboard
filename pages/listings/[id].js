@@ -60,7 +60,6 @@ const View = () => {
     router.push("/listings");
   };
 
-  console.log(singleListing, "lks");
   return (
     <DashboardLayout>
       {singleListingLoading ? (

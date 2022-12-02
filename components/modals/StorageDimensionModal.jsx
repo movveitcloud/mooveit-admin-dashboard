@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
-import { XIcon } from "@heroicons/react/outline";
+import { PhotographIcon, XIcon } from "@heroicons/react/outline";
 
 const StorageDimensionModal = ({ id }) => {
   const dispatch = useDispatch();
@@ -35,6 +35,35 @@ const StorageDimensionModal = ({ id }) => {
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
               onChange={(e) => setStoragetype(e.target.value)}
             />
+            <h3 className=" font-bold text-sm mb-2">Description</h3>
+            <textarea className="px-4 py-2 border border-black w-full mb-4 rounded-md" />
+            <h3 className=" font-bold text-sm mb-2">Storage visualizer</h3>
+            <p className="mb-2 text-xs">
+              Only files in mp4 & GIF formats will be recognized. Max 20mb,jpeg and svg formats will be recognized. Max
+              1mb
+            </p>
+            <div className="flex items-center">
+              <div className="mr-3 flex items-center bg-[#F7F7F7] p-4 w-1/5 justify-center">
+                {/* {image !== "" ? (
+                  <img src={URL.createObjectURL(image)} className="w-full h-full" alt="Feature Image" />
+                ) : ( */}
+                <PhotographIcon className="w-8" />
+                {/* )} */}
+              </div>
+
+              <label
+                htmlFor="upload"
+                className="btn btn-white text-black border-3 border-accent w-[175px] hover:btn-accent ">
+                UPLOAD VISUALIZER
+              </label>
+              <input
+                id="upload"
+                type="file"
+                placeholder="UPLOAD ICON"
+                onChange={(e) => handleChange(e)}
+                className="hidden"
+              />
+            </div>
 
             <button
               className="btn w-full disabled:bg-[#DDDDDD] disabled:text-white cursor-pointer bg-black text-white  mt-6"

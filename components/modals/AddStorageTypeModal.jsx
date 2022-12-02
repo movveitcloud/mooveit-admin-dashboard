@@ -12,7 +12,7 @@ const AddStorageTypeModal = () => {
   const router = useRouter();
   const disableBtn = !storagetype;
   const closeModal = useRef(null);
-
+  const { updateConfigurationLoading } = useSelector((state) => state.admin);
   const refreshConfigurations = () => {
     dispatch(getConfigurations());
   };
@@ -20,6 +20,7 @@ const AddStorageTypeModal = () => {
   useEffect(() => {
     configurations?.map(({ _id }) => setId(_id));
   }, [configurations]);
+  // console.log(configurations);
   const handleSave = (e) => {
     const payload = {
       storageType: storagetype,

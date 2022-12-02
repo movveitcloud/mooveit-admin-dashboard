@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { uploadConfiguration, getConfigurations } from "../../redux/features/configurations.slice";
+import axios from "axios";
 
 import { uploadConfigurationImage } from "../../redux/features/configurations.slice";
 import { PhotographIcon, XIcon } from "@heroicons/react/outline";
@@ -13,11 +15,16 @@ const AddFeatureModal = () => {
   const dispatch = useDispatch();
   const [id, setId] = useState("");
   const [featurename, setFeaturename] = useState("");
-
+  const [imageupload, setImageupload] = useState("");
+  const closeModal = useRef(null);
   const router = useRouter();
   const [image, setImage] = useState("");
   const disableBtn = !featurename || !image;
+  const API = axios.create({ baseURL: process.env.BASE_URL });
 
+  const refreshConfigurations = () => {
+    dispatch(getConfigurations());
+  };
   useEffect(() => {
     configurations?.map(({ _id }) => setId(_id));
   }, [configurations]);
@@ -38,27 +45,81 @@ const AddFeatureModal = () => {
   const handleSave = () => {
     const payload = {
       name: featurename,
-      image: image,
+      image: imageupload,
     };
+    console.log(payload);
+    dispatch(
+      uploadConfiguration({
+        id: id,
+        payload: payload,
+        refreshConfigurations: refreshConfigurations,
+        closeModal: closeModal,
+      })
+    );
   };
-  const handleChange = (e) => {
-    const img = e.target.files[0];
+  const formData = new FormData();
+  formData.append("kkk", "kkk");
+  console.log(formData);
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}:${value}`);
+  }
 
+  const handleChange = async (e) => {
+    let img = e.target.files[0];
     setImage(img);
+
+    const formData = new FormData();
+    if (formData) {
+      formData.append("id", "id");
+      formData.append("key", "media");
+      formData.append("media", img);
+    }
+
+    console.log(formData);
     console.log(img);
-    const payload = { media: img, key: "media" };
-    dispatch(uploadConfigurationImage({ id, payload }));
-    // if (img.size > 1000) {
-    //   setImage("");
-    //   errorPopUp({ msg: "Image greater than 1mb" });
-    // }
-    // if (img.size <= 1000 && (img.type == "image/png" || img.type == "image/jpeg" || imgtype == "image/svg")) {
-    //   setImage(img);
-    // } else {
-    //   errorPopUp({ msg: "Image type not compatible" });
-    //   setImage("");
-    // }
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}:${value}`);
+    }
+    try {
+      const headers = {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("admin")).token}`,
+        "Content-Type": "multipart/formdata",
+      };
+      const response = await API({
+        method: "patch",
+        url: `/admin/configurations/${id}/upload`,
+        headers: headers,
+        data: formData,
+      });
+      console.log(response.data.data);
+      setImageupload(response.data.data);
+      return response.data.data;
+
+      // setFormDetails({ ...formDetails, image: response.data.data });
+    } catch (error) {
+      console.log(error);
+    }
+    // });
   };
+  // const handleChange = (e) => {
+  //   const img = e.target.files[0];
+
+  //   setImage(img);
+  //   console.log(img);
+  //   const payload = { media: img, key: "media" };
+
+  //   dispatch(uploadConfigurationImage({ id, payload }));
+  //   if (img.size > 1000) {
+  //     setImage("");
+  //     errorPopUp({ msg: "Image greater than 1mb" });
+  //   }
+  //   if (img.size <= 1000 && (img.type == "image/png" || img.type == "image/jpeg" || imgtype == "image/svg")) {
+  //     setImage(img);
+  //   } else {
+  //     errorPopUp({ msg: "Image type not compatible" });
+  //     setImage("");
+  //   }
+  // };
 
   return (
     <>
@@ -83,8 +144,8 @@ const AddFeatureModal = () => {
             <p className="mb-2 text-xs">Only files in png,jpeg and svg formats will be recognized. Max 1mb</p>
             <div className="flex items-center">
               <div className="mr-3 flex items-center bg-[#F7F7F7] p-4 w-1/5 justify-center">
-                {image !== "" ? (
-                  <img src={URL.createObjectURL(image)} className="w-full h-full" alt="Feature Image" />
+                {imageupload !== "" ? (
+                  <img src={imageupload} className="w-full h-full" alt="Feature Image" />
                 ) : (
                   <PhotographIcon className="w-8" />
                 )}
@@ -112,7 +173,7 @@ const AddFeatureModal = () => {
           </div>
         </label>
       </label>
-      <label htmlFor="addfeature" className="hidden" />
+      <label htmlFor="addfeature" className="hidden" ref={closeModal} />
     </>
   );
 };

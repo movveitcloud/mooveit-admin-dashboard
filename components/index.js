@@ -55,6 +55,8 @@ export { default as AddStorageFloorModal } from "./modals/AddStorageFloorModal";
 export { default as AdditionalServicesModal } from "./modals/AdditionalServicesModal";
 export { default as StorageDimensionModal } from "./modals/StorageDimensionModal";
 export { default as AddAdminModal } from "./modals/AddAdminModal";
+export { default as UpdateAdminModal } from "./modals/UpdateAdminModal";
+export { default as DeleteAdminModal } from "./modals/DeleteAdminModal";
 
 //CONFIGURATIONS
 export { default as StorageFeatures } from "./dashboard/Configurations/StorageFeatures";

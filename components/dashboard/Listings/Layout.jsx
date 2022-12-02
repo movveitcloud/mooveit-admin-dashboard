@@ -17,7 +17,7 @@ const Layout = ({ approvedCounts }) => {
 
   const { listingLoading } = useSelector((state) => state.listing);
   const view = (_id) => router.push(`/listings/${_id}`);
-
+  // console.log(listings);
   return (
     <div className="">
       {listingLoading ? (

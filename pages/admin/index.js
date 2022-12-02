@@ -132,11 +132,19 @@ const Admin = () => {
                 className="w-full h-full  outline-none text-base placeholder:text-[#959595] placeholder:text-base"
               />
             </div>
-            <label
-              htmlFor="addadmin"
-              className="border cursor-pointer  p-2 py-3 mr-4 bg-white whitespace-nowrap rounded-md text-sm ">
-              + Add Admin
-            </label>
+            {activeButton === "admin" ? (
+              <label
+                htmlFor="addadmin"
+                className="border cursor-pointer  p-2 py-3 mr-4 bg-white whitespace-nowrap rounded-md text-sm ">
+                + Add Admin
+              </label>
+            ) : (
+              <label
+                htmlFor="addsuperadmin"
+                className="border cursor-pointer  p-2 py-3 mr-4 bg-white whitespace-nowrap rounded-md text-sm ">
+                + Add Super Admin
+              </label>
+            )}
             <div className="border   p-2 bg-white whitespace-nowrap rounded-md   flex items-center">
               <DownloadIcon className="w-6 text-[#222222] m-0 " />
               Download CSV
@@ -149,10 +157,14 @@ const Admin = () => {
 
         {activeButton === "admin" ? (
           <Admins admincount={admincount} />
-        ) : superadmincount != 0 ? (
+        ) : superadmincount !== 0 ? (
           <SuperAdmins superadmincount={superadmincount} />
         ) : (
-          "no show"
+          <div className="bg-white rounded-lg w-full  flex justify-center mt-8">
+            <div className=" py-24 items-center">
+              <p className="text-center text-[#AAAAAA] text-xl font-bold">No super admin at this time.</p>
+            </div>
+          </div>
         )}
       </div>
     </DashboardLayout>
