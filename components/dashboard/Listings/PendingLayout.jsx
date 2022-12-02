@@ -21,6 +21,7 @@ const PendingLayout = ({ pendingCounts }) => {
     dispatch(getListings());
   }, []);
   const { listings } = useSelector((state) => state.listing);
+  console.log(listings);
   const { listingLoading } = useSelector((state) => state.listing);
   const router = useRouter();
   const view = (_id) => router.push(`/listings/${_id}`);
@@ -64,7 +65,7 @@ const PendingLayout = ({ pendingCounts }) => {
 
                         <td className="w-[30%] p-4  ">{address}</td>
 
-                        <td className="w-[20%] p-4 text-sm text-blue">{`${user.firstName} ${user.lastName}`}</td>
+                        <td className="w-[20%] p-4 text-sm text-blue">{`${user?.firstName} ${user?.lastName}`}</td>
 
                         <td className="w-[20%] p-4 text-sm">
                           <div className="flex flex-row space-x-2 items-center mt-2 font-normal text-sm">

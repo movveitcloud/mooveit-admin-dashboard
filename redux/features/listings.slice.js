@@ -25,6 +25,7 @@ export const approveListing = createAsyncThunk(
   async ({ payload, id }, { rejectWithValue }) => {
     try {
       const response = await api.approveListing({ payload, id });
+      console.log(response.data);
       return response.data;
     } catch (err) {
       errorPopUp({ msg: err.response.data.error });

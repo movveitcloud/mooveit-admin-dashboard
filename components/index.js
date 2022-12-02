@@ -54,6 +54,7 @@ export { default as AddStorageAccessModal } from "./modals/AddStorageAccessModal
 export { default as AddStorageFloorModal } from "./modals/AddStorageFloorModal";
 export { default as AdditionalServicesModal } from "./modals/AdditionalServicesModal";
 export { default as StorageDimensionModal } from "./modals/StorageDimensionModal";
+export { default as AddAdminModal } from "./modals/AddAdminModal";
 
 //CONFIGURATIONS
 export { default as StorageFeatures } from "./dashboard/Configurations/StorageFeatures";
@@ -62,3 +63,8 @@ export { default as StorageDimensions } from "./dashboard/Configurations/Storage
 export { default as AdditionalServices } from "./dashboard/Configurations/AdditionalServices";
 export { default as StorageType } from "./dashboard/Configurations/StorageType";
 export { default as StorageFloor } from "./dashboard/Configurations/StorageFloor";
+export { default as Testing } from "./dashboard/Configurations/Testing";
+
+//ADMIN
+export { default as Admins } from "./dashboard/Admin/Admins";
+export { default as SuperAdmins } from "./dashboard/Admin/SuperAdmins";

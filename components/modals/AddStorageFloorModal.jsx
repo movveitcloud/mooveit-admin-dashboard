@@ -1,19 +1,38 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-
+import { uploadConfiguration, getConfigurations } from "../../redux/features/configurations.slice";
 import { XIcon } from "@heroicons/react/outline";
 
-const AddStorageFloorModal = ({ id }) => {
+const AddStorageFloorModal = () => {
+  const { configurations } = useSelector((state) => state.configuration);
   const dispatch = useDispatch();
-
+  const closeModal = useRef(null);
+  const [id, setId] = useState("");
   const [storagefloor, setStoragefloor] = useState("");
   const router = useRouter();
   const disableBtn = !storagefloor;
-  const handleSave = () => {
+
+  const refreshConfigurations = () => {
+    dispatch(getConfigurations());
+  };
+
+  useEffect(() => {
+    configurations?.map(({ _id }) => setId(_id));
+  }, [configurations]);
+  const handleSave = (e) => {
     const payload = {
-      name: storagefloor,
+      storageFloor: storagefloor,
     };
+
+    dispatch(
+      uploadConfiguration({
+        id: id,
+        payload: payload,
+        refreshConfigurations: refreshConfigurations,
+        closeModal: closeModal,
+      })
+    );
   };
 
   return (
@@ -45,7 +64,7 @@ const AddStorageFloorModal = ({ id }) => {
           </div>
         </label>
       </label>
-      <label htmlFor="addstoragefloor" className="hidden" />
+      <label htmlFor="addstoragefloor" className="hidden" ref={closeModal} />
     </>
   );
 };

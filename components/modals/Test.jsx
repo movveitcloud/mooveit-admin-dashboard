@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { uploadConfiguration, getConfigurations } from "../../redux/features/configurations.slice";
 import { XIcon } from "@heroicons/react/outline";
 
-const AddStorageTypeModal = () => {
+const Test = ({ ids }) => {
   const { configurations } = useSelector((state) => state.configuration);
   const dispatch = useDispatch();
   const [id, setId] = useState("");
@@ -12,7 +12,6 @@ const AddStorageTypeModal = () => {
   const router = useRouter();
   const disableBtn = !storagetype;
   const closeModal = useRef(null);
-
   const refreshConfigurations = () => {
     dispatch(getConfigurations());
   };
@@ -24,7 +23,7 @@ const AddStorageTypeModal = () => {
     const payload = {
       storageType: storagetype,
     };
-
+    console.log(payload);
     dispatch(
       uploadConfiguration({
         id: id,
@@ -37,13 +36,13 @@ const AddStorageTypeModal = () => {
 
   return (
     <>
-      <input type="checkbox" id="addfeaturetype" className=" modal-toggle " />
-      <label htmlFor="addfeaturetype" className=" modal ">
+      <input type="checkbox" id={ids} className=" modal-toggle " />
+      <label htmlFor={ids} className=" modal ">
         <label className=" modal-box py-10 relative w-[80%] md:w-[50%] max-w-[500px] rounded-xl z-20">
           <div className="w-[80%] mx-auto text-left">
             <div className="flex justify-between items-center mb-6">
               <h2 className="font-bold text-2xl">Add Storage Type</h2>
-              <label htmlFor="addfeaturetype">
+              <label htmlFor={ids}>
                 <XIcon className="w-6 cursor-pointer modal-button" />
               </label>
             </div>
@@ -64,9 +63,9 @@ const AddStorageTypeModal = () => {
           </div>
         </label>
       </label>
-      <label htmlFor="addfeaturetype" className="hidden" ref={closeModal} />
+      <label htmlFor={ids} className="hidden" ref={closeModal} />
     </>
   );
 };
 
-export default AddStorageTypeModal;
+export default Test;

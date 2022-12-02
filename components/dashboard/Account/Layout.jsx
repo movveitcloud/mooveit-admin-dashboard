@@ -10,14 +10,11 @@ const Layout = ({ name }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(getListings());
     dispatch(getUsers());
   }, []);
   const { users } = useSelector((state) => state.user);
   const { userLoading } = useSelector((state) => state.user);
 
-  // const { listings } = useSelector((state) => state.listing);
-  // console.log(listings);
   const [option, setOption] = useState("");
 
   return (
@@ -33,48 +30,45 @@ const Layout = ({ name }) => {
           <table className=" w-full p-4 mb-8 ">
             <thead className="bg-white text-black-50 border  rounded-md p-6 ">
               <tr className="p-4 ">
-                <th className="items-center ml-6 my-4 text-start w-[30%] px-4">
-                  {`${name === "users" ? "User" : "Partner"}`}
+                <th className="items-center ml-6 my-4 text-start w-[25%] px-4">
+                  {`${name === "customer" ? "Customers" : "Partners"}`}
                 </th>
 
-                <th className="w-[15%] whitespace-nowrap text-start p-4">Email Address</th>
+                <th className="w-[20%] whitespace-nowrap text-start p-4">Email Address</th>
 
                 <th className="w-[15%] whitespace-nowrap text-start p-4">Phone Number</th>
                 <th className="w-[10%] whitespace-nowrap text-start p-4">Status</th>
-                <th className="w-[10%] whitespace-nowrap text-start p-4">Last Active</th>
+                {/* <th className="w-[10%] whitespace-nowrap text-start p-4">Last Active</th> */}
                 <th className="w-[10%]"></th>
               </tr>
             </thead>
             <tbody className="w-full   ">
               {users?.map(
-                ({ User, firstName, lastName, email, role, id }, index) =>
+                ({ User, firstName, lastName, email, role, isVerified }, index) =>
                   role === name && (
                     <tr className="capitalize cursor-pointer border" key={index}>
-                      <td className=" w-[30%]  p-4 ">
+                      <td className=" w-[25%]  p-4 ">
                         <div className="flex justify-start items-center">
-                          {/* <div className="rounded-full w-8 h-8 mr-2  ">
-                        <img className="w-full object-fit h-full rounded-full" src="/auth-image.png" alt="user-image" />
-                      </div> */}
                           <p className="text-sm">
                             {firstName} {lastName}
                           </p>
                         </div>
                       </td>
 
-                      <td className="w-[15%] p-4 text-sm ">{email}</td>
+                      <td className="w-[20%] p-4 text-sm ">{email}</td>
                       <td className="w-[15%] p-4 text-sm">08066198765</td>
                       <td className="w-[10%] p-4 text-sm ">
-                        {/* <span
-                      className={`${
-                        Status === "Verified" ? "bg-[#BBF7D0] text-[#11A13A] " : "bg-[#FECACA] text-[#D12C2C]"
-                      }  rounded-full  text-center items-center p-2 px-4`}>
-                      {Status}
-                    </span> */}
-                        <span className="bg-[#BBF7D0] text-[#11A13A] rounded-full  text-center items-center p-2 px-4">
-                          Verified
-                        </span>
+                        {isVerified === true ? (
+                          <span className="bg-[#BBF7D0] text-[#11A13A] rounded-full  text-center items-center p-2 px-4">
+                            Verified
+                          </span>
+                        ) : (
+                          <span className="bg-[#f9aaaa] text-[#F12C2C] rounded-full  text-center items-center p-2 px-4">
+                            Unverified
+                          </span>
+                        )}
                       </td>
-                      <td className="w-[10%] p-4 text-sm">Last</td>
+                      {/* <td className="w-[10%] p-4 text-sm">Last</td> */}
                       <td className="pr-4  w-[10%]      ">
                         {name === "customer" ? (
                           <div tabIndex="0" className="dropdown dropdown-left top-1">

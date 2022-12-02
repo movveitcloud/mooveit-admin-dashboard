@@ -37,7 +37,7 @@ const DashboardLayout = ({ children, name, userInfo }) => {
     getPageTitle();
     setPageReady(true);
     setLoading(false);
-    console.log(pageTitle);
+
     // if (user && !user.isVerified) {
     //   router.push("/verify");
     // }
