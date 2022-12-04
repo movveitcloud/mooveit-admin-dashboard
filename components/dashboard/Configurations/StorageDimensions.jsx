@@ -1,4 +1,4 @@
-import { PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
+import { PencilAltIcon, PhotographIcon, TrashIcon } from "@heroicons/react/outline";
 import React from "react";
 import { useSelector } from "react-redux";
 import Accordion from "../../shared/Accordion";
@@ -16,13 +16,23 @@ const StorageDimensions = () => {
         </label>
       </div>
 
-      {configurations?.forEach(({ storageSize }, i) =>
-        storageSize.map((val, indx) => (
+      {configurations?.map(({ storageSize }, i) =>
+        storageSize.map(({ name, description, visualization }, indx) => (
           <div
             key={indx}
-            className="bg-[#F9F9F9] border-l-4 border-accent rounded-lg px-6 py-4 flex justify-between items-center text-sm">
+            className="bg-[#F9F9F9] border-l-4 border-accent rounded-lg px-6 py-4 flex justify-between items-center text-sm mb-6">
             <div className="flex  items-center">
-              <p>CCTV</p>
+              <div className="rounded-md md:w-16 md:h-16 lg:w-14 lg:h-14 mr-3 hidden md:block">
+                {visualization ? (
+                  <img src={visualization} alt="Feature Image" className="w-full h-full rounded-md" />
+                ) : (
+                  <PhotographIcon className="w-full h-full rounded-md" />
+                )}
+              </div>
+              <div className="flex flex-col items-start justify-center space-y-2">
+                <p className="font-bold">{name}</p>
+                <p>{description}</p>
+              </div>
             </div>
             <div className="flex items-center gap-6">
               <div className="flex items-center cursor-pointer ">

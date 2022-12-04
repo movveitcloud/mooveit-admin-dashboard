@@ -8,10 +8,11 @@ const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 export const login = createAsyncThunk("/admin/login", async ({ payload, reset }, { rejectWithValue }) => {
   try {
     const response = await api.signIn(payload);
-
+    const bytes = response.data.response ? crypto.AES.decrypt(response.data.response, ENCRYPTION_KEY) : "";
+    const admin = JSON.parse(bytes ? bytes.toString(crypto.enc.Utf8) : null);
     console.log(payload);
     successPopUp({
-      msg: "Welcome back Admin",
+      msg: ` Welcome back ${admin.firstName}`,
       duration: 500,
       callback: () => location.replace("/accounts"),
     });
@@ -90,6 +91,7 @@ export const authenticatedUser = () => {
 const authSlice = createSlice({
   name: "auth",
   initialState: {
+    admin: null,
     loading: false,
     forgotLoading: false,
     resetLoading: false,
@@ -98,6 +100,9 @@ const authSlice = createSlice({
   },
 
   reducers: {
+    setAdmin: (state, action) => {
+      state.admin = action.payload;
+    },
     logout: (state) => {
       localStorage.removeItem("admin");
       state.admin = null;
@@ -111,7 +116,7 @@ const authSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       state.loading = false;
       localStorage.setItem("admin", JSON.stringify({ ...action.payload }));
-      state.user = action.payload;
+      state.admin = action.payload;
     },
     [login.rejected]: (state, action) => {
       state.loading = false;

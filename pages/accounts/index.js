@@ -10,7 +10,7 @@ const ManageAccounts = () => {
   const { users } = useSelector((state) => state.user);
   const [customercount, setcustomerCount] = useState(0);
   const [partnercount, setpartnerCount] = useState(0);
-  console.log(users);
+  // console.log(users);
 
   useEffect(() => {
     let customercount = 0;

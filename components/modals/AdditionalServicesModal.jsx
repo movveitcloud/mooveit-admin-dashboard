@@ -5,7 +5,7 @@ import { uploadConfiguration, getConfigurations } from "../../redux/features/con
 import { XIcon } from "@heroicons/react/outline";
 
 const AdditionalServicesModal = () => {
-  const { configurations } = useSelector((state) => state.configuration);
+  const { configurations, uploadConfigurationLoading } = useSelector((state) => state.configuration);
   const dispatch = useDispatch();
   const [id, setId] = useState("");
   const [additionalservice, setAdditionaservice] = useState("");
@@ -47,19 +47,20 @@ const AdditionalServicesModal = () => {
                 <XIcon className="w-6 cursor-pointer modal-button" />
               </label>
             </div>
-            <h3 className="font-bold text-sm mb-2">Additional Service</h3>
+            <h3 className="font-semibold text-sm mb-2">Additional Service</h3>
 
             <input
-              placeholder="Others"
+              placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
               onChange={(e) => setAdditionaservice(e.target.value)}
             />
-
             <button
-              className="btn w-full disabled:bg-[#DDDDDD] disabled:text-white cursor-pointer bg-black text-white  mt-6"
+              className={`${
+                uploadConfigurationLoading && "loading"
+              } btn  w-full disabled:bg-[#DDDDDD] disabled:text-white cursor-pointer bg-black text-white  mt-6 `}
               disabled={disableBtn}
               onClick={handleSave}>
-              SAVE
+              {uploadConfigurationLoading ? "" : "SAVE"}
             </button>
           </div>
         </label>

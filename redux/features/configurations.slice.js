@@ -33,9 +33,10 @@ export const uploadConfiguration = createAsyncThunk(
       const response = await api.uploadConfiguration({ id, payload });
       closeModal.current.click();
       refreshConfigurations();
-
+      console.log(response.data);
       return response.data;
     } catch (err) {
+      console.log(err.response.data.error);
       errorPopUp({ msg: err.response.data.error });
       return rejectWithValue(err.response.data);
     }
@@ -50,6 +51,8 @@ const configurationSlice = createSlice({
     configurationLoading: false,
     uploadImage: false,
     uploadImageLoading: false,
+    uploadConfiguration: {},
+    uploadConfigurationLoading: false,
   },
 
   extraReducers: {
@@ -73,6 +76,16 @@ const configurationSlice = createSlice({
     },
     [uploadConfigurationImage.rejected]: (state, action) => {
       state.uploadImageLoading = false;
+    },
+    [uploadConfiguration.pending]: (state) => {
+      state.uploadConfigurationLoading = true;
+    },
+    [uploadConfiguration.fulfilled]: (state, action) => {
+      state.uploadConfigurationLoading = false;
+      state.uploadConfiguration = action.payload.data;
+    },
+    [uploadConfiguration.rejected]: (state, action) => {
+      state.uploadConfigurationLoading = false;
     },
   },
 });

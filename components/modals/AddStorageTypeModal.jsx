@@ -5,14 +5,14 @@ import { uploadConfiguration, getConfigurations } from "../../redux/features/con
 import { XIcon } from "@heroicons/react/outline";
 
 const AddStorageTypeModal = () => {
-  const { configurations } = useSelector((state) => state.configuration);
+  const { configurations, uploadConfigurationLoading } = useSelector((state) => state.configuration);
   const dispatch = useDispatch();
   const [id, setId] = useState("");
   const [storagetype, setStoragetype] = useState("");
   const router = useRouter();
   const disableBtn = !storagetype;
   const closeModal = useRef(null);
-
+  const { updateConfigurationLoading } = useSelector((state) => state.admin);
   const refreshConfigurations = () => {
     dispatch(getConfigurations());
   };
@@ -20,6 +20,7 @@ const AddStorageTypeModal = () => {
   useEffect(() => {
     configurations?.map(({ _id }) => setId(_id));
   }, [configurations]);
+  // console.log(configurations);
   const handleSave = (e) => {
     const payload = {
       storageType: storagetype,
@@ -47,19 +48,21 @@ const AddStorageTypeModal = () => {
                 <XIcon className="w-6 cursor-pointer modal-button" />
               </label>
             </div>
-            <h3 className="font-bold text-sm mb-2">Storage Type</h3>
+            <h3 className="font-semibold text-sm mb-2">Storage Type</h3>
 
             <input
-              placeholder="Others"
+              placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
               onChange={(e) => setStoragetype(e.target.value)}
             />
 
             <button
-              className="btn w-full disabled:bg-[#DDDDDD] disabled:text-white cursor-pointer bg-black text-white  mt-6"
+              className={`${
+                uploadConfigurationLoading && "loading"
+              } btn  w-full disabled:bg-[#DDDDDD] disabled:text-white cursor-pointer bg-black text-white  mt-6 `}
               disabled={disableBtn}
               onClick={handleSave}>
-              SAVE
+              {uploadConfigurationLoading ? "" : "SAVE"}
             </button>
           </div>
         </label>

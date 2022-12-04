@@ -21,7 +21,7 @@ const PendingLayout = ({ pendingCounts }) => {
     dispatch(getListings());
   }, []);
   const { listings } = useSelector((state) => state.listing);
-  console.log(listings);
+  // console.log(listings);
   const { listingLoading } = useSelector((state) => state.listing);
   const router = useRouter();
   const view = (_id) => router.push(`/listings/${_id}`);

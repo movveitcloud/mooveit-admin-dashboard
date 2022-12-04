@@ -5,12 +5,11 @@ import { uploadConfiguration, getConfigurations } from "../../redux/features/con
 import { XIcon } from "@heroicons/react/outline";
 
 const AddStorageFloorModal = () => {
-  const { configurations } = useSelector((state) => state.configuration);
+  const { configurations, uploadConfigurationLoading } = useSelector((state) => state.configuration);
   const dispatch = useDispatch();
   const closeModal = useRef(null);
   const [id, setId] = useState("");
   const [storagefloor, setStoragefloor] = useState("");
-  const router = useRouter();
   const disableBtn = !storagefloor;
 
   const refreshConfigurations = () => {
@@ -47,7 +46,7 @@ const AddStorageFloorModal = () => {
                 <XIcon className="w-6 cursor-pointer modal-button" />
               </label>
             </div>
-            <h3 className="font-bold text-sm mb-2">Storage Floor</h3>
+            <h3 className="font-semibold text-sm mb-2">Storage Floor</h3>
 
             <input
               placeholder=""
@@ -56,10 +55,12 @@ const AddStorageFloorModal = () => {
             />
 
             <button
-              className="btn w-full disabled:bg-[#DDDDDD] disabled:text-white cursor-pointer bg-black text-white  mt-6"
+              className={`${
+                uploadConfigurationLoading && "loading"
+              } btn  w-full disabled:bg-[#DDDDDD] disabled:text-white cursor-pointer bg-black text-white  mt-6 `}
               disabled={disableBtn}
               onClick={handleSave}>
-              SAVE
+              {uploadConfigurationLoading ? "" : "SAVE"}
             </button>
           </div>
         </label>
