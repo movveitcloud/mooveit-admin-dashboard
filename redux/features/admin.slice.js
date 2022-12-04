@@ -4,7 +4,6 @@ import * as api from "../api";
 export const getAdmins = createAsyncThunk("/admin", async ({}, { rejectWithValue }) => {
   try {
     const response = await api.getAdmins();
-
     return response.data;
   } catch (err) {
     errorPopUp({ msg: err.response.data.error });
@@ -28,15 +27,15 @@ export const createAdmin = createAsyncThunk(
 );
 export const updatePassword = createAsyncThunk(
   "/admin/update",
-  async ({ payload, closeModal, refreshConfigurations }, { rejectWithValue }) => {
+  async ({ payload, closeModal, refreshConfigurations, reset }, { rejectWithValue }) => {
     try {
       const response = await api.updatePassword(payload);
+      successPopUp({ msg: "Password successfully updated" });
       closeModal.current.click();
       refreshConfigurations();
-
+      reset({ oldPassword: "", newPassword: "", confirmPassword: "" });
       return response.data;
     } catch (err) {
-      console.log(payload);
       errorPopUp({ msg: err.response.data.error });
       return rejectWithValue(err.response.data);
     }
@@ -49,7 +48,6 @@ export const deleteAdmin = createAsyncThunk(
       const response = await api.deleteAdmin({ id });
       closeModal.current.click();
       refreshConfigurations();
-
       return response.data;
     } catch (err) {
       errorPopUp({ msg: err.response.data.error });

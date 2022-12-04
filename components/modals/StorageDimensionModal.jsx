@@ -1,19 +1,70 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { uploadConfiguration, getConfigurations } from "../../redux/features/configurations.slice";
 import { useRouter } from "next/router";
-
+import axios from "axios";
 import { PhotographIcon, XIcon } from "@heroicons/react/outline";
 
-const StorageDimensionModal = ({ id }) => {
+const StorageDimensionModal = ({}) => {
+  const { configurations, uploadConfigurationLoading } = useSelector((state) => state.configuration);
   const dispatch = useDispatch();
+  const [id, setId] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [dimensionname, setDimensionname] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageupload, setImageupload] = useState("");
+  const closeModal = useRef(null);
+  const disableBtn = !description || !imageupload || !dimensionname;
+  const API = axios.create({ baseURL: process.env.BASE_URL });
 
-  const [storagetype, setStoragetype] = useState("");
-  const router = useRouter();
-  const disableBtn = !storagetype;
+  const refreshConfigurations = () => {
+    dispatch(getConfigurations());
+  };
+  useEffect(() => {
+    configurations?.map(({ _id }) => setId(_id));
+  }, [configurations]);
+
   const handleSave = () => {
     const payload = {
-      name: storagetype,
+      storageSize: { name: dimensionname, description: description, visualization: imageupload },
     };
+    dispatch(
+      uploadConfiguration({
+        id,
+        payload,
+        refreshConfigurations,
+        closeModal,
+      })
+    );
+  };
+
+  const handleChange = async (e) => {
+    setLoading(true);
+    let img = e.target.files[0];
+
+    const formData = new FormData();
+    if (formData) {
+      formData.append("id", "id");
+      formData.append("key", "media");
+      formData.append("media", img);
+    }
+    try {
+      const headers = {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("admin")).token}`,
+        "Content-Type": "multipart/formdata",
+      };
+      const response = await API({
+        method: "patch",
+        url: `/admin/configurations/${id}/upload`,
+        headers: headers,
+        data: formData,
+      });
+      setImageupload(response.data.data);
+      setLoading(false);
+      return response.data.data;
+    } catch (error) {
+      setLoading(false);
+    }
   };
 
   return (
@@ -28,36 +79,42 @@ const StorageDimensionModal = ({ id }) => {
                 <XIcon className="w-6 cursor-pointer modal-button" />
               </label>
             </div>
-            <h3 className=" font-bold text-sm mb-2">Storage Dimension</h3>
+            <h3 className=" font-semibold text-sm mb-2">Storage Dimension</h3>
 
             <input
-              placeholder="Others"
+              placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
-              onChange={(e) => setStoragetype(e.target.value)}
+              onChange={(e) => setDimensionname(e.target.value)}
             />
-            <h3 className=" font-bold text-sm mb-2">Description</h3>
-            <textarea className="px-4 py-2 border border-black w-full mb-4 rounded-md" />
-            <h3 className=" font-bold text-sm mb-2">Storage visualizer</h3>
+            <h3 className=" font-semibold text-sm mb-2">Description</h3>
+            <textarea
+              className="px-4 py-2 border border-black w-full mb-4 rounded-md"
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <h3 className=" font-semibold text-sm mb-2">Storage visualizer</h3>
             <p className="mb-2 text-xs">
               Only files in mp4 & GIF formats will be recognized. Max 20mb,jpeg and svg formats will be recognized. Max
               1mb
             </p>
             <div className="flex items-center">
               <div className="mr-3 flex items-center bg-[#F7F7F7] p-4 w-1/5 justify-center">
-                {/* {image !== "" ? (
-                  <img src={URL.createObjectURL(image)} className="w-full h-full" alt="Feature Image" />
-                ) : ( */}
-                <PhotographIcon className="w-8" />
-                {/* )} */}
+                {imageupload !== "" ? (
+                  <img src={imageupload} className="w-full h-full" alt="Feature Image" />
+                ) : (
+                  <PhotographIcon className="w-8" />
+                )}
               </div>
 
               <label
-                htmlFor="upload"
-                className="btn btn-white text-black border-3 border-accent w-[175px] hover:btn-accent ">
-                UPLOAD VISUALIZER
+                htmlFor="dimension"
+                className={`${
+                  loading && "loading"
+                } btn  btn-white text-black border-3 border-accent hover:btn-accent w-[175px] `}>
+                {loading ? "" : " UPLOAD VISUALIZER"}
               </label>
+
               <input
-                id="upload"
+                id="dimension"
                 type="file"
                 placeholder="UPLOAD ICON"
                 onChange={(e) => handleChange(e)}
@@ -66,15 +123,17 @@ const StorageDimensionModal = ({ id }) => {
             </div>
 
             <button
-              className="btn w-full disabled:bg-[#DDDDDD] disabled:text-white cursor-pointer bg-black text-white  mt-6"
+              className={`${
+                uploadConfigurationLoading && "loading"
+              } btn  w-full disabled:bg-[#DDDDDD] disabled:text-white cursor-pointer bg-black text-white  mt-6 `}
               disabled={disableBtn}
               onClick={handleSave}>
-              SAVE
+              {uploadConfigurationLoading ? "" : "SAVE"}
             </button>
           </div>
         </label>
       </label>
-      <label htmlFor="storagedimension" className="hidden" />
+      <label htmlFor="storagedimension" className="hidden" ref={closeModal} />
     </>
   );
 };

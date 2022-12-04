@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import { LogoutIcon } from "@heroicons/react/outline";
-import { logout } from "../../redux/features/auth.slice";
+import { KeyIcon, LogoutIcon } from "@heroicons/react/outline";
+import { authenticatedUser, logout } from "../../redux/features/auth.slice";
 import { dashboardNavLinks } from "../../helpers/data";
+import UpdateAdminModal from "../modals/UpdateAdminModal";
 
 const DashboardNavbar = ({ pathname }) => {
-  const [userData, setUserData] = useState(null);
+  const [adminData, setAdminData] = useState(null);
   const dispatch = useDispatch();
-  //   const { user } = useSelector((state) => state.auth);
+  const { admin } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
     dispatch(logout());
     location.assign("/");
   };
 
-  //   useEffect(() => {
-  //     if (authenticatedUser()) {
-  //       setUserData(authenticatedUser());
-  //     }
-  //   }, [user]);
+  useEffect(() => {
+    if (authenticatedUser()) {
+      setAdminData(authenticatedUser());
+    }
+  }, [admin]);
 
   return (
     <div className="flex flex-col justify-between h-full relative py-6 overflow-y-auto ">
@@ -52,25 +53,32 @@ const DashboardNavbar = ({ pathname }) => {
           <span className="w-8 h-8 rounded-full bg-[#C4C4C4]"></span>
           <div>
             <h2 className="text-[#222222]">
-              Admin
-              {/* {userData?.firstName} {userData?.lastName} */}
+              {adminData?.firstName} {adminData?.lastName}
             </h2>
-            {/* <h2 className="text-xs text-[#AAAAAA]">{`${userData?.email.slice(0, 22)}${
-              userData?.email.length > 22 ? "..." : ""
-            }`}</h2> */}
-            <h2 className="text-xs text-[#AAAAAA]">Admin@gmail.com</h2>
+            <h2 className="text-xs text-[#AAAAAA]">{`${adminData?.email.slice(0, 22)}${
+              adminData?.email.length > 22 ? "..." : ""
+            }`}</h2>
           </div>
         </div>
         <ChevronDownIcon className="w-4" />
 
         {/* dropdown content */}
-        <ul tabIndex="0" className="dropdown-content menu mb-3 p-2 w-full border shadow bg-base-100 divide-y">
+        <ul tabIndex="0" className="dropdown-content menu mb-3 p-2 w-full border shadow bg-base-100 divide-y ">
+          <li className="hover:text-primary">
+            <label htmlFor="updateadmin">
+              <div className="flex justify-start gap-3 items-center w-full">
+                <KeyIcon className="w-6 h-6" />
+                <p>Update password</p>
+              </div>
+            </label>
+          </li>
           <li className="hover:text-primary" onClick={handleLogout}>
             <span>
               <LogoutIcon className="w-6 h-6" /> Log out
             </span>
           </li>
         </ul>
+        <UpdateAdminModal />
         {/* dropdown content */}
       </div>
     </div>

@@ -33,10 +33,10 @@ export const uploadConfiguration = createAsyncThunk(
       const response = await api.uploadConfiguration({ id, payload });
       closeModal.current.click();
       refreshConfigurations();
-
+      console.log(response.data);
       return response.data;
     } catch (err) {
-      console.log(id);
+      console.log(err.response.data.error);
       errorPopUp({ msg: err.response.data.error });
       return rejectWithValue(err.response.data);
     }

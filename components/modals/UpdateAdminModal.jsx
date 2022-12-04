@@ -33,8 +33,8 @@ const UpdateAdminModal = ({ id }) => {
     if (newPassword !== confirmPassword) return errorPopUp({ msg: "Passwords do not match" });
     if (newPassword == confirmPassword) {
       const payload = { oldPassword, newPassword, confirmPassword };
-      console.log(payload);
-      dispatch(updatePassword({ payload, refreshConfigurations, closeModal }));
+
+      dispatch(updatePassword({ payload, refreshConfigurations, closeModal, reset }));
     }
   };
 

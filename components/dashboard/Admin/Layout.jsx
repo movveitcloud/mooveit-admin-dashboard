@@ -54,31 +54,31 @@ const Layout = ({ name, admincount, superadmincount }) => {
 
                       <td className="w-[20%] p-4 text-sm lowercase ">{email}</td>
                       <td className="w-[15%] p-4 text-sm">{role}</td>
-                      {/* {name === "superdmin" ? ( */}
-                      <td className="pr-4  w-[10%]      ">
-                        <div tabIndex="0" className="dropdown dropdown-left dropdown-down z-10 top-1">
-                          <DotsVerticalIcon className="w-4  " />
+                      {name === "superdmin" ? (
+                        <td className="pr-4  w-[10%]      ">
+                          <div tabIndex="0" className="dropdown dropdown-left dropdown-down z-10 top-1">
+                            <DotsVerticalIcon className="w-4  " />
 
-                          <div
-                            tabIndex="0"
-                            className="  bg-white rounded-sm shadow w-auto p-4 px-4 dropdown-content -top-10 menu   ">
-                            <label
-                              htmlFor="updateadmin"
-                              className="text-[12px] flex whitespace-nowrap cursor-pointer hover:text-red-600 ">
-                              <EyeIcon className="w-4 mr-4 mb-4 " />
-                              <p>Update Password</p>
-                            </label>
-                            <label
-                              htmlFor="deleteadmin"
-                              className="text-[12px] flex cursor-pointer hover:text-red-600"
-                              onClick={() => setIds(_id)}>
-                              <TrashIcon className="w-4 mr-4 " />
-                              <p>Delete Admin</p>
-                            </label>
+                            <div
+                              tabIndex="0"
+                              className="  bg-white rounded-sm shadow w-auto p-4 px-4 dropdown-content -top-10 menu   ">
+                              <label
+                                htmlFor="updateadmin"
+                                className="text-[12px] flex whitespace-nowrap cursor-pointer hover:text-red-600 ">
+                                <EyeIcon className="w-4 mr-4 mb-4 " />
+                                <p>Update Password</p>
+                              </label>
+                              <label
+                                htmlFor="deleteadmin"
+                                className="text-[12px] flex cursor-pointer hover:text-red-600"
+                                onClick={() => setIds(_id)}>
+                                <TrashIcon className="w-4 mr-4 " />
+                                <p>Delete Admin</p>
+                              </label>
+                            </div>
                           </div>
-                        </div>
-                      </td>
-                      {/* ) : null} */}
+                        </td>
+                      ) : null}
                     </tr>
                   )
                 );
