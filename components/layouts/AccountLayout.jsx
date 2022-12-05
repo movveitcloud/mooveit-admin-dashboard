@@ -6,7 +6,7 @@ const AccountLayout = ({ name }) => {
 
   return (
     <div className="">
-      <div className="rounded-lg">
+      <div className="rounded-lg overflow-x-auto">
         <table className=" w-full p-4 mb-8 ">
           <thead className="bg-white text-black-50 border rounded-md p-6 ">
             <tr className="p-4 ">

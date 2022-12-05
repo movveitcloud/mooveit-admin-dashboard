@@ -1,12 +1,12 @@
 const Tabs = ({ activeTab, setActiveTab, tabItems }) => {
   return (
-    <nav className="flex gap-5 w-full mt-2 mb-8">
+    <nav className="flex gap-5 w-full mt-2 mb-8 overflow-x-auto hide-scrollbar">
       {tabItems?.map(({ name, count }, i) => (
         <p
           key={i}
           className={`${
             activeTab === i ? " bg-accent text-primary" : " bg-[#DDDDDD] text-[#959595]"
-          } btn border-0 hover:bg-accent hover:text-primary text-[.5rem] lg:text-[.8rem] tracking-tight`}
+          } btn border-0 hover:bg-accent hover:text-primary text-[.8rem] tracking-tight`}
           onClick={() => setActiveTab(i)}>
           {name}
           {count ? (

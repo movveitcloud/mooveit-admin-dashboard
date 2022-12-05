@@ -106,10 +106,7 @@ const ManageAccounts = () => {
                     className="w-full h-full outline-none text-base placeholder:text-[#959595] placeholder:text-base"
                   />
                 </div>
-                <div className="border p-2 bg-white whitespace-nowrap rounded-md flex items-center">
-                  <DownloadIcon className="w-6 text-[#222222] m-0" />
-                  Download CSV
-                </div>
+                <DownloadCSV activeTab={activeTab} />
               </div>
             </div>
             {/* end of mobile */}
