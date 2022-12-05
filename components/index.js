@@ -2,6 +2,8 @@
 export { default as PageLoading } from "./shared/PageLoading";
 export { default as FormInput } from "./shared/FormInput";
 export { default as FormPassword } from "./shared/FormPassword";
+export { default as Tabs } from "./shared/Tabs";
+export { default as DownloadCSV } from "./shared/DownloadCSV";
 
 //NAVIGATION
 export { default as NavBar } from "./navigation/NavBar";
@@ -13,16 +15,13 @@ export { default as DashboardNavbar } from "./navigation/DashboardNavbar";
 //export { default as LandingNavBar } from "./LandingNavBar";
 
 //LAYOUTS
-export { default as PageLayout } from "./layouts/PageLayout";
 export { default as DefaultLayout } from "./layouts/DefaultLayout";
 export { default as AuthLayout } from "./layouts/AuthLayout";
 export { default as DashboardLayout } from "./layouts/DashboardLayout";
 export { default as HeadLayout } from "./layouts/HeadLayout";
+export { default as AccountLayout } from "./layouts/AccountLayout";
 
 //DASHBOARD
-
-export { default as Partners } from "./dashboard/Account/Partners";
-export { default as Users } from "./dashboard/Account/Users";
 export { default as Approved } from "./dashboard/Listings/Approved";
 export { default as Pending } from "./dashboard/Listings/Pending";
 export { default as ApprovalLayout } from "./dashboard/Listings/ApprovalLayout";

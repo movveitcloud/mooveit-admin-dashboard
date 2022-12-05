@@ -1,19 +1,19 @@
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-// import { authenticatedUser, isLoggedIn } from "../../redux/features/auth.slice";
+import { authenticatedUser } from "../../redux/features/auth.slice";
 import { Meta } from "../index";
 
 const AuthLayout = ({ children, title }) => {
-  // const user = authenticatedUser();
+  const user = authenticatedUser();
   const router = useRouter();
   const pathname = router.pathname;
 
-  // useEffect(() => {
-  //   if (user) {
-  //     router.replace(`${user.role == "partner" ? "/listings" : "/your-storage"}`);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (user) {
+      router.replace("/accounts");
+    }
+  }, []);
 
   return (
     <>
@@ -26,26 +26,11 @@ const AuthLayout = ({ children, title }) => {
                 <img src="/logo.png" alt="logo" className="max-h-8" />
               </a>
             </Link>
-            {pathname === "/signup" && (
-              <div className="flex items-center text-black gap-3">
-                <span className="hidden md:flex">Already have an account?</span>
-                <Link href="/login">
-                  <a className="underline underline-offset-2 hover:text-primary">Login Here</a>
-                </Link>
-              </div>
-            )}
-            {pathname === "/login" && (
-              <div className="flex items-center text-black gap-3">
-                <span className="hidden md:flex">Don't have an account?</span>
-                <Link href="/signup">
-                  <a className="underline underline-offset-2 hover:text-primary">Sign Up</a>
-                </Link>
-              </div>
-            )}
+
             {pathname === "/forgot-password" && (
               <div className="flex items-center text-black gap-3">
                 <span className="hidden md:flex">Remembered your password?</span>
-                <Link href="/login">
+                <Link href="/">
                   <a className="underline underline-offset-2 hover:text-primary">Login Here</a>
                 </Link>
               </div>
