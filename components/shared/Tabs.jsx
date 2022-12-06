@@ -9,16 +9,13 @@ const Tabs = ({ activeTab, setActiveTab, tabItems }) => {
           } btn border-0 hover:bg-accent hover:text-primary text-[.8rem] tracking-tight`}
           onClick={() => setActiveTab(i)}>
           {name}
-          {count ? (
-            <span
-              className={`${
-                activeTab === i ? " text-white bg-primary" : " bg-[#c1bfbf] text-white"
-              } rounded-full py-1 px-2 text-[.5rem] lg:text-[.7rem] ml-4 `}>
-              {count}
-            </span>
-          ) : (
-            ""
-          )}
+
+          <span
+            className={`${
+              activeTab === i ? " text-white bg-primary" : " bg-[#c1bfbf] text-white"
+            } rounded-full py-1 px-2 text-[.5rem] lg:text-[.7rem] ml-4 `}>
+            {count}
+          </span>
         </p>
       ))}
     </nav>
