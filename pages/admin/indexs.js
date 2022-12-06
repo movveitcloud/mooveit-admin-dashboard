@@ -1,23 +1,34 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { AdminLayout, DashboardLayout, DownloadCSV, Tabs, AddAdminModal } from "../../components";
+import { Admins, SuperAdmins } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { clearFilteredAdmin, filterAdmin, getAdmins } from "../../redux/features/admin.slice";
-import { clearFilteredUser, filterUsers, getUsers } from "../../redux/features/users.slice";
 import { ChevronDownIcon, SearchIcon, DownloadIcon } from "@heroicons/react/outline";
 import { PulseLoader } from "react-spinners";
 import { motion } from "framer-motion";
 
 const Admin = () => {
-  const dispatch = useDispatch();
+  const [activeButton, setActiveButton] = useState("admin");
+  const [value, setValue] = useState("");
   const { admins, filteredAdmin, adminLoading } = useSelector((state) => state.admin);
-  //   console.log(adminLoading);
+  const [admincount, setadminCount] = useState(0);
+  const [superadmincount, setSuperadmin] = useState(0);
+  //   console.log(users);
   useEffect(() => {
     dispatch(getAdmins());
   }, []);
+  // useEffect(() => {
+  //   let admincount = 0;
+  //   admins?.map(() => ((admincount += 1), setadminCount(admincount)));
+
+  //   let superadmincount = 0;
+
+  //    admins?.map(() => ((admincount += 1), setadminCount(admincount)));
+  // }, [admins]);
 
   const [activeTab, setActiveTab] = useState(0);
-
+  const dispatch = useDispatch();
   const AdminCount = filteredAdmin?.filter(({ role }) => role === "admin").length;
   const superAdminCount = filteredAdmin?.filter(({ role }) => role === "superadmin").length;
 
@@ -25,7 +36,6 @@ const Admin = () => {
     { name: "Admins", count: AdminCount },
     { name: "Superadmins", count: superAdminCount },
   ];
-  const { userLoading } = useSelector((state) => state.user);
 
   const handleSearch = (e) => {
     const { value } = e.target;
@@ -40,22 +50,48 @@ const Admin = () => {
 
   return (
     <DashboardLayout>
+      mmmm
       {adminLoading ? (
         <div className="relative">
-          <div className="h-[500px] flex justify-center items-center">
+          <div className="h-[400px] flex justify-center items-center">
             <PulseLoader loading={adminLoading} color="#EDCC5B" />
           </div>
         </div>
       ) : (
+        // <div className="flex space-x-5 mb-4">
+        //   <button
+        //     onClick={() => setActiveButton("admin")}
+        //     className={`${
+        //       activeButton === "admin" ? "bg-accent-focus  text-accent-content" : "bg-[#EEEEEE] text-[#BBBBBB] "
+        //     }  py-2 px-4 rounded-md  flex items-center align-middle justify-center text-sm md:text-base `}>
+        //     Admins
+        //     <div
+        //       className={` ${
+        //         activeButton === "admin" ? "bg-accent-content" : "bg-[#BBBBBB]"
+        //       } ml-2 text-white md:text-[10px] text-[10px] rounded-sm p-2 h-4 flex align-middle items-center`}>
+        //       {admincount}
+        //     </div>
+        //   </button>
+
+        //   <button
+        //     onClick={() => setActiveButton("super admin")}
+        //     className={`${
+        //       activeButton === "super admin" ? "bg-accent-focus text-accent-content" : "bg-[#EEEEEE] text-[#BBBBBB]"
+        //     }  py-2 px-4 rounded-md  flex items-center align-middle justify-center text-sm md:text-base`}>
+        //     Super Admins
+        //     <div
+        //       className={` ${
+        //         activeButton === "super admin" ? "bg-accent-content" : "bg-[#BBBBBB]"
+        //       } ml-2 text-white  text-[10px] rounded-sm  p-2  h-4 flex align-middle items-center`}>
+        //       {superadmincount}
+        //     </div>
+        //   </button>
+        // </div>
         <>
-          <Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabItems={tabItems} />
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="bg-white p-8 shadow">
+          {/* <Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabItems={tabItems} /> */}
+          <div className="bg-white p-8 shadow ">
             <div className="hidden md:flex justify-between mb-10 text-sm ">
-              <div className="flex justify-start xl:w-2/3 mr-4   ">
+              {/* <div className="flex justify-start xl:w-2/3 mr-4   ">
                 <div className="flex items-center  justify-start w-fit border lg:mr-8 md:mr-2    rounded-md">
                   <div className="bg-accent-content border  rounded-l-md border-r-none p-3 py-3 text-white whitespace-nowrap cursor-pointer  ">
                     View All
@@ -73,21 +109,32 @@ const Admin = () => {
                   <SearchIcon className="text-accent-content w-5 md:w-6 mr-1" />
                   <input
                     type="text"
+                    value={value}
                     onChange={handleSearch}
                     placeholder="Search..."
                     className="w-full h-full  outline-none text-base placeholder:text-[#959595] placeholder:text-[8px] md:placeholder:text-base"
                   />
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex">
-                <label
-                  htmlFor={activeTab === 0 ? "addadmin" : "addsuperadmin"}
+                {/* {activeButton === "admin" ? ( */}
+
+                {/* <label
+                  htmlFor={`$ { activeTab === 0 ? "addadmin" :  "addsuperadmin"}`}
                   className="border cursor-pointer  p-2 py-3 mr-4 bg-white whitespace-nowrap rounded-md text-sm ">
                   {activeTab === 0 ? " + Add Admin" : " + Add Super Admin"}
-                </label>
+                </label> */}
 
-                <DownloadCSV activeTab={activeTab} />
+                {/* ) : (
+                  <label
+                    htmlFor="addsuperadmin"
+                    className="border cursor-pointer  p-2 py-3 mr-4 bg-white whitespace-nowrap rounded-md text-sm ">
+                    + Add Super Admin
+                  </label>
+                )} */}
+
+                {/* <DownloadCSV activeTab={activeTab} /> */}
               </div>
             </div>
 
@@ -112,16 +159,25 @@ const Admin = () => {
                   <SearchIcon className="text-accent-content w-5 md:w-6 mr-1" />
                   <input
                     type="text"
+                    value={value}
                     onChange={handleSearch}
                     placeholder="Search..."
                     className="w-full h-full  outline-none text-base placeholder:text-[#959595] placeholder:text-base"
                   />
                 </div>
-                <label
-                  htmlFor={activeTab === 0 ? "addadmin" : "addsuperadmin"}
-                  className="border cursor-pointer  p-2 py-3 mr-4 bg-white whitespace-nowrap rounded-md text-sm ">
-                  {activeTab === 0 ? " + Add Admin" : " + Add Super Admin"}
-                </label>
+                {activeButton === "admin" ? (
+                  <label
+                    htmlFor="addadmin"
+                    className="border cursor-pointer  p-2 py-3 mr-4 bg-white whitespace-nowrap rounded-md text-sm ">
+                    + Add Admin
+                  </label>
+                ) : (
+                  <label
+                    htmlFor="addsuperadmin"
+                    className="border cursor-pointer  p-2 py-3 mr-4 bg-white whitespace-nowrap rounded-md text-sm ">
+                    + Add Super Admin
+                  </label>
+                )}
                 <DownloadCSV activeTab={activeTab} />
               </div>
             </div>
@@ -129,8 +185,19 @@ const Admin = () => {
 
             <AddAdminModal />
 
+            {/* {activeButton === "admin" ? (
+              <Admins admincount={admincount} />
+            ) : superadmincount !== 0 ? (
+              <SuperAdmins superadmincount={superadmincount} />
+            ) : (
+              <div className="bg-white rounded-lg w-full  flex justify-center mt-8">
+                <div className=" py-24 items-center">
+                  <p className="text-center text-[#AAAAAA] text-xl font-bold">No super admin at this time.</p>
+                </div>
+              </div>
+            )} */}
             <AdminLayout name={activeTab === 0 ? "admin" : "superadmin"} />
-          </motion.div>
+          </div>
         </>
       )}
     </DashboardLayout>

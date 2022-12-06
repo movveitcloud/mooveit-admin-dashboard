@@ -59,6 +59,7 @@ export const deleteAdmin = createAsyncThunk(
 const adminSlice = createSlice({
   name: "admin",
   initialState: {
+    filteredAdmin: [],
     admins: [],
     loading: false,
     adminLoading: false,
@@ -69,6 +70,14 @@ const adminSlice = createSlice({
     updatePassword: {},
     updatePasswordLoading: false,
   },
+  reducers: {
+    filterAdmin: (state, action) => {
+      state.filteredAdmin = action.payload;
+    },
+    clearFilteredUser: (state, action) => {
+      state.filteredAdmin = action.payload;
+    },
+  },
 
   extraReducers: {
     [getAdmins.pending]: (state) => {
@@ -77,6 +86,7 @@ const adminSlice = createSlice({
     [getAdmins.fulfilled]: (state, action) => {
       state.adminLoading = false;
       state.admins = action.payload.data;
+      state.filteredAdmin = action.payload.data;
     },
     [getAdmins.rejected]: (state, action) => {
       state.adminLoading = false;
@@ -113,4 +123,5 @@ const adminSlice = createSlice({
     },
   },
 });
+export const { filterAdmin, clearFilteredAdmin } = adminSlice.actions;
 export default adminSlice.reducer;

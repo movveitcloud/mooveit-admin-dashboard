@@ -20,6 +20,7 @@ export { default as AuthLayout } from "./layouts/AuthLayout";
 export { default as DashboardLayout } from "./layouts/DashboardLayout";
 export { default as HeadLayout } from "./layouts/HeadLayout";
 export { default as AccountLayout } from "./layouts/AccountLayout";
+export { default as AdminLayout } from "./layouts/AdminLayout";
 
 //DASHBOARD
 export { default as Approved } from "./dashboard/Listings/Approved";
