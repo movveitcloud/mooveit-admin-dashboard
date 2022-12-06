@@ -1,22 +1,23 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ChevronDownIcon, SearchIcon, DownloadIcon } from "@heroicons/react/outline";
-import { AccountLayout, DashboardLayout, DownloadCSV, Tabs } from "../../components";
-import { clearFilteredUser, filterUsers, getUsers } from "../../redux/features/users.slice";
-import { PulseLoader } from "react-spinners";
+import { ChevronDownIcon, SearchIcon } from "@heroicons/react/outline";
 import { motion } from "framer-motion";
+import { PulseLoader } from "react-spinners";
+import { clearFilteredUser, filterUsers, getUsers } from "../../redux/features/users.slice";
+import { AccountLayout, DashboardLayout, DownloadCSV, Tabs } from "../../components";
 
 const ManageAccounts = () => {
   const [activeTab, setActiveTab] = useState(0);
   const { users, filteredUsers, userLoading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const usersCount = filteredUsers?.filter(({ role }) => role === "customer").length;
-  const partnersCount = filteredUsers?.filter(({ role }) => role === "partner").length;
+  const count = ({ role }) => filteredUsers?.filter((user) => user.role === role).length;
+  const customers = users?.filter(({ role }) => role === "customer");
+  const partners = users?.filter(({ role }) => role === "partner");
 
   const tabItems = [
-    { name: "Customers", count: usersCount },
-    { name: "Partners", count: partnersCount },
+    { name: "Customers", count: count({ role: "customer" }) },
+    { name: "Partners", count: count({ role: "partner" }) },
   ];
 
   const handleSearch = (e) => {
@@ -30,7 +31,15 @@ const ManageAccounts = () => {
     }
   };
 
-  const downloadCSV = () => {};
+  //Export to CSV
+  const csvHeaders = [
+    { label: "First Name", key: "firstName" },
+    { label: "Last Name", key: "lastName" },
+    { label: "Email", key: "email" },
+    { label: "Verified", key: "isVerified" },
+  ];
+  const appUsers = [customers, partners];
+  const csvFilename = ["MovveIt_Customers", "MovveIt_Partners"];
 
   useEffect(() => {
     dispatch(getUsers());
@@ -45,13 +54,9 @@ const ManageAccounts = () => {
           </div>
         </div>
       ) : (
-        <>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
           <Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabItems={tabItems} />
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="bg-white p-8 shadow">
+          <div className="bg-white p-8 shadow">
             <div className="hidden md:flex justify-between mb-10 text-sm ">
               <div className="flex justify-start xl:w-2/3 mr-4   ">
                 <div className="flex items-center  justify-start w-fit border lg:mr-8 md:mr-2    rounded-md">
@@ -78,7 +83,7 @@ const ManageAccounts = () => {
                 </div>
               </div>
 
-              <DownloadCSV activeTab={activeTab} />
+              <DownloadCSV data={appUsers[activeTab]} headers={csvHeaders} filename={csvFilename[activeTab]} />
             </div>
 
             {/* mobile */}
@@ -106,14 +111,14 @@ const ManageAccounts = () => {
                     className="w-full h-full outline-none text-base placeholder:text-[#959595] placeholder:text-base"
                   />
                 </div>
-                <DownloadCSV activeTab={activeTab} />
+                <DownloadCSV data={appUsers[activeTab]} headers={csvHeaders} filename={csvFilename[activeTab]} />
               </div>
             </div>
             {/* end of mobile */}
 
             <AccountLayout name={activeTab === 0 ? "customer" : "partner"} />
-          </motion.div>
-        </>
+          </div>
+        </motion.div>
       )}
     </DashboardLayout>
   );
