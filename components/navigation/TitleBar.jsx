@@ -1,30 +1,14 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { MenuAlt3Icon } from "@heroicons/react/solid";
 import { motion, AnimatePresence } from "framer-motion";
+import { BellIcon, MenuAlt3Icon } from "@heroicons/react/outline";
 import DashboardNavbar from "./DashboardNavbar";
-import { BellIcon, SearchIcon } from "@heroicons/react/outline";
-// import { authenticatedUser } from "../../redux/features/auth.slice";
-// import { isPartner } from "../../helpers/utils";
 
 const TitleBar = ({ pageTitle, pathname, menuOpen, setMenuOpen }) => {
-  const router = useRouter();
-  // const user = authenticatedUser();
-
   return (
     <div className="py-5 px-4 lg:px-8 lg:py-5 w-full border-b">
       <div className="flex justify-between items-center gap-4">
-        <div className="hidden sm:flex flex-row flex-grow gap-3 items-center">
-          <SearchIcon className="text-primary w-5" />
-          <input
-            type="text"
-            // placeholder={isPartner ? "Looking for something" : "Search listings by location  or partner"}
-            placeholder="Search listings by location  or partner"
-            className="w-full bg-transparent h-full pr-6 outline-none text-base placeholder:text-[#A5A5A5]"
-          />
-        </div>
+        <h1 className="font-semibold text-xl">{` ${pageTitle}`}</h1>
         <div className="flex items-center gap-6">
-          <div className="justify-center items-center border border-[#FEF08A] rounded p-3 cursor-pointer  hidden sm:flex">
+          <div className="justify-center items-center border border-[#FEF08A] rounded p-3 cursor-pointer hidden sm:flex">
             <BellIcon className="w-6 text-[#222222]" />
           </div>
         </div>
@@ -49,7 +33,6 @@ const TitleBar = ({ pageTitle, pathname, menuOpen, setMenuOpen }) => {
           </AnimatePresence>
         </div>
       )}
-
       {/* mobile menu end */}
     </div>
   );

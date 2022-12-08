@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { errorPopUp, successPopUp } from "../../helpers/toastify";
 import crypto from "crypto-js";
-
 import * as api from "../api";
+
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 
 export const login = createAsyncThunk("/admin/login", async ({ payload, reset }, { rejectWithValue }) => {
@@ -63,7 +63,6 @@ export const verifyResetToken = createAsyncThunk(
   async ({ token }, { rejectWithValue }) => {
     try {
       const response = await api.verifyResetToken(token);
-
       return response.data;
     } catch (err) {
       location.replace("/");

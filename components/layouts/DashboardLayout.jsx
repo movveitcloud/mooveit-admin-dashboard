@@ -3,10 +3,9 @@ import { useRouter } from "next/router";
 import { dashboardNavLinks } from "../../helpers/data";
 import { motion } from "framer-motion";
 import { authenticatedUser } from "../../redux/features/auth.slice";
-import { DashboardNavbar, Meta, TitleBar, PageLoading } from "../index";
+import { DashboardNavbar, Meta, TitleBar } from "../index";
 
-const DashboardLayout = ({ children, name, userInfo }) => {
-  const [loading, setLoading] = useState(true);
+const DashboardLayout = ({ children, name }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [pageReady, setPageReady] = useState(false);
   const [pageTitle, setPageTitle] = useState("");
@@ -20,15 +19,6 @@ const DashboardLayout = ({ children, name, userInfo }) => {
     );
   };
 
-  //   const authorizeUser = (role) => {
-  //     //BOUNCE UNAUTHORIZED USERS
-  //     const item = dashboardNavLinks?.find((a) => router?.asPath.includes(a.path));
-  //     //  const sub =  dashboardNavLinks?.subMenus?.find((a) => router?.asPath.includes(a.path));
-  //     if (item && !item?.permission.includes(role))
-  //       return router.replace(`${user.role == "partner" ? "/listings" : "/your-storage"}`);
-  //     setHasPermission(true);
-  //   };
-
   useEffect(() => {
     if (!user) {
       router.push("/");
@@ -36,23 +26,11 @@ const DashboardLayout = ({ children, name, userInfo }) => {
 
     getPageTitle();
     setPageReady(true);
-    setLoading(false);
-
-    // if (user && !user.isVerified) {
-    //   router.push("/verify");
-    // }
-    // if (user && user.isVerified) {
-    //   authorizeUser(user.role);
-    // }
   }, []);
-
-  // if (loading) {
-  //   return <PageLoading loading={loading} />;
-  // }
 
   return (
     <>
-      <Meta title={`Admin-Dashboard | ${pageTitle}`} />
+      <Meta title={`Manage ${pageTitle}`} />
       {pageReady && (
         <div className="h-screen flex justify-content items-center text-black">
           <aside className="hidden bg-white h-screen w-3/12 overflow-y-auto lg:block border-r">
