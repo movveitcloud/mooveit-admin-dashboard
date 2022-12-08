@@ -17,7 +17,7 @@ const StorageDimensions = () => {
       </div>
 
       {configurations?.map(({ storageSize }, i) =>
-        storageSize.map(({ name, description, visualization }, indx) => (
+        storageSize.map(({ label, description, visualization }, indx) => (
           <div
             key={indx}
             className="bg-[#F9F9F9] border-l-4 border-accent rounded-lg px-6 py-4 flex justify-between items-center text-sm mb-6">
@@ -30,7 +30,7 @@ const StorageDimensions = () => {
                 )}
               </div>
               <div className="flex flex-col items-start justify-center space-y-2">
-                <p className="font-bold">{name}</p>
+                <p className="font-bold">{label}</p>
                 <p>{description}</p>
               </div>
             </div>

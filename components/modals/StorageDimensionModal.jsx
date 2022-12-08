@@ -11,10 +11,11 @@ const StorageDimensionModal = ({}) => {
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
   const [dimensionname, setDimensionname] = useState("");
+  const [dimensionvalue, setDimensionvalue] = useState("");
   const [description, setDescription] = useState("");
   const [imageupload, setImageupload] = useState("");
   const closeModal = useRef(null);
-  const disableBtn = !description || !imageupload || !dimensionname;
+  const disableBtn = !description || !imageupload || !dimensionname || !dimensionvalue;
   const API = axios.create({ baseURL: process.env.BASE_URL });
 
   const refreshConfigurations = () => {
@@ -26,7 +27,12 @@ const StorageDimensionModal = ({}) => {
 
   const handleSave = () => {
     const payload = {
-      storageSize: { name: dimensionname, description: description, visualization: imageupload },
+      storageSize: {
+        label: dimensionname,
+        value: dimensionvalue,
+        description: description,
+        visualization: imageupload,
+      },
     };
     dispatch(
       uploadConfiguration({
@@ -44,7 +50,7 @@ const StorageDimensionModal = ({}) => {
 
     const formData = new FormData();
     if (formData) {
-      formData.append("id", "id");
+      formData.append("id", id);
       formData.append("key", "media");
       formData.append("media", img);
     }
@@ -85,6 +91,15 @@ const StorageDimensionModal = ({}) => {
               placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
               onChange={(e) => setDimensionname(e.target.value)}
+            />
+            <h3 className=" font-semibold text-sm mb-2">Storage Dimension(value)</h3>
+            <p className="mb-2 text-xs">Max 50 characters</p>
+
+            <input
+              placeholder=""
+              className="px-4 py-2 border border-black w-full mb-4 rounded-md"
+              maxLength={50}
+              onChange={(e) => setDimensionvalue(e.target.value)}
             />
             <h3 className=" font-semibold text-sm mb-2">Description</h3>
             <textarea

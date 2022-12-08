@@ -11,9 +11,10 @@ const AddFeatureModal = () => {
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
   const [featurename, setFeaturename] = useState("");
+  const [featurevalue, setFeaturevalue] = useState("");
   const [imageupload, setImageupload] = useState("");
   const closeModal = useRef(null);
-  const disableBtn = !featurename || !imageupload;
+  const disableBtn = !featurename || !imageupload || !featurevalue;
   const API = axios.create({ baseURL: process.env.BASE_URL });
 
   const refreshConfigurations = () => {
@@ -25,8 +26,10 @@ const AddFeatureModal = () => {
 
   const handleSave = () => {
     const payload = {
-      storageFeatures: { name: featurename, image: imageupload },
+      storageFeatures: { label: featurename, value: featurevalue, image: imageupload },
     };
+
+    console.log(payload);
 
     dispatch(
       uploadConfiguration({
@@ -88,6 +91,15 @@ const AddFeatureModal = () => {
               placeholder="Enter Feature..."
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
               onChange={(e) => setFeaturename(e.target.value)}
+            />
+            <h3 className=" font-semibold text-sm mb-2">Feature(value)</h3>
+            <p className="mb-2 text-xs">Max 50 characters</p>
+
+            <input
+              placeholder="Enter Feature..."
+              className="px-4 py-2 border border-black w-full mb-4 rounded-md"
+              maxLength={50}
+              onChange={(e) => setFeaturevalue(e.target.value)}
             />
             <h3 className="font-semibold text-sm mb-2 ">Feature's Icon</h3>
             <p className="mb-2 text-xs">Only files in png,jpeg and svg formats will be recognized. Max 1mb</p>

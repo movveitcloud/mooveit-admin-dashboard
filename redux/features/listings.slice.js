@@ -51,6 +51,7 @@ const listingSlice = createSlice({
   name: "listing",
   initialState: {
     listings: [],
+    filteredListings: [],
     loading: false,
     listingLoading: false,
     singleListing: {},
@@ -61,6 +62,15 @@ const listingSlice = createSlice({
     disapproveListingLoading: false,
   },
 
+  reducers: {
+    filterListings: (state, action) => {
+      state.filteredListings = action.payload;
+    },
+    clearFilteredListings: (state, action) => {
+      state.filteredListings = action.payload;
+    },
+  },
+
   extraReducers: {
     [getListings.pending]: (state) => {
       state.listingLoading = true;
@@ -68,6 +78,7 @@ const listingSlice = createSlice({
     [getListings.fulfilled]: (state, action) => {
       state.listingLoading = false;
       state.listings = action.payload.data;
+      state.filteredListings = action.payload.data;
     },
     [getListings.rejected]: (state, action) => {
       state.listingLoading = false;
@@ -104,5 +115,7 @@ const listingSlice = createSlice({
     },
   },
 });
+
+export const { filterListings, clearFilteredListings } = listingSlice.actions;
 
 export default listingSlice.reducer;
