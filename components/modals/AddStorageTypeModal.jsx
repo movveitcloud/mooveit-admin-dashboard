@@ -9,8 +9,9 @@ const AddStorageTypeModal = () => {
   const dispatch = useDispatch();
   const [id, setId] = useState("");
   const [storagetype, setStoragetype] = useState("");
+  const [storagetypevalue, setStoragetypevalue] = useState("");
   const router = useRouter();
-  const disableBtn = !storagetype;
+  const disableBtn = !storagetype || !storagetypevalue;
   const closeModal = useRef(null);
   const { updateConfigurationLoading } = useSelector((state) => state.admin);
   const refreshConfigurations = () => {
@@ -23,7 +24,10 @@ const AddStorageTypeModal = () => {
   // console.log(configurations);
   const handleSave = (e) => {
     const payload = {
-      storageType: storagetype,
+      storageType: {
+        label: storagetype,
+        value: storagetypevalue,
+      },
     };
 
     dispatch(
@@ -54,6 +58,15 @@ const AddStorageTypeModal = () => {
               placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
               onChange={(e) => setStoragetype(e.target.value)}
+            />
+            <h3 className="font-semibold text-sm mb-2">Storage Type(value)</h3>
+            <p className="mb-2 text-xs">Max 50 characters</p>
+
+            <input
+              placeholder=""
+              className="px-4 py-2 border border-black w-full mb-4 rounded-md"
+              maxLength={50}
+              onChange={(e) => setStoragetypevalue(e.target.value)}
             />
 
             <button

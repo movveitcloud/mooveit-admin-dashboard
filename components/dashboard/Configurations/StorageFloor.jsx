@@ -17,12 +17,12 @@ const StorageFloor = () => {
       </div>
 
       {configurations?.map(({ storageFloor }, i) =>
-        storageFloor.map((val, indx) => (
+        storageFloor.map(({ label }, indx) => (
           <div
             key={indx}
             className="bg-[#F9F9F9] border-l-4 border-accent rounded-lg px-6 py-4 flex justify-between items-center text-sm mb-6">
             <div className="flex  items-center">
-              <p className=" capitalize ">{val}</p>
+              <p className=" capitalize ">{label}</p>
             </div>
             <div className="flex items-center gap-6">
               <div className="flex items-center cursor-pointer ">

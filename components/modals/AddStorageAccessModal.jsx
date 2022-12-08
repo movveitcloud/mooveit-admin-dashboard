@@ -8,8 +8,9 @@ const AddStorageAccess = () => {
   const dispatch = useDispatch();
   const { configurations, uploadConfigurationLoading } = useSelector((state) => state.configuration);
   const [storageaccess, setStorageaccess] = useState("");
+  const [storageaccessvalue, setStorageaccessvalue] = useState("");
   const router = useRouter();
-  const disableBtn = !storageaccess;
+  const disableBtn = !storageaccess || !storageaccessvalue;
   const closeModal = useRef(null);
   const [id, setId] = useState("");
   const refreshConfigurations = () => {
@@ -21,7 +22,10 @@ const AddStorageAccess = () => {
   }, [configurations]);
   const handleSave = (e) => {
     const payload = {
-      storageAccessType: storageaccess,
+      storageAccessType: {
+        label: storageaccess,
+        value: storageaccessvalue,
+      },
     };
 
     dispatch(
@@ -54,6 +58,15 @@ const AddStorageAccess = () => {
               onChange={(e) => setStorageaccess(e.target.value)}
             />
 
+            <h3 className="font-semibold text-sm mb-2">Access Method(value)</h3>
+            <p className="mb-2 text-xs">Max 50 characters</p>
+
+            <input
+              placeholder=""
+              className="px-4 py-2 border border-black w-full mb-4 rounded-md"
+              maxLength={50}
+              onChange={(e) => setStorageaccessvalue(e.target.value)}
+            />
             <button
               className={`${
                 uploadConfigurationLoading && "loading"

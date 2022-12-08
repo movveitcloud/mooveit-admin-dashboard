@@ -9,6 +9,7 @@ const AdditionalServicesModal = () => {
   const dispatch = useDispatch();
   const [id, setId] = useState("");
   const [additionalservice, setAdditionaservice] = useState("");
+  const [additionalservicevalue, setAdditionaservicevalue] = useState("");
   const router = useRouter();
   const disableBtn = !additionalservice;
   const closeModal = useRef(null);
@@ -53,6 +54,16 @@ const AdditionalServicesModal = () => {
               placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
               onChange={(e) => setAdditionaservice(e.target.value)}
+            />
+
+            <h3 className="font-semibold text-sm mb-2">Additional Service(value)</h3>
+            <p className="mb-2 text-xs">Max 50 characters</p>
+
+            <input
+              placeholder=""
+              className="px-4 py-2 border border-black w-full mb-4 rounded-md"
+              maxLength={50}
+              onChange={(e) => setAdditionaservicevalue(e.target.value)}
             />
             <button
               className={`${

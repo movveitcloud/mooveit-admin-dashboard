@@ -10,7 +10,8 @@ const AddStorageFloorModal = () => {
   const closeModal = useRef(null);
   const [id, setId] = useState("");
   const [storagefloor, setStoragefloor] = useState("");
-  const disableBtn = !storagefloor;
+  const [storagefloorvalue, setStoragefloorvalue] = useState("");
+  const disableBtn = !storagefloor || !storagefloorvalue;
 
   const refreshConfigurations = () => {
     dispatch(getConfigurations());
@@ -21,7 +22,10 @@ const AddStorageFloorModal = () => {
   }, [configurations]);
   const handleSave = (e) => {
     const payload = {
-      storageFloor: storagefloor,
+      storageFloor: {
+        label: storagefloor,
+        value: storagefloorvalue,
+      },
     };
 
     dispatch(
@@ -52,6 +56,16 @@ const AddStorageFloorModal = () => {
               placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
               onChange={(e) => setStoragefloor(e.target.value)}
+            />
+
+            <h3 className="font-semibold text-sm mb-2">Storage Floor(value)</h3>
+            <p className="mb-2 text-xs">Max 50 characters</p>
+
+            <input
+              placeholder=""
+              className="px-4 py-2 border border-black w-full mb-4 rounded-md"
+              maxLength={50}
+              onChange={(e) => setStoragefloorvalue(e.target.value)}
             />
 
             <button
