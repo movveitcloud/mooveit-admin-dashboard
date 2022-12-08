@@ -33,6 +33,7 @@ export const uploadConfiguration = createAsyncThunk(
       const response = await api.uploadConfiguration({ id, payload });
       closeModal.current.click();
       refreshConfigurations();
+      console.log(payload);
       console.log(response.data);
       return response.data;
     } catch (err) {

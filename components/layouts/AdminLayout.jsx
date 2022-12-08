@@ -7,16 +7,10 @@ import { PulseLoader } from "react-spinners";
 // import UpdateAdminModal from "../../modals/UpdateAdminModal";
 import { DeleteAdminModal, UpdateAdminModal } from "../../components";
 
-const AdminLayout = ({ name, admincount, superadmincount }) => {
+const AdminLayout = ({ name }) => {
   const { filteredAdmin } = useSelector((state) => state.admin);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAdmins());
-  }, []);
   const [ids, setIds] = useState("");
-
-  // console.log(admins);
 
   return (
     <div className="">
