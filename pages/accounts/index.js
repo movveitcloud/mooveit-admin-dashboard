@@ -75,7 +75,7 @@ const ManageAccounts = () => {
                 <div className="flex w-1/2   space-x-2  items-center border  bg-white rounded-md p-3 py-3">
                   <SearchIcon className="text-accent-content w-5 md:w-6 mr-1" />
                   <input
-                    type="text"
+                    type="search"
                     onChange={handleSearch}
                     placeholder="Search by last name..."
                     className="w-full h-full  outline-none text-base placeholder:text-[#959595] placeholder:text-[8px] md:placeholder:text-base"
@@ -105,7 +105,7 @@ const ManageAccounts = () => {
                 <div className="flex w-2/3 space-x-2 items-center border bg-white rounded-md p-2">
                   <SearchIcon className="text-accent-content w-5 md:w-6 mr-1" />
                   <input
-                    type="text"
+                    type="search"
                     // onChange={handleSearch}
                     placeholder="Search..."
                     className="w-full h-full outline-none text-base placeholder:text-[#959595] placeholder:text-base"
