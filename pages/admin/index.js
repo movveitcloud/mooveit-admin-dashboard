@@ -3,7 +3,6 @@ import { useState } from "react";
 import { AdminLayout, DashboardLayout, DownloadCSV, Tabs, AddAdminModal } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { clearFilteredAdmin, filterAdmin, getAdmins } from "../../redux/features/admin.slice";
-import { clearFilteredUser, filterUsers, getUsers } from "../../redux/features/users.slice";
 import { ChevronDownIcon, SearchIcon, DownloadIcon } from "@heroicons/react/outline";
 import { PulseLoader } from "react-spinners";
 import { motion } from "framer-motion";
@@ -37,6 +36,7 @@ const Admin = () => {
       dispatch(clearFilteredAdmin(admins));
     }
   };
+  //Export to CSV
   const csvHeaders = [
     { label: "First Name", key: "firstName" },
     { label: "Last Name", key: "lastName" },
@@ -45,8 +45,6 @@ const Admin = () => {
   ];
   const appUsers = [admin, superadmin];
   const csvFilename = ["MovveIt_Admins", "MovveIt_SuperAdmins"];
-  // const adminlength = count({ role: "admin" });
-  // console.log(adminlength);
 
   const adminCounts = [admin.length, superadmin.length];
   const adminStatus = ["admin", "superadmin"];
@@ -84,7 +82,7 @@ const Admin = () => {
                     <input
                       type="text"
                       onChange={handleSearch}
-                      placeholder="Search..."
+                      placeholder="Search by lastname..."
                       className="w-full h-full  outline-none text-base placeholder:text-[#959595] placeholder:text-[8px] md:placeholder:text-base"
                     />
                   </div>
@@ -123,7 +121,7 @@ const Admin = () => {
                     <input
                       type="text"
                       onChange={handleSearch}
-                      placeholder="Search..."
+                      placeholder="Search by lastname..."
                       className="w-full h-full  outline-none text-base placeholder:text-[#959595] placeholder:text-base"
                     />
                   </div>

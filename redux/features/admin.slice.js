@@ -74,7 +74,7 @@ const adminSlice = createSlice({
     filterAdmin: (state, action) => {
       state.filteredAdmin = action.payload;
     },
-    clearFilteredUser: (state, action) => {
+    clearFilteredAdmin: (state, action) => {
       state.filteredAdmin = action.payload;
     },
   },
