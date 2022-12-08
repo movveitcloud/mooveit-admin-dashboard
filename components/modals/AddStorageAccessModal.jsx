@@ -46,11 +46,13 @@ const AddStorageAccess = () => {
           <div className="w-[80%] mx-auto text-left">
             <div className="flex justify-between items-center mb-6">
               <h2 className="font-bold text-2xl">Add Access Method</h2>
-              <label htmlFor="addfeatureaccess">
-                <XIcon className="w-6 cursor-pointer modal-button" />
+              <label
+                htmlFor="addfeatureaccess"
+                className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none absolute right-6 top-6">
+                <XIcon className="w-4" />
               </label>
             </div>
-            <h3 className="font-semibold text-sm mb-2">Access Method</h3>
+            <h3 className="font-semibold text-sm mb-2">Label</h3>
 
             <input
               placeholder=""
@@ -58,7 +60,7 @@ const AddStorageAccess = () => {
               onChange={(e) => setStorageaccess(e.target.value)}
             />
 
-            <h3 className="font-semibold text-sm mb-2">Access Method(value)</h3>
+            <h3 className="font-semibold text-sm mb-2">Value</h3>
             <p className="mb-2 text-xs">Max 50 characters</p>
 
             <input
