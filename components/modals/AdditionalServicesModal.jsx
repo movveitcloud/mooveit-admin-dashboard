@@ -9,8 +9,9 @@ const AdditionalServicesModal = () => {
   const dispatch = useDispatch();
   const [id, setId] = useState("");
   const [additionalservice, setAdditionaservice] = useState("");
+  const [additionalservicevalue, setAdditionaservicevalue] = useState("");
   const router = useRouter();
-  const disableBtn = !additionalservice;
+  const disableBtn = !additionalservice || !additionalservicevalue;
   const closeModal = useRef(null);
 
   const refreshConfigurations = () => {
@@ -22,7 +23,7 @@ const AdditionalServicesModal = () => {
   }, [configurations]);
   const handleSave = (e) => {
     const payload = {
-      services: { [additionalservice]: false },
+      services: { label: additionalservice, value: false },
     };
     console.log(payload);
     dispatch(
@@ -43,16 +44,28 @@ const AdditionalServicesModal = () => {
           <div className="w-[80%] mx-auto text-left">
             <div className="flex justify-between items-center mb-6">
               <h2 className="font-bold text-2xl">Add Additional Service</h2>
-              <label htmlFor="additionalservices">
-                <XIcon className="w-6 cursor-pointer modal-button" />
+              <label
+                htmlFor="additionalservices"
+                className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none absolute right-6 top-6">
+                <XIcon className="w-4" />
               </label>
             </div>
-            <h3 className="font-semibold text-sm mb-2">Additional Service</h3>
+            <h3 className="font-semibold text-sm mb-2">Label</h3>
 
             <input
               placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
               onChange={(e) => setAdditionaservice(e.target.value)}
+            />
+
+            <h3 className="font-semibold text-sm mb-2">Value</h3>
+            <p className="mb-2 text-xs">Max 50 characters</p>
+
+            <input
+              placeholder=""
+              className="px-4 py-2 border border-black w-full mb-4 rounded-md"
+              maxLength={50}
+              onChange={(e) => setAdditionaservicevalue(e.target.value)}
             />
             <button
               className={`${

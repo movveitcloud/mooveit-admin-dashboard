@@ -10,7 +10,8 @@ const AddStorageFloorModal = () => {
   const closeModal = useRef(null);
   const [id, setId] = useState("");
   const [storagefloor, setStoragefloor] = useState("");
-  const disableBtn = !storagefloor;
+  const [storagefloorvalue, setStoragefloorvalue] = useState("");
+  const disableBtn = !storagefloor || !storagefloorvalue;
 
   const refreshConfigurations = () => {
     dispatch(getConfigurations());
@@ -21,7 +22,10 @@ const AddStorageFloorModal = () => {
   }, [configurations]);
   const handleSave = (e) => {
     const payload = {
-      storageFloor: storagefloor,
+      storageFloor: {
+        label: storagefloor,
+        value: storagefloorvalue,
+      },
     };
 
     dispatch(
@@ -42,16 +46,28 @@ const AddStorageFloorModal = () => {
           <div className="w-[80%] mx-auto text-left">
             <div className="flex justify-between items-center mb-6">
               <h2 className="font-bold text-2xl">Add Storage Floor</h2>
-              <label htmlFor="addstoragefloor">
-                <XIcon className="w-6 cursor-pointer modal-button" />
+              <label
+                htmlFor="addstoragefloor"
+                className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none absolute right-6 top-6">
+                <XIcon className="w-4" />
               </label>
             </div>
-            <h3 className="font-semibold text-sm mb-2">Storage Floor</h3>
+            <h3 className="font-semibold text-sm mb-2">Label</h3>
 
             <input
               placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
               onChange={(e) => setStoragefloor(e.target.value)}
+            />
+
+            <h3 className="font-semibold text-sm mb-2">Value</h3>
+            <p className="mb-2 text-xs">Max 50 characters</p>
+
+            <input
+              placeholder=""
+              className="px-4 py-2 border border-black w-full mb-4 rounded-md"
+              maxLength={50}
+              onChange={(e) => setStoragefloorvalue(e.target.value)}
             />
 
             <button
