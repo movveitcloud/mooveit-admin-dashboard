@@ -55,6 +55,16 @@ export const deleteAdmin = createAsyncThunk(
     }
   }
 );
+export const getSingleUser = createAsyncThunk("/admin/users/userId", async ({ id }, { rejectWithValue }) => {
+  try {
+    const response = await api.getSingleUser(id);
+    console.log(response.data);
+    return response.data;
+  } catch (err) {
+    errorPopUp({ msg: err.response.data.error });
+    return rejectWithValue(err.response.data);
+  }
+});
 
 const adminSlice = createSlice({
   name: "admin",
@@ -69,6 +79,8 @@ const adminSlice = createSlice({
     deleteAdminLoading: false,
     updatePassword: {},
     updatePasswordLoading: false,
+    singleListing: {},
+    singleListingLoading: false,
   },
   reducers: {
     filterAdmin: (state, action) => {
@@ -120,6 +132,16 @@ const adminSlice = createSlice({
     },
     [updatePassword.rejected]: (state, action) => {
       state.updatePasswordLoading = false;
+    },
+    [getSingleUser.pending]: (state) => {
+      state.singleUserLoading = true;
+    },
+    [getSingleUser.fulfilled]: (state, action) => {
+      state.singleUserLoading = false;
+      state.singleUser = action.payload.data;
+    },
+    [getSingleUser.rejected]: (state, action) => {
+      state.singleUserLoading = false;
     },
   },
 });

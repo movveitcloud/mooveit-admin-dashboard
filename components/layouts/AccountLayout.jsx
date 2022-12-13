@@ -1,8 +1,12 @@
 import { useSelector } from "react-redux";
 import { MailIcon, DotsVerticalIcon, EyeIcon, TrashIcon } from "@heroicons/react/outline";
+import { useRouter } from "next/router";
 
 const AccountLayout = ({ name }) => {
   const { filteredUsers } = useSelector((state) => state.user);
+  const router = useRouter();
+
+  const view = (_id, role) => role === "partner" && router.push(`/accounts/${_id}`);
 
   return (
     <div className="">
@@ -20,9 +24,9 @@ const AccountLayout = ({ name }) => {
           </thead>
           <tbody className="w-full">
             {filteredUsers?.map(
-              ({ User, firstName, lastName, email, role, isVerified }, index) =>
+              ({ User, firstName, lastName, email, role, isVerified, _id }, index) =>
                 role === name && (
-                  <tr className="capitalize cursor-pointer border" key={index}>
+                  <tr className="capitalize cursor-pointer border" key={index} onClick={() => view(_id, role)}>
                     <td className=" w-[25%]  p-4 ">
                       <div className="flex justify-start items-center">
                         <p className="text-sm">
