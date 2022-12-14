@@ -59,16 +59,17 @@ const VerifyParnerModal = () => {
             <input
               placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
-              onChange={(e) => setDocumenttype(e.target.value)}
+              value="Drivers License"
+              // onChange={(e) => setDocumenttype(e.target.value)}
             />
-            <h3 className="font-semibold text-sm mb-2">Value</h3>
-            <p className="mb-2 text-xs">Max 50 characters</p>
+            <div className="h-[150px] md:h-[200px]">
+              <img src="/drivers-license.png" alt="Uploaded Document" className="h-full" />
+            </div>
 
             <button
               className={`${
                 uploadConfigurationLoading && "loading"
-              } btn  w-full disabled:bg-[#DDDDDD] disabled:text-white cursor-pointer bg-black text-white  mt-6 `}
-              disabled={disableBtn}
+              } btn  w-full  cursor-pointer bg-black text-white  mt-6 `}
               onClick={handleSave}>
               {uploadConfigurationLoading ? "" : "VERIFY ACCOUNT"}
             </button>

@@ -82,7 +82,7 @@ const View = () => {
               />
               <Services delivery={singleListing?.delivery} packing={singleListing?.packing} />
             </>
-            <>
+            {/* <>
               <Dimension storageSize={getValue({ options: storageSize, key: List?.storageSize })} />
               <Media images={singleListing?.media} />
               <Description storageTitle={List?.storageTitle} description={List?.description} />
@@ -102,9 +102,9 @@ const View = () => {
             <Pricing
               hourlyRate={List?.hourlyRate ? `$${List.hourlyRate}` : "N/A"}
               monthlyRate={List?.monthlyRate ? `$${List.monthlyRate}` : "N/A"}
-            />
+            /> */}
 
-            {singleUser?.isAdminVerified !== true && (
+            {singleUser?.isAdminVerified !== true ? (
               <div className="flex justify-end">
                 <div className="flex gap-4">
                   {/* <button
@@ -116,6 +116,16 @@ const View = () => {
                     htmlFor="verifypartner"
                     className={`btn btn-primary w-[175px] disabled:bg-[#ccc] disabled:text-primary hover:w-[180px]`}>
                     Verify
+                  </label>
+                </div>
+              </div>
+            ) : (
+              <div className="flex justify-end">
+                <div className="flex gap-4">
+                  <label
+                    htmlFor="disverifypartner"
+                    className={`btn btn-primary w-[175px] disabled:bg-[#ccc] disabled:text-primary hover:w-[180px]`}>
+                    Disverify
                   </label>
                 </div>
               </div>
