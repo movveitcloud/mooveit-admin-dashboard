@@ -23,6 +23,7 @@ export const disapproveListing = ({ payload, id }) => API.patch(`/admin/listings
 
 //USERS
 export const getUsers = () => API.get("/admin/users");
+export const getSingleUser = (id) => API.get(`/admin/users/${id}`);
 
 //CONFIGURATIONS
 export const getConfigurations = () => API.get("/admin/configurations");
