@@ -73,13 +73,7 @@ export const dashboardNavLinks = [
     icon: <UserIcon className="w-full" />,
     iconActive: <UserIconSolid className="w-full" />,
   },
-  {
-    name: "Verification",
-    path: "/verification",
-    title: "Verification",
-    icon: <BadgeCheckIcon className="w-full" />,
-    iconActive: <BadgeCheckIconSolid className="w-full" />,
-  },
+
   {
     name: "Configurations",
     path: "/configurations",

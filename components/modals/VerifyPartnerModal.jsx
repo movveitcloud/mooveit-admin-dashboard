@@ -1,43 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/router";
-import { uploadConfiguration, getConfigurations } from "../../redux/features/configurations.slice";
+import { getUsers, verifyUser } from "../../redux/features/users.slice";
 import { XIcon } from "@heroicons/react/outline";
 
-const VerifyParnerModal = () => {
-  const { configurations, uploadConfigurationLoading } = useSelector((state) => state.configuration);
+const VerifyParnerModal = ({ isAdminVerified, Id }) => {
   const dispatch = useDispatch();
-  const [id, setId] = useState("");
-  const [documenttype, setDocumenttype] = useState("");
-  const [storagetypevalue, setStoragetypevalue] = useState("");
-  const router = useRouter();
-  const disableBtn = !documenttype || !storagetypevalue;
   const closeModal = useRef(null);
-  const { updateConfigurationLoading } = useSelector((state) => state.admin);
-  const refreshConfigurations = () => {
-    dispatch(getConfigurations());
+  const { verifyUserLoading } = useSelector((state) => state.user);
+  const refreshUsers = () => {
+    dispatch(getUsers());
   };
 
-  useEffect(() => {
-    configurations?.map(({ _id }) => setId(_id));
-  }, [configurations]);
-  // console.log(configurations);
-  const handleSave = (e) => {
-    const payload = {
-      storageType: {
-        label: storagetype,
-        value: storagetypevalue,
-      },
-    };
-
-    dispatch(
-      uploadConfiguration({
-        id: id,
-        payload: payload,
-        refreshConfigurations: refreshConfigurations,
-        closeModal: closeModal,
-      })
-    );
+  const handleVerify = () => {
+    const payload = { isAdminVerified: true };
+    dispatch(verifyUser({ id: Id, payload, refreshUsers, closeModal }));
+  };
+  const handleDisVerify = () => {
+    const payload = { isAdminVerified: false };
+    dispatch(verifyUser({ id: Id, payload, refreshUsers, closeModal }));
   };
 
   return (
@@ -54,29 +34,42 @@ const VerifyParnerModal = () => {
                 <XIcon className="w-4" />
               </label>
             </div>
-            <h3 className="font-semibold text-sm mb-2">Document Type</h3>
-
-            <input
-              placeholder=""
-              className="px-4 py-2 border border-black w-full mb-4 rounded-md"
-              value="Drivers License"
-              // onChange={(e) => setDocumenttype(e.target.value)}
-            />
-            <div className="h-[150px] md:h-[200px]">
-              <img src="/drivers-license.png" alt="Uploaded Document" className="h-full" />
+            <div className="flex justify-start mb-8 w-full">
+              <p className="text-start inline-block">
+                Are you sure you want to {isAdminVerified === true ? "disverify" : "verify"} this partner?
+              </p>
             </div>
 
-            <button
-              className={`${
-                uploadConfigurationLoading && "loading"
-              } btn  w-full  cursor-pointer bg-black text-white  mt-6 `}
-              onClick={handleSave}>
-              {uploadConfigurationLoading ? "" : "VERIFY ACCOUNT"}
-            </button>
+            <div className="flex justify-center text-sm">
+              <div className="flex gap-4">
+                <label className="btn btn-primary w-[100px] modal-button" htmlFor="verifypartner">
+                  Cancel
+                </label>
+                <p
+                  className={`${
+                    verifyUserLoading && "loading"
+                  } btn border-accent hover:bg-accent hover:border-accent w-[100px] text-black`}
+                  onClick={isAdminVerified === true ? handleDisVerify : handleVerify}>
+                  {verifyUserLoading ? "" : isAdminVerified === true ? <div>DISVERIFY</div> : <div>VERIFY</div>}
+                </p>
+              </div>
+            </div>
+
+            {/* <button
+              className={`${verifyUserLoading && "loading"} btn  w-full  cursor-pointer bg-black text-white  mt-6 `}
+              onClick={isAdminVerified === true ? handleDisVerify : handleVerify}>
+              {verifyUserLoading ? (
+                ""
+              ) : isAdminVerified === true ? (
+                <div>DISVERIFY ACCOUNT</div>
+              ) : (
+                <div>VERIFY ACCOUNT</div>
+              )}
+            </button> */}
           </div>
         </label>
       </label>
-      <label htmlFor="addfeaturetype" className="hidden" ref={closeModal} />
+      <label htmlFor="verifypartner" className="hidden" ref={closeModal} />
     </>
   );
 };

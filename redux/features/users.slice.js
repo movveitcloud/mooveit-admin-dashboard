@@ -11,6 +11,33 @@ export const getUsers = createAsyncThunk("/users", async ({}, { rejectWithValue 
     return rejectWithValue(err.response.data);
   }
 });
+export const getSingleUser = createAsyncThunk("/admin/users/userId", async ({ id }, { rejectWithValue }) => {
+  try {
+    const response = await api.getSingleUser(id);
+
+    return response.data;
+  } catch (err) {
+    errorPopUp({ msg: err.response.data.error });
+    return rejectWithValue(err.response.data);
+  }
+});
+export const verifyUser = createAsyncThunk(
+  "/admin/users/Id",
+  async ({ id, payload, closeModal, refreshUsers }, { rejectWithValue }) => {
+    try {
+      const response = await api.verifyUser({ id, payload });
+      console.log(response.data);
+      closeModal.current.click();
+      refreshUsers();
+      console.log(payload);
+
+      return response.data;
+    } catch (err) {
+      errorPopUp({ msg: err.response.data.error });
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 const userSlice = createSlice({
   name: "users",
@@ -19,6 +46,10 @@ const userSlice = createSlice({
     filteredUsers: [],
     loading: false,
     userLoading: false,
+    singleUser: {},
+    singleUserLoading: false,
+    verifyUser: {},
+    verifyUserLoading: false,
   },
 
   reducers: {
@@ -41,6 +72,26 @@ const userSlice = createSlice({
     },
     [getUsers.rejected]: (state, action) => {
       state.userLoading = false;
+    },
+    [getSingleUser.pending]: (state) => {
+      state.singleUserLoading = true;
+    },
+    [getSingleUser.fulfilled]: (state, action) => {
+      state.singleUserLoading = false;
+      state.singleUser = action.payload.data;
+    },
+    [getSingleUser.rejected]: (state, action) => {
+      state.singleUserLoading = false;
+    },
+    [verifyUser.pending]: (state) => {
+      state.verifyUserLoading = true;
+    },
+    [verifyUser.fulfilled]: (state, action) => {
+      state.verifyUserLoading = false;
+      state.verifyUser = action.payload.data;
+    },
+    [verifyUser.rejected]: (state, action) => {
+      state.verifyUserLoading = false;
     },
   },
 });
