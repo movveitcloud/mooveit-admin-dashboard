@@ -30,10 +30,11 @@ const VerifyParnerModal = ({ isAdminVerified, Id }) => {
               <h2 className="font-bold text-2xl">Account Verification</h2>
               <label
                 htmlFor="verifypartner"
-                className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none absolute right-6 top-6">
-                <XIcon className="w-4" />
+                className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none  ">
+                <XIcon className="w-4 " />
               </label>
             </div>
+
             <div className="flex justify-start mb-8 w-full">
               <p className="text-start inline-block">
                 Are you sure you want to {isAdminVerified === true ? "disverify" : "verify"} this partner?
@@ -50,7 +51,7 @@ const VerifyParnerModal = ({ isAdminVerified, Id }) => {
                     verifyUserLoading && "loading"
                   } btn border-accent hover:bg-accent hover:border-accent w-[100px] text-black`}
                   onClick={isAdminVerified === true ? handleDisVerify : handleVerify}>
-                  {verifyUserLoading ? "" : isAdminVerified === true ? <div>DISVERIFY</div> : <div>VERIFY</div>}
+                  {verifyUserLoading ? "" : isAdminVerified === true ? "DISVERIFY" : "VERIFY"}
                 </p>
               </div>
             </div>
