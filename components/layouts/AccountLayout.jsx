@@ -28,6 +28,7 @@ const AccountLayout = ({ name }) => {
               <th className="w-[20%] whitespace-nowrap text-start p-4">Email Address</th>
               <th className="w-[15%] whitespace-nowrap text-start p-4">Phone Number</th>
               <th className="w-[10%] whitespace-nowrap text-start p-4">Status</th>
+              <th className="w-[10%]"></th>
               {/* <th className="w-[10%] whitespace-nowrap text-start p-4">Last Active</th> */}
               <th className="w-[10%]"></th>
             </tr>
@@ -38,7 +39,8 @@ const AccountLayout = ({ name }) => {
                 role === name && (
                   <tr
                     key={index}
-                    className={`capitalize w-full  ${name === "partner" ? "cursor-pointer" : null} border`}>
+                    // className={`capitalize w-full  ${name === "partner" ? "cursor-pointer" : null} border`}>
+                    className="capitalize w-full border">
                     <td className=" w-[25%]  p-4 ">
                       <div className="flex justify-start items-center">
                         <p className="text-sm">
@@ -49,7 +51,7 @@ const AccountLayout = ({ name }) => {
 
                     <td className="w-[20%] p-4 text-sm ">{email}</td>
                     <td className="w-[15%] p-4 text-sm">08066198765</td>
-                    <td className="w-[10%] p-4 text-sm ">
+                    <td className="w-[10%] p-4 text-sm  ">
                       {isVerified === true ? (
                         <span className="bg-[#BBF7D0] text-[#11A13A] rounded-full  text-center items-center p-2 px-4">
                           Verified
@@ -60,11 +62,12 @@ const AccountLayout = ({ name }) => {
                         </span>
                       )}
                     </td>
-                    <td>
-                      {name === "partner" ? (
-                        isAdminVerified === true ? (
+
+                    {name === "partner" ? (
+                      isAdminVerified === true ? (
+                        <td className="w-[10%] p-4 text-sm cursor-pointer  ">
                           <div
-                            className=" "
+                            className=" flex justify-center"
                             onClick={() => {
                               verify.current.click();
                               setId(_id);
@@ -74,8 +77,11 @@ const AccountLayout = ({ name }) => {
                             }}>
                             <BadgeCheckIcon className="w-6 text-[#11A13A]" />
                           </div>
-                        ) : (
+                        </td>
+                      ) : (
+                        <td className="w-[10%] p-4 text-sm cursor-pointer  ">
                           <div
+                            className=" flex justify-center"
                             onClick={() => {
                               verify.current.click();
                               setId(_id);
@@ -83,14 +89,14 @@ const AccountLayout = ({ name }) => {
                             }}>
                             <BadgeCheckIcon className="w-6 text-[#F12C2C]" />
                           </div>
-                        )
-                      ) : null}
-                    </td>
+                        </td>
+                      )
+                    ) : null}
 
                     <td className="pr-4  w-[10%]      ">
                       {name === "customer" ? (
-                        <div tabIndex="0" className="dropdown dropdown-left top-1 cursor-pointer">
-                          <DotsVerticalIcon className="w-4  " />
+                        <div tabIndex="0" className="dropdown dropdown-left top-1 cursor-pointer p-4">
+                          <DotsVerticalIcon className="w-4   " />
 
                           <div
                             tabIndex="0"
@@ -106,8 +112,10 @@ const AccountLayout = ({ name }) => {
                           </div>
                         </div>
                       ) : (
-                        <div tabIndex="0" className="dropdown dropdown-left dropdown-down z-10 top-1">
-                          <DotsVerticalIcon className="w-4  " />
+                        <div
+                          tabIndex="0"
+                          className="dropdown dropdown-left dropdown-down z-10 top-1 cursor-pointer  p-4 ">
+                          <DotsVerticalIcon className="w-4   " />
 
                           <div
                             tabIndex="0"
