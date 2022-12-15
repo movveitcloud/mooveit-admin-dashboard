@@ -1,17 +1,26 @@
 import { useSelector } from "react-redux";
-import { MailIcon, DotsVerticalIcon, EyeIcon, TrashIcon } from "@heroicons/react/outline";
+import { MailIcon, DotsVerticalIcon, EyeIcon, TrashIcon, BadgeCheckIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { getSingleUser } from "../../redux/features/users.slice";
 import VerifyParnerModal from "../modals/VerifyPartnerModal";
 
 const AccountLayout = ({ name }) => {
   const { filteredUsers } = useSelector((state) => state.user);
   const router = useRouter();
-
+  const [Id, setId] = useState("");
+  const [isAdminVerified, setIsAdminVerified] = useState("");
+  const verify = useRef();
   const view = (_id, role) => role === "partner" && router.push(`/accounts/${_id}`);
+  const dispatch = useDispatch();
+  const { singleUser } = useSelector((state) => state.user);
 
   return (
     <div className="">
       <div className="rounded-lg overflow-x-auto">
+        <label htmlFor={name === "partner" ? "verifypartner" : null} ref={verify} />
         <table className=" w-full p-4 mb-8 ">
           <thead className="bg-white text-black-50 border rounded-md p-6 ">
             <tr className="p-4 ">
@@ -28,10 +37,8 @@ const AccountLayout = ({ name }) => {
               ({ User, firstName, lastName, email, role, isVerified, _id, isAdminVerified }, index) =>
                 role === name && (
                   <tr
-                    className={`capitalize ${name === "partner" ? "cursor-pointer" : null} border`}
                     key={index}
-                    onClick={() => view(_id, role)}>
-                    {/* <tr className="capitalize  border" key={index}> */}
+                    className={`capitalize w-full  ${name === "partner" ? "cursor-pointer" : null} border`}>
                     <td className=" w-[25%]  p-4 ">
                       <div className="flex justify-start items-center">
                         <p className="text-sm">
@@ -53,28 +60,41 @@ const AccountLayout = ({ name }) => {
                         </span>
                       )}
                     </td>
-                    {/* <td>
+                    <td>
                       {name === "partner" ? (
                         isAdminVerified === true ? (
-                          <label htmlFor="disverifypartner">
-                            <div className="cursor-pointer text-sm text-[#F12C2C]">DISVERIFY</div>
-                          </label>
+                          <div
+                            className=" "
+                            onClick={() => {
+                              verify.current.click();
+                              setId(_id);
+                              setIsAdminVerified(isAdminVerified);
+                              // dispatch(getSingleUser({ id: _id }));
+                              // console.log(singleUser);
+                            }}>
+                            <BadgeCheckIcon className="w-6 text-[#11A13A]" />
+                          </div>
                         ) : (
-                          <label htmlFor="verifypartner">
-                            <div className="cursor-pointer text-sm text-[#11A13A]">VERIFY</div>
-                          </label>
+                          <div
+                            onClick={() => {
+                              verify.current.click();
+                              setId(_id);
+                              setIsAdminVerified(isAdminVerified);
+                            }}>
+                            <BadgeCheckIcon className="w-6 text-[#F12C2C]" />
+                          </div>
                         )
                       ) : null}
-                    </td> */}
-                    {/* <td className="w-[10%] p-4 text-sm">Last</td> */}
+                    </td>
+
                     <td className="pr-4  w-[10%]      ">
                       {name === "customer" ? (
-                        <div tabIndex="0" className="dropdown dropdown-left top-1">
+                        <div tabIndex="0" className="dropdown dropdown-left top-1 cursor-pointer">
                           <DotsVerticalIcon className="w-4  " />
 
                           <div
                             tabIndex="0"
-                            className="  bg-white rounded-sm shadow w-auto p-4 px-4 dropdown-content menu   ">
+                            className=" cursor-pointer bg-white rounded-sm shadow w-auto p-4 px-4 dropdown-content menu   ">
                             <div className="text-[12px] flex whitespace-nowrap ">
                               <EyeIcon className="w-4 mr-4 mb-4 " />
                               <p>View History</p>
@@ -108,14 +128,13 @@ const AccountLayout = ({ name }) => {
                         </div>
                       )}
                     </td>
-                    <VerifyParnerModal id={_id} />
                   </tr>
                 )
             )}
           </tbody>
         </table>
       </div>
-
+      <VerifyParnerModal Id={Id} isAdminVerified={isAdminVerified} />
       {/* <div className="text-center text-[#959595]   flex justify-center items-center mb-6  ">
         <div className="flex justify-between w-full  lg:w-1/3 md:w-2/3 p-2 px-4 ">
           <div className="flex">

@@ -24,6 +24,7 @@ export const disapproveListing = ({ payload, id }) => API.patch(`/admin/listings
 //USERS
 export const getUsers = () => API.get("/admin/users");
 export const getSingleUser = (id) => API.get(`/admin/users/${id}`);
+export const verifyUser = ({ payload, id }) => API.patch(`/admin/users/${id}`, payload);
 
 //CONFIGURATIONS
 export const getConfigurations = () => API.get("/admin/configurations");
