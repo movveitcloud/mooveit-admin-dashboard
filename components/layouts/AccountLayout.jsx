@@ -27,7 +27,7 @@ const AccountLayout = ({ name }) => {
               <th className="items-center ml-6 my-4 text-start w-[25%] px-4">Name</th>
               <th className="w-[20%] whitespace-nowrap text-start p-4">Email Address</th>
               <th className="w-[15%] whitespace-nowrap text-start p-4">Phone Number</th>
-              <th className="w-[10%] whitespace-nowrap text-start p-4">Status</th>
+              <th className="w-[10%] whitespace-nowrap  p-4 text-start">Status</th>
               <th className="w-[10%]"></th>
               {/* <th className="w-[10%] whitespace-nowrap text-start p-4">Last Active</th> */}
               <th className="w-[10%]"></th>
@@ -48,7 +48,7 @@ const AccountLayout = ({ name }) => {
 
                     <td className="w-[20%] p-4 text-sm ">{email}</td>
                     <td className="w-[15%] p-4 text-sm">08066198765</td>
-                    <td className="w-[10%] p-4 text-sm ">
+                    <td className="w-[10%] p-4 text-sm  ">
                       <span
                         className={`${
                           isAdminVerified || (name == "customer" && isVerified)
@@ -59,8 +59,6 @@ const AccountLayout = ({ name }) => {
                           verify.current.click();
                           setId(_id);
                           setIsAdminVerified(isAdminVerified);
-                          // dispatch(getSingleUser({ id: _id }));
-                          // console.log(singleUser);
                         }}>
                         {name == "partner"
                           ? isAdminVerified

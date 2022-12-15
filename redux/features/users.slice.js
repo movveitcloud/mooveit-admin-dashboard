@@ -26,10 +26,9 @@ export const verifyUser = createAsyncThunk(
   async ({ id, payload, closeModal, refreshUsers }, { rejectWithValue }) => {
     try {
       const response = await api.verifyUser({ id, payload });
-      console.log(response.data);
+      // console.log(response.data);
       closeModal.current.click();
       refreshUsers();
-      console.log(payload);
 
       return response.data;
     } catch (err) {
