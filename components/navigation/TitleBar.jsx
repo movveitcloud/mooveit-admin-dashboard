@@ -6,7 +6,7 @@ const TitleBar = ({ pageTitle, pathname, menuOpen, setMenuOpen }) => {
   return (
     <div className="py-5 px-4 lg:px-8 lg:py-5 w-full border-b">
       <div className="flex justify-between items-center gap-4">
-        <h1 className="font-semibold text-xl">{` ${pageTitle}`}</h1>
+        <h1 className="font-semibold text-xl">{`Manage ${pageTitle}`}</h1>
         <div className="flex items-center gap-6">
           <div className="justify-center items-center border border-[#FEF08A] rounded p-3 cursor-pointer hidden sm:flex">
             <BellIcon className="w-6 text-[#222222]" />
