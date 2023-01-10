@@ -1,59 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { getSingleUser } from "../../redux/features/admin.slice";
+import { getSingleUser } from "../../redux/features/users.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { PulseLoader } from "react-spinners";
 import { motion } from "framer-motion";
 import { ArrowNarrowLeftIcon } from "@heroicons/react/outline";
-import { getValue, getValueArray } from "../../helpers/utils";
-import {
-  howAccessListing,
-  storageFeatures,
-  whenAccessListing,
-  spaceDuration,
-  arrivalNoticeOpts,
-  storageFloors,
-  storageKinds,
-  storageSize,
-} from "../../helpers/data";
-import {
-  Access,
-  Address,
-  BookingDetails,
-  // Calendar,
-  DashboardLayout,
-  Description,
-  Dimension,
-  Media,
-  Pricing,
-  Services,
-  Type,
-  VerifyPartnerModal,
-} from "../../components";
+
+import { Name, Email, DashboardLayout, VerifyPartnerModal, Document, Vat } from "../../components";
 
 const View = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const query = router.query.id;
   const { singleListing } = useSelector((state) => state.listing);
-  const { singleUser, singleUserLoading } = useSelector((state) => state.admin);
-  const [List, setList] = useState({});
-  const [option, setOption] = useState(false);
-
-  const id = query;
+  const { singleUser, singleUserLoading } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (query) {
       dispatch(getSingleUser({ id: query }));
     }
   }, [query]);
-  console.log(singleUser);
-  useEffect(() => {
-    if (singleListing) {
-      setList(singleListing);
-      singleListing.status === "pending" ? setOption(true) : "";
-    }
-  }, [singleListing]);
 
   return (
     <DashboardLayout>
@@ -74,63 +40,22 @@ const View = () => {
           </div>
           <div className="w-[80%] mx-auto">
             <>
-              <Address Address={List?.address} />
-              <Type
-                storageType={getValue({ options: storageKinds, key: List?.storageType })}
-                storageFloor={getValue({ options: storageFloors, key: List?.storageFloor })}
-                storageFeatures={getValueArray({ options: storageFeatures, key: List?.storageFeatures })}
-              />
-              <Services delivery={singleListing?.delivery} packing={singleListing?.packing} />
+              <Name firstName={singleUser?.firstName} lastName={singleUser?.lastName} />
+              <Email Email={singleUser?.email} />
+              <Vat Vat={singleUser?.isVatRegistered} />
+              <Document />
             </>
-            {/* <>
-              <Dimension storageSize={getValue({ options: storageSize, key: List?.storageSize })} />
-              <Media images={singleListing?.media} />
-              <Description storageTitle={List?.storageTitle} description={List?.description} />
-            </>
-            <>
-              <Access
-                storageAccessPeriod={getValue({ options: whenAccessListing, key: List?.storageAccessPeriod })}
-                storageAccessType={getValue({ options: howAccessListing, key: List?.storageAccessType })}
-                parkingInstruction={List?.parkingInstruction ? List?.parkingInstruction : "N/A"}
-                parkingPermit={List?.parkingPermit ? "Available" : "N/A"}
-              />
-              <BookingDetails
-                bookingDuration={getValue({ options: spaceDuration, key: List?.bookingDuration })}
-                bookingNotice={getValue({ options: arrivalNoticeOpts, key: List?.bookingNotice })}
-              />
-            </>
-            <Pricing
-              hourlyRate={List?.hourlyRate ? `$${List.hourlyRate}` : "N/A"}
-              monthlyRate={List?.monthlyRate ? `$${List.monthlyRate}` : "N/A"}
-            /> */}
 
-            {singleUser?.isAdminVerified !== true ? (
-              <div className="flex justify-end">
-                <div className="flex gap-4">
-                  {/* <button
-                  className="btn btn-primary w-[175px] disabled:bg-[#ccc] disabled:text-primary"
-                  onClick={approve}>
-                  Approve
-                </button> */}
-                  <label
-                    htmlFor="verifypartner"
-                    className={`btn btn-primary w-[175px] disabled:bg-[#ccc] disabled:text-primary hover:w-[180px]`}>
-                    Verify
-                  </label>
-                </div>
+            <div className="flex justify-end">
+              <div className="flex gap-4">
+                <label
+                  htmlFor="verifypartner"
+                  className={`btn btn-primary w-[175px] disabled:bg-[#ccc] disabled:text-primary hover:w-[180px]`}>
+                  {singleUser?.isAdminVerified !== true ? "Verify" : "Disverify"}
+                </label>
               </div>
-            ) : (
-              <div className="flex justify-end">
-                <div className="flex gap-4">
-                  <label
-                    htmlFor="disverifypartner"
-                    className={`btn btn-primary w-[175px] disabled:bg-[#ccc] disabled:text-primary hover:w-[180px]`}>
-                    Disverify
-                  </label>
-                </div>
-              </div>
-            )}
-            <VerifyPartnerModal id={id} />
+            </div>
+            <VerifyPartnerModal Id={singleUser?._id} isAdminVerified={singleUser?.isAdminVerified} query={query} />
           </div>
         </motion.div>
       )}

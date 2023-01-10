@@ -1,14 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers, verifyUser } from "../../redux/features/users.slice";
+import { getSingleUser } from "../../redux/features/users.slice";
 import { XIcon } from "@heroicons/react/outline";
+import { useRouter } from "next/router";
 
-const VerifyParnerModal = ({ isAdminVerified, Id }) => {
+const VerifyParnerModal = ({ isAdminVerified, Id, query }) => {
   const dispatch = useDispatch();
   const closeModal = useRef(null);
   const { verifyUserLoading } = useSelector((state) => state.user);
   const refreshUsers = () => {
-    dispatch(getUsers());
+    if (query) {
+      dispatch(getSingleUser({ id: query }));
+    }
   };
 
   const handleVerify = () => {

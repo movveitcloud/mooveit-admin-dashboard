@@ -27,9 +27,11 @@ export const getSingleUser = (id) => API.get(`/admin/users/${id}`);
 export const verifyUser = ({ payload, id }) => API.patch(`/admin/users/${id}`, payload);
 
 //CONFIGURATIONS
-export const getConfigurations = () => API.get("/admin/configurations");
+export const getConfigurations = (config) => API.get(`/configurations/${config}`);
 export const uploadConfigurationImage = ({ id, payload }) => API.patch(`/admin/configurations/${id}/upload`, payload);
-export const uploadConfiguration = ({ id, payload }) => API.patch(`/admin/configurations/${id}`, payload);
+export const createConfiguration = ({ config, payload }) => API.post(`configurations/${config}`, payload);
+export const updateConfiguration = ({ config, id, payload }) => API.patch(`/configurations/${config}/${id}`, payload);
+export const deleteConfiguration = ({ config, id }) => API.delete(`/configurations/${config}/${id}`);
 
 //ADMIN
 export const createAdmin = ({ payload }) => API.post("/admin/register", payload);

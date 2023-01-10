@@ -26,7 +26,7 @@ const AccountLayout = ({ name }) => {
             <tr className="p-4 ">
               <th className="items-center ml-6 my-4 text-start w-[25%] px-4">Name</th>
               <th className="w-[20%] whitespace-nowrap text-start p-4">Email Address</th>
-              <th className="w-[15%] whitespace-nowrap text-start p-4">Phone Number</th>
+              {/* <th className="w-[15%] whitespace-nowrap text-start p-4">Phone Number</th> */}
               <th className="w-[10%] whitespace-nowrap  p-4 text-start">Status</th>
               <th className="w-[10%]"></th>
               {/* <th className="w-[10%] whitespace-nowrap text-start p-4">Last Active</th> */}
@@ -47,7 +47,7 @@ const AccountLayout = ({ name }) => {
                     </td>
 
                     <td className="w-[20%] p-4 text-sm ">{email}</td>
-                    <td className="w-[15%] p-4 text-sm">08066198765</td>
+                    {/* <td className="w-[15%] p-4 text-sm">08066198765</td> */}
                     <td className="w-[10%] p-4 text-sm  ">
                       <span
                         className={`${
@@ -55,11 +55,12 @@ const AccountLayout = ({ name }) => {
                             ? "bg-[#BBF7D0] text-[#11A13A]"
                             : "bg-[#f9aaaa] text-[#F12C2C]"
                         } rounded-full  text-center items-center p-2 px-4 w-full cursor-pointer`}
-                        onClick={() => {
-                          verify.current.click();
-                          setId(_id);
-                          setIsAdminVerified(isAdminVerified);
-                        }}>
+                        onClick={
+                          () => view(_id, role)
+                          // verify.current.click();
+                          // setId(_id);
+                          // setIsAdminVerified(isAdminVerified);
+                        }>
                         {name == "partner"
                           ? isAdminVerified
                             ? "Verified"

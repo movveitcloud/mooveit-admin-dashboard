@@ -1,39 +1,67 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { uploadConfiguration, getConfigurations } from "../../redux/features/configurations.slice";
+import { createConfiguration, updateConfigurations, getServices } from "../../redux/features/configurations.slice";
 import { XIcon } from "@heroicons/react/outline";
 
-const AdditionalServicesModal = () => {
-  const { configurations, uploadConfigurationLoading } = useSelector((state) => state.configuration);
+const AdditionalServicesModal = ({ details }) => {
+  const { createConfigurationLoading, updateConfigurationLoading } = useSelector((state) => state.configuration);
   const dispatch = useDispatch();
-  const [id, setId] = useState("");
-  const [additionalservice, setAdditionaservice] = useState("");
-  const [additionalservicevalue, setAdditionaservicevalue] = useState("");
+  const [identification, setIdentification] = useState("");
   const router = useRouter();
-  const disableBtn = !additionalservice || !additionalservicevalue;
+  const initialState = { label: "", value: "" };
+  const [data, setData] = useState(initialState);
+  const disableBtn = !data.value || !data.label;
+  const [info, setInfo] = useState([]);
   const closeModal = useRef(null);
 
   const refreshConfigurations = () => {
-    dispatch(getConfigurations());
+    dispatch(getServices({ config: "services" }));
   };
 
+  const fomat = [];
   useEffect(() => {
-    configurations?.map(({ _id }) => setId(_id));
-  }, [configurations]);
+    if (details) {
+      fomat = details;
+      setInfo(details);
+      details?.map(({ label, value, _id }) => {
+        setData({ label: label, value: value === false ? "false" : "true" });
+        setIdentification(_id);
+      });
+    }
+  }, [details]);
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setData({ ...data, [name]: value });
+  };
+
   const handleSave = (e) => {
-    const payload = {
-      services: { label: additionalservice, value: false },
-    };
-    console.log(payload);
-    dispatch(
-      uploadConfiguration({
-        id: id,
-        payload: payload,
-        refreshConfigurations: refreshConfigurations,
-        closeModal: closeModal,
-      })
-    );
+    const payload = { ...data };
+
+    info.length !== 0
+      ? dispatch(
+          updateConfigurations({
+            config: "services",
+            id: identification,
+            payload: payload,
+            refreshConfigurations: refreshConfigurations,
+            closeModal: closeModal,
+            setData: setData,
+            data: data,
+            initialState: initialState,
+            setInfo,
+          })
+        )
+      : dispatch(
+          createConfiguration({
+            config: "services",
+            payload: payload,
+            refreshConfigurations: refreshConfigurations,
+            closeModal: closeModal,
+            setData,
+            initialState,
+          })
+        );
   };
 
   return (
@@ -46,7 +74,11 @@ const AdditionalServicesModal = () => {
               <h2 className="font-bold text-2xl">Add Additional Service</h2>
               <label
                 htmlFor="additionalservices"
-                className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none absolute right-6 top-6">
+                className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none "
+                onClick={() => {
+                  setInfo([]);
+                  setData(initialState);
+                }}>
                 <XIcon className="w-4" />
               </label>
             </div>
@@ -55,7 +87,9 @@ const AdditionalServicesModal = () => {
             <input
               placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
-              onChange={(e) => setAdditionaservice(e.target.value)}
+              name="label"
+              onChange={handleChange}
+              value={data.label}
             />
 
             <h3 className="font-semibold text-sm mb-2">Value</h3>
@@ -64,16 +98,24 @@ const AdditionalServicesModal = () => {
             <input
               placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
+              name="value"
+              onChange={handleChange}
+              value={data.value}
               maxLength={50}
-              onChange={(e) => setAdditionaservicevalue(e.target.value)}
             />
             <button
               className={`${
-                uploadConfigurationLoading && "loading"
+                (createConfigurationLoading && "loading") || (updateConfigurationLoading && "loading")
               } btn  w-full disabled:bg-[#DDDDDD] disabled:text-white cursor-pointer bg-black text-white  mt-6 `}
               disabled={disableBtn}
               onClick={handleSave}>
-              {uploadConfigurationLoading ? "" : "SAVE"}
+              {info?.length !== 0
+                ? updateConfigurationLoading
+                  ? ""
+                  : "EDIT"
+                : createConfigurationLoading
+                ? ""
+                : "SAVE"}
             </button>
           </div>
         </label>

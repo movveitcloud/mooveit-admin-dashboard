@@ -55,6 +55,7 @@ export { default as AddAdminModal } from "./modals/AddAdminModal";
 export { default as UpdateAdminModal } from "./modals/UpdateAdminModal";
 export { default as DeleteAdminModal } from "./modals/DeleteAdminModal";
 export { default as VerifyPartnerModal } from "./modals/VerifyPartnerModal";
+export { default as DeleteConfigModal } from "./modals/DeleteConfigModal";
 
 //CONFIGURATIONS
 export { default as StorageFeatures } from "./dashboard/Configurations/StorageFeatures";
@@ -67,3 +68,9 @@ export { default as StorageFloor } from "./dashboard/Configurations/StorageFloor
 //ADMIN
 export { default as Admins } from "./dashboard/Admin/Admins";
 export { default as SuperAdmins } from "./dashboard/Admin/SuperAdmins";
+
+//ACCOUNT
+export { default as Name } from "./dashboard/Account/Name";
+export { default as Email } from "./dashboard/Account/Email";
+export { default as Vat } from "./dashboard/Account/Vat";
+export { default as Document } from "./dashboard/Account/Document";

@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getSingleListing, disapproveListing, approveListing } from "../../redux/features/listings.slice";
-import { getConfigurations } from "../../redux/features/configurations.slice";
+import {
+  getConfigurations,
+  getFeatures,
+  getFloor,
+  getSize,
+  getServices,
+  getType,
+  getAccess,
+} from "../../redux/features/configurations.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { PulseLoader } from "react-spinners";
 import { motion } from "framer-motion";
@@ -26,9 +34,15 @@ import { DashboardLayout } from "../../components";
 const Configurations = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { configurations, configurationLoading } = useSelector((state) => state.configuration);
+  const { configurations, configurationLoading, featuresLoading } = useSelector((state) => state.configuration);
   useEffect(() => {
-    dispatch(getConfigurations());
+    dispatch(getConfigurations({ config: "storage-features" }));
+    dispatch(getFeatures({ config: "storage-features" }));
+    dispatch(getFloor({ config: "storage-floor" }));
+    dispatch(getSize({ config: "storage-size" }));
+    dispatch(getServices({ config: "services" }));
+    dispatch(getAccess({ config: "storage-access-type" }));
+    dispatch(getType({ config: "storage-type" }));
   }, []);
 
   // console.log(configurations);
