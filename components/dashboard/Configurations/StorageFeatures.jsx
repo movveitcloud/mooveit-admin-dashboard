@@ -21,17 +21,17 @@ const StorageFeatures = () => {
   // console.log(features);
   return (
     <Accordion title="Storage Features">
-      <div className="flex justify-between items-center mb-6">
-        <p>Add a storage feature </p>
+      <div className="md:flex justify-between items-center mb-6 text-center">
+        <p className="text-sm md:text-base hidden md:inline">Add a storage feature </p>
         <label
           htmlFor="addfeature"
-          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent w-[175px]`}>
-          Add a Feature
+          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent text-[12px] md:text-[14px]  w-[175px]`}>
+          ADD FEATURE
         </label>
       </div>
       {/* {featuresLoading} */}
       {features?.length === 0 ? (
-        <div className=" text-center font-semibold">No storage features at this time</div>
+        <div className=" text-center font-semibold text-sm md:text-base">No storage features at this time</div>
       ) : (
         features?.map(({ label, image, _id }, indx) => (
           <div
@@ -48,12 +48,12 @@ const StorageFeatures = () => {
                   )}
                 </div>
               </span>
-              <p className=" uppercase">{label}</p>
+              <p className=" uppercase text-[12px] md:text-[14px]">{label}</p>
             </div>
             <div className="flex items-center gap-6">
               <label htmlFor="addfeature" className="flex items-center cursor-pointer " onClick={() => edit(_id)}>
                 <PencilAltIcon className="text-primary w-4 mr-2 " />
-                <p>Edit</p>
+                <p className="">Edit</p>
               </label>
               <label
                 htmlFor={_id}

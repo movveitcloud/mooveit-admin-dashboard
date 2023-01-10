@@ -15,17 +15,17 @@ const StorageAccess = () => {
   };
   return (
     <Accordion title="Storage Access">
-      <div className="flex justify-between items-center mb-6">
-        <p>Add an access method </p>
+      <div className="md:flex justify-between items-center mb-6 text-center">
+        <p className="text-sm md:text-base hidden md:inline">Add an access method </p>
         <label
           htmlFor="addfeatureaccess"
-          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent w-fit`}>
+          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent w-fit text-[12px] md:text-[14px] `}>
           ADD ACCESS METHOD
         </label>
       </div>
 
       {access?.length === 0 ? (
-        <div className=" text-center font-semibold">No storage access type at this time</div>
+        <div className=" text-center font-semibold text-sm md:text-base">No storage access type at this time</div>
       ) : (
         access?.map(({ label, _id }, indx) => (
           <div

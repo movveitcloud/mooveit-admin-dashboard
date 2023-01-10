@@ -16,18 +16,19 @@ const StorageType = () => {
 
   return (
     <Accordion title="Storage Type">
-      <div className="flex justify-between items-center mb-6">
-        <p>Add a storage type </p>
+      <div className="md:flex justify-between items-center mb-6 text-center">
+        <p className="text-sm md:text-base hidden md:inline ">Add a storage type </p>
         <label
           htmlFor="addfeaturetype"
-          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent w-[175px]`}>
+          // className={`py-2 px-4 md:px-5 text-center md:py-3 text-black btn-outline btn-primary border border-accent hover:btn-accent text-sm  rounded-md  md:text-[16px]  w-[150px] md:w-[175px]`}>
+          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent text-[12px] md:text-[14px] w-[175px]`}>
           ADD TYPE
         </label>
       </div>
 
       <div>
         {type?.length === 0 ? (
-          <div className=" text-center font-semibold">No storage type at this time</div>
+          <div className=" text-center font-semibold text-sm md:text-base">No storage type at this time</div>
         ) : (
           type?.map(({ label, _id }, indx) => (
             <div

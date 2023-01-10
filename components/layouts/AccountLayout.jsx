@@ -25,12 +25,12 @@ const AccountLayout = ({ name }) => {
           <thead className="bg-white text-black-50 border rounded-md p-6 ">
             <tr className="p-4 ">
               <th className="items-center ml-6 my-4 text-start w-[25%] px-4">Name</th>
-              <th className="w-[20%] whitespace-nowrap text-start p-4">Email Address</th>
+              <th className="w-[30%] whitespace-nowrap text-start p-4">Email Address</th>
               {/* <th className="w-[15%] whitespace-nowrap text-start p-4">Phone Number</th> */}
-              <th className="w-[10%] whitespace-nowrap  p-4 text-start">Status</th>
-              <th className="w-[10%]"></th>
+              <th className="w-[35%] whitespace-nowrap  p-4 text-start">Status</th>
+              <th className="w-[20%]"></th>
               {/* <th className="w-[10%] whitespace-nowrap text-start p-4">Last Active</th> */}
-              <th className="w-[10%]"></th>
+              <th className="w-[15%]"></th>
             </tr>
           </thead>
           <tbody className="w-full">
@@ -38,7 +38,7 @@ const AccountLayout = ({ name }) => {
               ({ User, firstName, lastName, email, role, isVerified, _id, isAdminVerified }, index) =>
                 role === name && (
                   <tr key={index} className="capitalize w-full border">
-                    <td className=" w-[25%]  p-4 ">
+                    <td className=" w-[30%]  p-4 ">
                       <div className="flex justify-start items-center">
                         <p className="text-sm">
                           {firstName} {lastName}
@@ -46,9 +46,9 @@ const AccountLayout = ({ name }) => {
                       </div>
                     </td>
 
-                    <td className="w-[20%] p-4 text-sm ">{email}</td>
+                    <td className="w-[35%] p-4 text-sm ">{email}</td>
                     {/* <td className="w-[15%] p-4 text-sm">08066198765</td> */}
-                    <td className="w-[10%] p-4 text-sm  ">
+                    <td className="w-[20%] p-4 text-sm  ">
                       <span
                         className={`${
                           isAdminVerified || (name == "customer" && isVerified)
@@ -71,7 +71,7 @@ const AccountLayout = ({ name }) => {
                       </span>
                     </td>
 
-                    <td className="pr-4  w-[10%]      ">
+                    <td className="pr-4  w-[15%]       ">
                       {name === "customer" ? (
                         <div tabIndex="0" className="dropdown dropdown-left top-1 cursor-pointer p-4">
                           <DotsVerticalIcon className="w-4   " />

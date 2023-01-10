@@ -18,11 +18,11 @@ const StorageFloor = () => {
 
   return (
     <Accordion title="Storage Floor">
-      <div className="flex justify-between items-center mb-6">
-        <p>Add storage floor </p>
+      <div className="md:flex justify-between items-center mb-6 text-center">
+        <p className="text-sm md:text-base hidden md:inline">Add storage floor </p>
         <label
           htmlFor="addstoragefloor"
-          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent w-[175px]`}>
+          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent text-[12px] md:text-[14px] w-[175px]`}>
           ADD FLOOR
         </label>
       </div>
@@ -30,14 +30,14 @@ const StorageFloor = () => {
       {/* {configurations?.map(({ storageFloor }, i) => ( */}
       <div>
         {floor?.length === 0 ? (
-          <div className=" text-center font-semibold">No storage floor at this time</div>
+          <div className=" text-center font-semibold text-sm md:text-base">No storage floor at this time</div>
         ) : (
           floor?.map(({ label, _id }, indx) => (
             <div
               key={indx}
               className="bg-[#F9F9F9] border-l-4 border-accent rounded-lg px-6 py-4 flex justify-between items-center text-sm mb-6">
               <div className="flex  items-center">
-                <p className=" capitalize ">{label}</p>
+                <p className=" capitalize  ">{label}</p>
               </div>
               <div className="flex items-center gap-6">
                 <label

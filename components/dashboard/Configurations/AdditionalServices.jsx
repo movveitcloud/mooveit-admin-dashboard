@@ -16,17 +16,17 @@ const AdditionalServices = () => {
 
   return (
     <Accordion title="Additional Services">
-      <div className="flex justify-between items-center mb-6">
-        <p>Add additional services </p>
+      <div className="md:flex justify-between items-center mb-6 text-center">
+        <p className="text-sm md:text-base hidden md:inline">Add additional services </p>
         <label
           htmlFor="additionalservices"
-          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent w-[175px]`}>
+          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent text-[12px] md:text-[14px] w-[175px]`}>
           ADD SERVICES
         </label>
       </div>
 
       {services?.length === 0 ? (
-        <div className=" text-center font-semibold">No services at this time</div>
+        <div className=" text-center font-semibold text-sm md:text-base">No services at this time</div>
       ) : (
         services?.map(
           ({ label, _id }, indx) => (

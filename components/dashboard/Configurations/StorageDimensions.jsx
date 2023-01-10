@@ -17,11 +17,11 @@ const StorageDimensions = () => {
 
   return (
     <Accordion title="Storage Dimensions">
-      <div className="flex justify-between items-center mb-6">
-        <p>Add Storage Dimension </p>
+      <div className="md:flex justify-between items-center  mb-6 text-center">
+        <p className="text-sm md:text-base hidden md:inline">Add Storage Dimension </p>
         <label
           htmlFor="storagedimension"
-          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent w-[175px]`}>
+          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent text-[12px] md:text-[14px]  w-[175px]`}>
           ADD DIMENSION
         </label>
       </div>
@@ -29,7 +29,7 @@ const StorageDimensions = () => {
       {/* {configurations?.map(({ storageSize }, i) => ( */}
       <div>
         {size?.length === 0 ? (
-          <div className=" text-center font-semibold">No storage dimension at this time</div>
+          <div className=" text-center font-semibold text-sm md:text-base">No storage dimension at this time</div>
         ) : (
           size?.map(({ label, description, visualization, _id }, indx) => (
             <div
