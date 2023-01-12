@@ -1,4 +1,4 @@
-import { PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
+import { PencilAltIcon, TrashIcon, DotsVerticalIcon } from "@heroicons/react/outline";
 import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import Accordion from "../../shared/Accordion";
@@ -21,7 +21,7 @@ const StorageType = () => {
         <label
           htmlFor="addfeaturetype"
           // className={`py-2 px-4 md:px-5 text-center md:py-3 text-black btn-outline btn-primary border border-accent hover:btn-accent text-sm  rounded-md  md:text-[16px]  w-[150px] md:w-[175px]`}>
-          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent text-[12px] md:text-[14px] w-[175px]`}>
+          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent text-[12px] md:text-[14px] md:w-[175px]`}>
           ADD TYPE
         </label>
       </div>
@@ -35,9 +35,9 @@ const StorageType = () => {
               key={indx}
               className="bg-[#F9F9F9] border-l-4 border-accent rounded-lg px-6 py-4 flex justify-between items-center text-sm mb-6">
               <div className="flex  items-center">
-                <p className=" uppercase">{label}</p>
+                <p className=" uppercase text-[12px] md:text-[14px]">{label}</p>
               </div>
-              <div className="flex items-center gap-6">
+              <div className="hidden md:flex items-center gap-6">
                 <label htmlFor="addfeaturetype" className="flex items-center cursor-pointer " onClick={() => edit(_id)}>
                   <PencilAltIcon className="text-primary w-4 mr-2 " />
                   <p>Edit</p>
@@ -52,7 +52,31 @@ const StorageType = () => {
                   <TrashIcon className="w-4   mr-2" />
                   <p className="">Delete</p>
                 </label>
-                <DeleteConfigModal id={Id} config="storage-type" refresh={getType} />
+                {/* <DeleteConfigModal id={Id} config="storage-type" refresh={getType} /> */}
+              </div>
+              <div tabIndex="0" className="dropdown dropdown-left  cursor-pointer p-4 md:hidden">
+                <DotsVerticalIcon className="w-4   " />
+
+                <div
+                  tabIndex="0"
+                  className=" cursor-pointer bg-white rounded-sm shadow w-auto p-4 px-4 dropdown-content menu   ">
+                  <label
+                    htmlFor="addfeaturetype"
+                    className="flex items-center cursor-pointer mb-2 "
+                    onClick={() => edit(_id)}>
+                    <PencilAltIcon className="text-primary w-4 mr-2 " />
+                    <p className="">Edit</p>
+                  </label>
+                  <label
+                    htmlFor={_id}
+                    className=" text-red-500  cursor-pointer flex items-center"
+                    onClick={() => {
+                      setId(_id);
+                    }}>
+                    <TrashIcon className="w-4   mr-2" />
+                    <p className="">Delete</p>
+                  </label>
+                </div>
               </div>
             </div>
           ))
@@ -60,6 +84,7 @@ const StorageType = () => {
       </div>
 
       <AddStorageTypeModal details={editVal} />
+      <DeleteConfigModal id={Id} config="storage-type" refresh={getType} />
     </Accordion>
   );
 };

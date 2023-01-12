@@ -159,8 +159,8 @@ const AddFeatureModal = ({ details }) => {
                 htmlFor="upload"
                 className={`${
                   loading && "loading"
-                } btn  btn-white text-black border-3 border-accent hover:btn-accent w-[175px] `}>
-                {loading ? "" : "UPLOAD ICON"}
+                } btn  btn-white text-black border-3 border-accent hover:btn-accent md:w-[175px] `}>
+                {loading ? "" : imageupload !== "" ? "CHANGE ICON" : "UPLOAD ICON"}
               </label>
 
               <input

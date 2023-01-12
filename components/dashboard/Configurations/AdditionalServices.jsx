@@ -1,4 +1,4 @@
-import { PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
+import { PencilAltIcon, TrashIcon, DotsVerticalIcon } from "@heroicons/react/outline";
 import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import Accordion from "../../shared/Accordion";
@@ -20,7 +20,7 @@ const AdditionalServices = () => {
         <p className="text-sm md:text-base hidden md:inline">Add additional services </p>
         <label
           htmlFor="additionalservices"
-          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent text-[12px] md:text-[14px] w-[175px]`}>
+          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent text-[12px] md:text-[14px] md:w-[175px]`}>
           ADD SERVICES
         </label>
       </div>
@@ -37,7 +37,7 @@ const AdditionalServices = () => {
               <div className="flex  items-center">
                 <p className=" capitalize">{label}</p>
               </div>
-              <div className="flex items-center gap-6">
+              <div className="hidden md:flex items-center gap-6">
                 <label
                   htmlFor="additionalservices"
                   className="flex items-center cursor-pointer "
@@ -54,7 +54,30 @@ const AdditionalServices = () => {
                   <TrashIcon className="w-4   mr-2" />
                   <p className="">Delete</p>
                 </label>
-                <DeleteConfigModal id={Id} config="services" refresh={getServices} />
+              </div>
+              <div tabIndex="0" className="dropdown dropdown-left  cursor-pointer p-4 md:hidden">
+                <DotsVerticalIcon className="w-4   " />
+
+                <div
+                  tabIndex="0"
+                  className=" cursor-pointer bg-white rounded-sm shadow w-auto p-4 px-4 dropdown-content menu   ">
+                  <label
+                    htmlFor="additionalservices"
+                    className="flex items-center cursor-pointer mb-2 "
+                    onClick={() => edit(_id)}>
+                    <PencilAltIcon className="text-primary w-4 mr-2 " />
+                    <p className="">Edit</p>
+                  </label>
+                  <label
+                    htmlFor={_id}
+                    className=" text-red-500  cursor-pointer flex items-center"
+                    onClick={() => {
+                      setId(_id);
+                    }}>
+                    <TrashIcon className="w-4   mr-2" />
+                    <p className="">Delete</p>
+                  </label>
+                </div>
               </div>
             </div>
           )
@@ -62,6 +85,7 @@ const AdditionalServices = () => {
         )
       )}
       <AdditionalServicesModal details={editVal} />
+      <DeleteConfigModal id={Id} config="services" refresh={getServices} />
     </Accordion>
   );
 };

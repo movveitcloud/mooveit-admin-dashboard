@@ -1,4 +1,4 @@
-import { PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
+import { PencilAltIcon, TrashIcon, DotsVerticalIcon } from "@heroicons/react/outline";
 import { useSelector } from "react-redux";
 import Accordion from "../../shared/Accordion";
 import React, { useEffect, useState } from "react";
@@ -19,7 +19,7 @@ const StorageAccess = () => {
         <p className="text-sm md:text-base hidden md:inline">Add an access method </p>
         <label
           htmlFor="addfeatureaccess"
-          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent w-fit text-[12px] md:text-[14px] `}>
+          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent md:w-fit text-[12px] md:text-[14px] `}>
           ADD ACCESS METHOD
         </label>
       </div>
@@ -32,9 +32,9 @@ const StorageAccess = () => {
             key={indx}
             className="bg-[#F9F9F9] border-l-4 border-accent rounded-lg px-6 py-4 flex justify-between items-center text-sm mb-6">
             <div className="flex  items-center">
-              <p className=" uppercase">{label}</p>
+              <p className=" uppercase text-[12px] md:text-[14px]">{label}</p>
             </div>
-            <div className="flex items-center gap-6">
+            <div className="hidden md:flex items-center gap-6">
               <label htmlFor="addfeatureaccess" className="flex items-center cursor-pointer " onClick={() => edit(_id)}>
                 <PencilAltIcon className="text-primary w-4 mr-2 " />
                 <p>Edit</p>
@@ -48,12 +48,36 @@ const StorageAccess = () => {
                 <TrashIcon className="w-4   mr-2" />
                 <p className="">Delete</p>
               </label>
-              <DeleteConfigModal id={Id} config="storage-access-type" refresh={getAccess} />
+            </div>
+            <div tabIndex="0" className="dropdown dropdown-left  cursor-pointer p-4 md:hidden">
+              <DotsVerticalIcon className="w-4   " />
+
+              <div
+                tabIndex="0"
+                className=" cursor-pointer bg-white rounded-sm shadow w-auto p-4 px-4 dropdown-content menu   ">
+                <label
+                  htmlFor="addfeatureaccess"
+                  className="flex items-center cursor-pointer mb-2 "
+                  onClick={() => edit(_id)}>
+                  <PencilAltIcon className="text-primary w-4 mr-2 " />
+                  <p className="">Edit</p>
+                </label>
+                <label
+                  htmlFor={_id}
+                  className=" text-red-500  cursor-pointer flex items-center"
+                  onClick={() => {
+                    setId(_id);
+                  }}>
+                  <TrashIcon className="w-4   mr-2" />
+                  <p className="">Delete</p>
+                </label>
+              </div>
             </div>
           </div>
         ))
       )}
       <AddStorageAccessModal details={editVal} />
+      <DeleteConfigModal id={Id} config="storage-access-type" refresh={getAccess} />
     </Accordion>
   );
 };

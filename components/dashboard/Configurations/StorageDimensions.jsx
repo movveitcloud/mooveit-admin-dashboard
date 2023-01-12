@@ -1,4 +1,4 @@
-import { PencilAltIcon, PhotographIcon, TrashIcon } from "@heroicons/react/outline";
+import { PencilAltIcon, PhotographIcon, TrashIcon, DotsVerticalIcon } from "@heroicons/react/outline";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Accordion from "../../shared/Accordion";
@@ -21,7 +21,7 @@ const StorageDimensions = () => {
         <p className="text-sm md:text-base hidden md:inline">Add Storage Dimension </p>
         <label
           htmlFor="storagedimension"
-          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent text-[12px] md:text-[14px]  w-[175px]`}>
+          className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent text-[12px] md:text-[14px]  md:w-[175px]`}>
           ADD DIMENSION
         </label>
       </div>
@@ -48,7 +48,7 @@ const StorageDimensions = () => {
                   <p>{description}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-6">
+              <div className="hidden md:flex items-center gap-6">
                 <label
                   htmlFor="storagedimension"
                   className="flex items-center cursor-pointer "
@@ -65,13 +65,37 @@ const StorageDimensions = () => {
                   <TrashIcon className="w-4   mr-2" />
                   <p className="">Delete</p>
                 </label>
-                <DeleteConfigModal id={Id} config="storage-size" refresh={getSize} />
+              </div>
+              <div tabIndex="0" className="dropdown dropdown-left  cursor-pointer p-4 md:hidden">
+                <DotsVerticalIcon className="w-4   " />
+
+                <div
+                  tabIndex="0"
+                  className=" cursor-pointer bg-white rounded-sm shadow w-auto p-4 px-4 dropdown-content menu   ">
+                  <label
+                    htmlFor="storagedimension"
+                    className="flex items-center cursor-pointer mb-2 "
+                    onClick={() => edit(_id)}>
+                    <PencilAltIcon className="text-primary w-4 mr-2 " />
+                    <p className="">Edit</p>
+                  </label>
+                  <label
+                    htmlFor={_id}
+                    className=" text-red-500  cursor-pointer flex items-center"
+                    onClick={() => {
+                      setId(_id);
+                    }}>
+                    <TrashIcon className="w-4   mr-2" />
+                    <p className="">Delete</p>
+                  </label>
+                </div>
               </div>
             </div>
           ))
         )}
       </div>
       <StorageDimensionModal details={editVal} />
+      <DeleteConfigModal id={Id} config="storage-size" refresh={getSize} />
     </Accordion>
   );
 };
