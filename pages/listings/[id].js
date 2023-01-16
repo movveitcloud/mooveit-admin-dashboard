@@ -7,6 +7,17 @@ import { motion } from "framer-motion";
 import { ArrowNarrowLeftIcon } from "@heroicons/react/outline";
 import { getValue, getValueArray } from "../../helpers/utils";
 import {
+  getFeatures,
+  getFloor,
+  getType,
+  getAccess,
+  getAccessPeriod,
+  getBookingPeriod,
+  getNoticePeriod,
+  getServices,
+  getSize,
+} from "../../redux/features/configurations.slice";
+import {
   howAccessListing,
   storageFeatures,
   whenAccessListing,
@@ -52,6 +63,18 @@ const View = () => {
       singleListing.status === "pending" ? setOption(true) : "";
     }
   }, [singleListing]);
+  console.log(singleListing);
+  useEffect(() => {
+    dispatch(getType({ config: "storage-type" }));
+    dispatch(getFloor({ config: "storage-floor" }));
+    dispatch(getFeatures({ config: "storage-features" }));
+    dispatch(getAccess({ config: "storage-access-type" }));
+    dispatch(getAccessPeriod({ config: "storage-access-period" }));
+    dispatch(getBookingPeriod({ config: "booking-period" }));
+    dispatch(getNoticePeriod({ config: "notice-period" }));
+    dispatch(getServices({ config: "notice-period" }));
+    dispatch(getSize({ config: "notice-period" }));
+  }, []);
 
   const approve = () => {
     const id = query;
@@ -59,6 +82,15 @@ const View = () => {
     dispatch(approveListing({ id: id, payload: payload }));
     router.push("/listings");
   };
+  const { type } = useSelector((state) => state.configuration);
+  const { floor } = useSelector((state) => state.configuration);
+  const { features } = useSelector((state) => state.configuration);
+  const { access } = useSelector((state) => state.configuration);
+  const { accessperiod } = useSelector((state) => state.configuration);
+  const { bookingperiod } = useSelector((state) => state.configuration);
+  const { noticeperiod } = useSelector((state) => state.configuration);
+  const { size } = useSelector((state) => state.configuration);
+  const { services } = useSelector((state) => state.configuration);
 
   return (
     <DashboardLayout>
@@ -81,27 +113,28 @@ const View = () => {
             <>
               <Address Address={List?.address} />
               <Type
-                storageType={getValue({ options: storageKinds, key: List?.storageType })}
-                storageFloor={getValue({ options: storageFloors, key: List?.storageFloor })}
-                storageFeatures={getValueArray({ options: storageFeatures, key: List?.storageFeatures })}
+                storageType={getValue({ options: type, key: List?.storageType })}
+                storageFloor={getValue({ options: floor, key: List?.storageFloor })}
+                storageFeatures={getValue({ options: features, key: List?.storageFeatures })}
               />
-              <Services delivery={singleListing?.delivery} packing={singleListing?.packing} />
+              {/* <Services delivery={singleListing?.delivery} packing={singleListing?.packing} /> */}
+              <Services services={getValue({ options: size, key: List?.storageFeatures, list: List })} />
             </>
             <>
-              <Dimension storageSize={getValue({ options: storageSize, key: List?.storageSize })} />
+              <Dimension storageSize={getValue({ options: size, key: List?.storageSize, list: List.storageSize })} />
               <Media images={singleListing?.media} />
               <Description storageTitle={List?.storageTitle} description={List?.description} />
             </>
             <>
               <Access
-                storageAccessPeriod={getValue({ options: whenAccessListing, key: List?.storageAccessPeriod })}
-                storageAccessType={getValue({ options: howAccessListing, key: List?.storageAccessType })}
+                storageAccessPeriod={getValue({ options: accessperiod, key: List?.storageAccessPeriod })}
+                storageAccessType={getValue({ options: access, key: List?.storageAccessType })}
                 parkingInstruction={List?.parkingInstruction ? List?.parkingInstruction : "N/A"}
                 parkingPermit={List?.parkingPermit ? "Available" : "N/A"}
               />
               <BookingDetails
-                bookingDuration={getValue({ options: spaceDuration, key: List?.bookingDuration })}
-                bookingNotice={getValue({ options: arrivalNoticeOpts, key: List?.bookingNotice })}
+                bookingDuration={getValue({ options: bookingperiod, key: List?.bookingDuration })}
+                bookingNotice={getValue({ options: noticeperiod, key: List?.bookingNotice })}
               />
             </>
             <Pricing

@@ -9,6 +9,9 @@ import {
   getServices,
   getType,
   getAccess,
+  getAccessPeriod,
+  getBookingPeriod,
+  getNoticePeriod,
 } from "../../redux/features/configurations.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { PulseLoader } from "react-spinners";
@@ -26,7 +29,10 @@ import {
   StorageFloor,
   StorageDimensions,
   AdditionalServices,
+  StorageAccessPeriod,
   StorageDimensionModal,
+  ShortestBookingPeriod,
+  StorageNoticePeriod,
 } from "../../components";
 
 import { DashboardLayout } from "../../components";
@@ -43,6 +49,9 @@ const Configurations = () => {
     dispatch(getServices({ config: "services" }));
     dispatch(getAccess({ config: "storage-access-type" }));
     dispatch(getType({ config: "storage-type" }));
+    dispatch(getAccessPeriod({ config: "storage-access-period" }));
+    dispatch(getBookingPeriod({ config: "booking-period" }));
+    dispatch(getNoticePeriod({ config: "notice-period" }));
   }, []);
 
   // console.log(configurations);
@@ -64,7 +73,10 @@ const Configurations = () => {
               <StorageAccess />
               <StorageFloor />
               <StorageDimensions />
+              <StorageAccessPeriod />
+              <ShortestBookingPeriod />
               <AdditionalServices />
+              <StorageNoticePeriod />
             </>
 
             {/* <div className="flex justify-end">

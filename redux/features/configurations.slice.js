@@ -63,6 +63,45 @@ export const getAccess = createAsyncThunk(
     }
   }
 );
+export const getAccessPeriod = createAsyncThunk(
+  "/configurations/storage-access-period",
+  async ({ config, id }, { rejectWithValue }) => {
+    try {
+      const response = await api.getConfigurations(config);
+
+      return response.data;
+    } catch (err) {
+      errorPopUp({ msg: err.response.data.error });
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+export const getBookingPeriod = createAsyncThunk(
+  "/configurations/bookingperiod",
+  async ({ config, id }, { rejectWithValue }) => {
+    try {
+      const response = await api.getConfigurations(config);
+
+      return response.data;
+    } catch (err) {
+      errorPopUp({ msg: err.response.data.error });
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+export const getNoticePeriod = createAsyncThunk(
+  "/configurations/noticeperiod",
+  async ({ config, id }, { rejectWithValue }) => {
+    try {
+      const response = await api.getConfigurations(config);
+
+      return response.data;
+    } catch (err) {
+      errorPopUp({ msg: err.response.data.error });
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 export const getServices = createAsyncThunk("/configurations/services", async ({ config, id }, { rejectWithValue }) => {
   try {
     const response = await api.getConfigurations(config);
@@ -179,6 +218,9 @@ const configurationSlice = createSlice({
     services: [],
     servicesLoading: false,
     size: [],
+    accessperiod: [],
+    noticeperiod: [],
+    bookingperiod: [],
     sizeLoading: false,
     loading: false,
     configurationLoading: false,
@@ -260,6 +302,15 @@ const configurationSlice = createSlice({
 
     [getServices.fulfilled]: (state, action) => {
       state.services = action.payload.data;
+    },
+    [getAccessPeriod.fulfilled]: (state, action) => {
+      state.accessperiod = action.payload.data;
+    },
+    [getBookingPeriod.fulfilled]: (state, action) => {
+      state.bookingperiod = action.payload.data;
+    },
+    [getNoticePeriod.fulfilled]: (state, action) => {
+      state.noticeperiod = action.payload.data;
     },
 
     [uploadConfigurationImage.pending]: (state) => {

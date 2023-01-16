@@ -56,6 +56,9 @@ export { default as UpdateAdminModal } from "./modals/UpdateAdminModal";
 export { default as DeleteAdminModal } from "./modals/DeleteAdminModal";
 export { default as VerifyPartnerModal } from "./modals/VerifyPartnerModal";
 export { default as DeleteConfigModal } from "./modals/DeleteConfigModal";
+export { default as AddAccessPeriodModal } from "./modals/AddAccessPeriodModal";
+export { default as AddBookingPeriodModal } from "./modals/AddBookingPeriodModal";
+export { default as AddNoticePeriodModal } from "./modals/AddNoticePeriodModal";
 
 //CONFIGURATIONS
 export { default as StorageFeatures } from "./dashboard/Configurations/StorageFeatures";
@@ -64,6 +67,9 @@ export { default as StorageDimensions } from "./dashboard/Configurations/Storage
 export { default as AdditionalServices } from "./dashboard/Configurations/AdditionalServices";
 export { default as StorageType } from "./dashboard/Configurations/StorageType";
 export { default as StorageFloor } from "./dashboard/Configurations/StorageFloor";
+export { default as StorageAccessPeriod } from "./dashboard/Configurations/StorageAccessPeriod";
+export { default as ShortestBookingPeriod } from "./dashboard/Configurations/ShortestBookingPeriod";
+export { default as StorageNoticePeriod } from "./dashboard/Configurations/StorageNoticeperiod";
 
 //ADMIN
 export { default as Admins } from "./dashboard/Admin/Admins";
