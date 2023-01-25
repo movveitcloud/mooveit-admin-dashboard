@@ -14,6 +14,9 @@ export const signIn = (payload) => API.post("/admin/login", payload);
 export const forgotPassword = (payload) => API.post("/admin/forgot-password", payload);
 export const resetPassword = ({ payload, token }) => API.patch(`/admin/reset-password/${token}`, payload);
 export const verifyResetToken = (token) => API.get(`/admin/reset-password/${token}`);
+export const updatePassword = (payload) => API.patch("/admin/update-password", payload);
+export const updateProfile = ({ id, payload }) => API.patch(`/admin/${id}`, payload);
+export const updateProfileImage = ({ id, payload }) => API.patch(`/admin/${id}/upload`, payload);
 
 //LISTINGS
 export const getListings = () => API.get("/admin/listings");
@@ -37,4 +40,3 @@ export const deleteConfiguration = ({ config, id }) => API.delete(`/configuratio
 export const createAdmin = ({ payload }) => API.post("/admin/register", payload);
 export const getAdmins = () => API.get("/admin");
 export const deleteAdmin = ({ id }) => API.delete(`/admin/${id}`);
-export const updatePassword = (payload) => API.patch("/admin/update-password", payload);

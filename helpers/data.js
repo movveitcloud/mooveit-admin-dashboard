@@ -81,6 +81,23 @@ export const dashboardNavLinks = [
     icon: <CogIcon className="w-full" />,
     iconActive: <CodeIconSolid className="w-full" />,
   },
+  {
+    name: "Settings",
+    path: null,
+    title: "Settings",
+    icon: <CogIcon className="w-full" />,
+    iconActive: <CodeIconSolid className="w-full" />,
+    subMenus: [
+      {
+        path: "/update-password",
+        title: "Update-password",
+      },
+      {
+        path: "/update-profile",
+        title: "Update-profile",
+      },
+    ],
+  },
 ];
 export const storageKinds = [
   { name: "Garage & Lock Up", value: "garage&lockup" },

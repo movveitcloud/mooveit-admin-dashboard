@@ -40,7 +40,7 @@ const UpdateAdminModal = ({ id }) => {
 
   return (
     <>
-      <input type="checkbox" id="updateadmin" className=" modal-toggle " />
+      <input type="checkbox" id="updateadmin" className=" modal-toggle  " />
       <label htmlFor="updateadmin" className=" modal ">
         <label className=" modal-box py-10 relative w-[80%] md:w-[50%] max-w-[500px] rounded-xl z-20">
           <div className="w-[80%] mx-auto text-left">

@@ -4,14 +4,14 @@ import { useRouter } from "next/router";
 import { createConfiguration, updateConfigurations, getServices } from "../../redux/features/configurations.slice";
 import { XIcon } from "@heroicons/react/outline";
 
-const AdditionalServicesModal = ({ details }) => {
+const AdditionalServiceModal = ({ details }) => {
   const { createConfigurationLoading, updateConfigurationLoading } = useSelector((state) => state.configuration);
   const dispatch = useDispatch();
   const [identification, setIdentification] = useState("");
   const router = useRouter();
   const initialState = { label: "", value: "" };
   const [data, setData] = useState(initialState);
-  const disableBtn = !data.value || !data.label;
+  const disableBtn = !data.label;
   const [info, setInfo] = useState([]);
   const closeModal = useRef(null);
 
@@ -24,8 +24,8 @@ const AdditionalServicesModal = ({ details }) => {
     if (details) {
       fomat = details;
       setInfo(details);
-      details?.map(({ label, value, _id }) => {
-        setData({ label: label, value: value === false ? "false" : "true" });
+      details?.map(({ label, _id }) => {
+        setData({ label: label });
 
         setIdentification(_id);
       });
@@ -33,7 +33,7 @@ const AdditionalServicesModal = ({ details }) => {
   }, [details]);
   const handleChange = (e) => {
     const { value, name } = e.target;
-    setData({ ...data, [name]: value });
+    setData({ ...data, [name]: value.toLowerCase() });
   };
 
   const handleSave = (e) => {
@@ -67,14 +67,14 @@ const AdditionalServicesModal = ({ details }) => {
 
   return (
     <>
-      <input type="checkbox" id="additionalservices" className=" modal-toggle " />
-      <label htmlFor="additionalservices" className=" modal ">
+      <input type="checkbox" id="additionalservice" className=" modal-toggle " />
+      <label htmlFor="additionalservice" className=" modal ">
         <label className=" modal-box py-10 relative w-[80%] md:w-[50%] max-w-[500px] rounded-xl z-20">
           <div className="w-[80%] mx-auto text-left">
             <div className="flex justify-between items-center mb-6">
               <h2 className="font-bold text-2xl">Add Additional Service</h2>
               <label
-                htmlFor="additionalservices"
+                htmlFor="additionalservice"
                 className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none "
                 onClick={() => {
                   setInfo([]);
@@ -93,13 +93,13 @@ const AdditionalServicesModal = ({ details }) => {
               value={data.label}
             />
 
-            <h3 className="font-semibold text-sm mb-2">Value</h3>
+            {/* <h3 className="font-semibold text-sm mb-2">Value</h3>
 
             <select name="value" onChange={handleChange} value={data.value}>
               <option>Select a value</option>
               <option value={false}>False</option>
               <option value={true}>True</option>
-            </select>
+            </select> */}
 
             <button
               className={`${
@@ -118,9 +118,9 @@ const AdditionalServicesModal = ({ details }) => {
           </div>
         </label>
       </label>
-      <label htmlFor="additionalservices" className="hidden" ref={closeModal} />
+      <label htmlFor="additionalservice" className="hidden" ref={closeModal} />
     </>
   );
 };
 
-export default AdditionalServicesModal;
+export default AdditionalServiceModal;

@@ -97,9 +97,11 @@ const AddFeatureModal = ({ details }) => {
         headers: headers,
         data: formData,
       });
+      console.log(response.data.data);
       setImageupload(response.data.data);
       setLoading(false);
       setData({ ...data, image: response.data.data });
+
       return response.data.data;
     } catch (error) {
       setLoading(false);

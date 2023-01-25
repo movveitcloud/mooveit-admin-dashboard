@@ -11,6 +11,7 @@ export { default as TitleBar } from "./navigation/TitleBar";
 export { default as Meta } from "./navigation/Meta";
 export { default as Footer } from "./navigation/Footer";
 export { default as DashboardNavbar } from "./navigation/DashboardNavbar";
+export { default as DashboardNavAccordion } from "./navigation/DashboardNavAccordion";
 
 //LAYOUTS
 export { default as DefaultLayout } from "./layouts/DefaultLayout";
@@ -20,6 +21,7 @@ export { default as HeadLayout } from "./layouts/HeadLayout";
 export { default as AccountLayout } from "./layouts/AccountLayout";
 export { default as AdminLayout } from "./layouts/AdminLayout";
 export { default as ListingsLayout } from "./layouts/ListingsLayout";
+export { default as PaymentLayout } from "./layouts/PaymentLayout";
 
 //DASHBOARD
 export { default as ApprovalLayout } from "./dashboard/Listings/ApprovalLayout";
@@ -49,7 +51,8 @@ export { default as AddFeatureModal } from "./modals/AddFeatureModal";
 export { default as AddStorageTypeModal } from "./modals/AddStorageTypeModal";
 export { default as AddStorageAccessModal } from "./modals/AddStorageAccessModal";
 export { default as AddStorageFloorModal } from "./modals/AddStorageFloorModal";
-export { default as AdditionalServicesModal } from "./modals/AdditionalServicesModal";
+// export { default as AdditionalServicesModal } from "./modals/AdditionalServicesModals";
+export { default as AdditionalServiceModal } from "./modals/AdditionalServiceModal";
 export { default as StorageDimensionModal } from "./modals/StorageDimensionModal";
 export { default as AddAdminModal } from "./modals/AddAdminModal";
 export { default as UpdateAdminModal } from "./modals/UpdateAdminModal";

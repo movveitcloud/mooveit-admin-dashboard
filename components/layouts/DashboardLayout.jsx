@@ -36,7 +36,6 @@ const DashboardLayout = ({ children, name }) => {
           <aside className="hidden bg-white h-screen w-3/12 overflow-y-auto lg:block border-r">
             <DashboardNavbar pathname={router.asPath} />
           </aside>
-
           <div className="h-screen w-full mx-auto bg-[#fafafa] overflow-y-auto overflow-x-hidden">
             <div className="sticky top-0 z-[20] bg-white">
               <TitleBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} pageTitle={pageTitle} pathname={router?.asPath} />

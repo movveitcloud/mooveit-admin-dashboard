@@ -28,7 +28,7 @@ const ShortestBookingPeriod = () => {
           htmlFor="addbookingperiod"
           // className={`py-2 px-4 md:px-5 text-center md:py-3 text-black btn-outline btn-primary border border-accent hover:btn-accent text-sm  rounded-md  md:text-[16px]  w-[150px] md:w-[175px]`}>
           className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent text-[12px] md:text-[14px] md:w-[175px]`}>
-          ADD ACCESS PERIOD
+          ADD BOOKING PERIOD
         </label>
       </div>
 

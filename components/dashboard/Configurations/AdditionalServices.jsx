@@ -2,7 +2,7 @@ import { PencilAltIcon, TrashIcon, DotsVerticalIcon } from "@heroicons/react/out
 import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import Accordion from "../../shared/Accordion";
-import { DeleteConfigModal, AdditionalServicesModal } from "../../../components";
+import { DeleteConfigModal, AdditionalServiceModal } from "../../../components";
 import { getServices } from "../../../redux/features/configurations.slice";
 
 const AdditionalServices = () => {
@@ -17,9 +17,9 @@ const AdditionalServices = () => {
   return (
     <Accordion title="Additional Services">
       <div className="md:flex justify-between items-center mb-6 text-center">
-        <p className="text-sm md:text-base hidden md:inline">Add additional services </p>
+        <p className="text-sm md:text-base hidden md:inline ">Add access period </p>
         <label
-          htmlFor="additionalservices"
+          htmlFor="additionalservice"
           className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent text-[12px] md:text-[14px] md:w-[175px]`}>
           ADD SERVICES
         </label>
@@ -62,7 +62,7 @@ const AdditionalServices = () => {
                   tabIndex="0"
                   className=" cursor-pointer bg-white rounded-sm shadow w-auto p-4 px-4 dropdown-content menu   ">
                   <label
-                    htmlFor="additionalservices"
+                    htmlFor="additionalservice"
                     className="flex items-center cursor-pointer mb-2 "
                     onClick={() => edit(_id)}>
                     <PencilAltIcon className="text-primary w-4 mr-2 " />
@@ -84,7 +84,8 @@ const AdditionalServices = () => {
           // ))
         )
       )}
-      <AdditionalServicesModal details={editVal} />
+
+      <AdditionalServiceModal details={editVal} />
       <DeleteConfigModal id={Id} config="services" refresh={getServices} />
     </Accordion>
   );

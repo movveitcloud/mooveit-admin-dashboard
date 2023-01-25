@@ -25,22 +25,7 @@ export const createAdmin = createAsyncThunk(
     }
   }
 );
-export const updatePassword = createAsyncThunk(
-  "/admin/update",
-  async ({ payload, closeModal, refreshConfigurations, reset }, { rejectWithValue }) => {
-    try {
-      const response = await api.updatePassword(payload);
-      successPopUp({ msg: "Password successfully updated" });
-      closeModal.current.click();
-      refreshConfigurations();
-      reset({ oldPassword: "", newPassword: "", confirmPassword: "" });
-      return response.data;
-    } catch (err) {
-      errorPopUp({ msg: err.response.data.error });
-      return rejectWithValue(err.response.data);
-    }
-  }
-);
+
 export const deleteAdmin = createAsyncThunk(
   "/admin/id",
   async ({ id, closeModal, refreshConfigurations }, { rejectWithValue }) => {
@@ -67,8 +52,6 @@ const adminSlice = createSlice({
     createAdminLoading: false,
     deleteAdmin: {},
     deleteAdminLoading: false,
-    updatePassword: {},
-    updatePasswordLoading: false,
   },
   reducers: {
     filterAdmin: (state, action) => {
@@ -110,16 +93,6 @@ const adminSlice = createSlice({
     },
     [deleteAdmin.rejected]: (state, action) => {
       state.deleteAdminLoading = false;
-    },
-    [updatePassword.pending]: (state) => {
-      state.updatePasswordLoading = true;
-    },
-    [updatePassword.fulfilled]: (state, action) => {
-      state.updatePasswordLoading = false;
-      state.updatePassword = action.payload.data;
-    },
-    [updatePassword.rejected]: (state, action) => {
-      state.updatePasswordLoading = false;
     },
   },
 });

@@ -22,7 +22,7 @@ import {
   AddStorageAccessModal,
   AddStorageFloorModal,
   AddStorageTypeModal,
-  AdditionalServicesModal,
+  AdditionalServiceModal,
   StorageAccess,
   StorageFeatures,
   StorageType,
@@ -95,7 +95,7 @@ const Configurations = () => {
             <AddStorageAccessModal />
             <AddStorageFloorModal />
             <StorageDimensionModal />
-            <AdditionalServicesModal />
+            <AdditionalServiceModal />
           </div>
         </motion.div>
       )}

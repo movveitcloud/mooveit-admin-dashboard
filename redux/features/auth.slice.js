@@ -71,6 +71,52 @@ export const verifyResetToken = createAsyncThunk(
     }
   }
 );
+export const updatePassword = createAsyncThunk("/admin/update", async ({ payload, reset }, { rejectWithValue }) => {
+  try {
+    const response = await api.updatePassword(payload);
+    successPopUp({ msg: "Password successfully updated" });
+    reset({ oldPassword: "", newPassword: "", confirmPassword: "" });
+    return response.data;
+  } catch (err) {
+    errorPopUp({ msg: err.response.data.error });
+    return rejectWithValue(err.response.data);
+  }
+});
+
+export const updateProfile = createAsyncThunk(
+  "/admin/updateprofile",
+  async ({ payload, id, reset }, { rejectWithValue }) => {
+    try {
+      const response = await api.updateProfile({ payload, id });
+      successPopUp({ msg: "Profile successfully updated" });
+
+      return response.data;
+    } catch (err) {
+      errorPopUp({ msg: err.response.data.error });
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+export const updateProfileImage = createAsyncThunk(
+  "/user/update-profileimage/upload",
+  async ({ payload, id, setFormDetails, formDetails }, { rejectWithValue }) => {
+    try {
+      const response = await api.updateProfileImage({ payload, id });
+      successPopUp({
+        msg: "Profile picture successfully updated",
+        duration: 500,
+      });
+      setFormDetails({
+        ...formDetails,
+        profilePicture: response.data.data,
+      });
+      return response.data;
+    } catch (err) {
+      errorPopUp({ msg: err.response.data.error });
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 //RETURN USER OBJECT IF LOGGED IN
 export const authenticatedUser = () => {
@@ -84,6 +130,7 @@ export const authenticatedUser = () => {
     const userObject = bytes ? bytes.toString(crypto.enc.Utf8) : null;
     return JSON.parse(userObject);
   }
+
   return false;
 };
 
@@ -96,6 +143,11 @@ const authSlice = createSlice({
     resetLoading: false,
     verifyLoading: false,
     resetTokenData: null,
+    updatePassword: {},
+    updatePasswordLoading: false,
+    updateProfileLoading: false,
+    profilePictureLoading: false,
+    updateprofile: {},
   },
 
   reducers: {
@@ -115,6 +167,7 @@ const authSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       state.loading = false;
       localStorage.setItem("admin", JSON.stringify({ ...action.payload }));
+      console.log(action.payload);
       state.admin = action.payload;
     },
     [login.rejected]: (state, action) => {
@@ -148,6 +201,38 @@ const authSlice = createSlice({
     },
     [verifyResetToken.rejected]: (state, action) => {
       state.verifyLoading = false;
+    },
+    [updatePassword.pending]: (state) => {
+      state.updatePasswordLoading = true;
+    },
+    [updatePassword.fulfilled]: (state, action) => {
+      state.updatePasswordLoading = false;
+      state.updatePassword = action.payload.data;
+    },
+    [updatePassword.rejected]: (state, action) => {
+      state.updatePasswordLoading = false;
+    },
+    [updateProfile.pending]: (state) => {
+      state.updateProfileLoading = true;
+    },
+    [updateProfile.fulfilled]: (state, action) => {
+      state.updateProfileLoading = false;
+      state.admininfo = action.payload.data;
+      localStorage.setItem("admin", JSON.stringify({ ...action.payload }));
+      state.admin = action.payload;
+    },
+    [updateProfileImage.pending]: (state) => {
+      state.profilePictureLoading = true;
+    },
+    [updateProfileImage.fulfilled]: (state, action) => {
+      state.profilePictureLoading = false;
+    },
+    [updateProfileImage.rejected]: (state, action) => {
+      state.profilePictureLoading = false;
+    },
+
+    [updateProfile.rejected]: (state, action) => {
+      state.updateProfileLoading = false;
     },
   },
 });
