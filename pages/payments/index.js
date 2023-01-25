@@ -14,7 +14,7 @@ const Listings = () => {
   const listingType = ({ status }) => filteredListings?.filter((listing) => listing.status === status);
   const approvedPayments = listingType({ status: "approved" });
   const pendingPayments = listingType({ status: "pending" });
-  const refundedPayments = listingType({ status: "disapproved" });
+  const refundedPayments = listingType({ status: "refunded" });
 
   const tabItems = [
     { name: "Approved", count: approvedPayments.length },
