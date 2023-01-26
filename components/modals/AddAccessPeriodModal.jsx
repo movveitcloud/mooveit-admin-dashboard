@@ -1,21 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { createConfiguration, updateConfigurations, getFloor } from "../../redux/features/configurations.slice";
+import {
+  createConfiguration,
+  updateConfigurations,
+  getType,
+  getAccessPeriod,
+} from "../../redux/features/configurations.slice";
 import { XIcon } from "@heroicons/react/outline";
 
-const AddStorageFloorModal = ({ details }) => {
+const AddAccessPeriodModal = ({ details }) => {
   const { createConfigurationLoading, updateConfigurationLoading } = useSelector((state) => state.configuration);
   const dispatch = useDispatch();
-  const closeModal = useRef(null);
   const [identification, setIdentification] = useState("");
+  const [info, setInfo] = useState([]);
+  const router = useRouter();
+  const closeModal = useRef(null);
   const initialState = { label: "", value: "" };
   const [data, setData] = useState(initialState);
   const disableBtn = !data.value || !data.label;
-  const [info, setInfo] = useState([]);
 
   const refreshConfigurations = () => {
-    dispatch(getFloor({ config: "storage-floor" }));
+    dispatch(getAccessPeriod({ config: "storage-access-period" }));
   };
   const fomat = [];
   useEffect(() => {
@@ -40,7 +46,7 @@ const AddStorageFloorModal = ({ details }) => {
     info.length !== 0
       ? dispatch(
           updateConfigurations({
-            config: "storage-floor",
+            config: "storage-access-period",
             id: identification,
             payload: payload,
             refreshConfigurations: refreshConfigurations,
@@ -53,7 +59,7 @@ const AddStorageFloorModal = ({ details }) => {
         )
       : dispatch(
           createConfiguration({
-            config: "storage-floor",
+            config: "storage-access-period",
             payload: payload,
             refreshConfigurations: refreshConfigurations,
             closeModal: closeModal,
@@ -65,14 +71,14 @@ const AddStorageFloorModal = ({ details }) => {
 
   return (
     <>
-      <input type="checkbox" id="addstoragefloor" className=" modal-toggle " />
-      <label htmlFor="addstoragefloor" className=" modal ">
+      <input type="checkbox" id="addaccessperiod" className=" modal-toggle " />
+      <label htmlFor="addaccessperiod" className=" modal ">
         <label className=" modal-box py-10 relative w-[80%] md:w-[50%] max-w-[500px] rounded-xl z-20">
           <div className="w-[80%] mx-auto text-left">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="font-bold text-2xl">Add Storage Floor</h2>
+              <h2 className="font-bold text-2xl">Add Access Period</h2>
               <label
-                htmlFor="addstoragefloor"
+                htmlFor="addaccessperiod"
                 className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none "
                 onClick={() => {
                   setInfo([]);
@@ -90,7 +96,6 @@ const AddStorageFloorModal = ({ details }) => {
               onChange={handleChange}
               value={data.label}
             />
-
             <h3 className="font-semibold text-sm mb-2">Value</h3>
             <p className="mb-2 text-xs">Max 50 characters</p>
 
@@ -120,9 +125,9 @@ const AddStorageFloorModal = ({ details }) => {
           </div>
         </label>
       </label>
-      <label htmlFor="addstoragefloor" className="hidden" ref={closeModal} />
+      <label htmlFor="addaccessperiod" className="hidden" ref={closeModal} />
     </>
   );
 };
 
-export default AddStorageFloorModal;
+export default AddAccessPeriodModal;

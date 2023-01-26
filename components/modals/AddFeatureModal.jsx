@@ -1,53 +1,83 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { uploadConfiguration, getConfigurations } from "../../redux/features/configurations.slice";
+import { createConfiguration, getFeatures, updateConfigurations } from "../../redux/features/configurations.slice";
 import axios from "axios";
 import { PhotographIcon, XIcon } from "@heroicons/react/outline";
 import { errorPopUp } from "../../helpers/toastify";
 
-const AddFeatureModal = () => {
-  const { configurations, uploadConfigurationLoading } = useSelector((state) => state.configuration);
+const AddFeatureModal = ({ details }) => {
+  const { createConfigurationLoading, updateConfigurationLoading, features } = useSelector(
+    (state) => state.configuration
+  );
   const dispatch = useDispatch();
-  const [id, setId] = useState("");
+  const [identification, setIdentification] = useState("");
   const [loading, setLoading] = useState(false);
-  const [featurename, setFeaturename] = useState("");
-  const [featurevalue, setFeaturevalue] = useState("");
   const [imageupload, setImageupload] = useState("");
   const closeModal = useRef(null);
-  const disableBtn = !featurename || !imageupload || !featurevalue;
+  const initialState = { label: "", value: "", image: "" };
+  const [data, setData] = useState(initialState);
+  const disableBtn = !data.value || !data.label || !data.image;
+  const [info, setInfo] = useState([]);
   const API = axios.create({ baseURL: process.env.BASE_URL });
 
   const refreshConfigurations = () => {
-    dispatch(getConfigurations());
+    dispatch(getFeatures({ config: "storage-features" }));
   };
+  const fomat = [];
   useEffect(() => {
-    configurations?.map(({ _id }) => setId(_id));
-  }, [configurations]);
+    if (details) {
+      fomat = details;
+      setInfo(details);
+      details?.map(({ label, value, _id, image }) => {
+        setData({ label: label, value: value, image: image });
+        setImageupload(image);
+        setIdentification(_id);
+      });
+    }
+  }, [details]);
+  const handleValue = (e) => {
+    const { value, name } = e.target;
+    setData({ ...data, [name]: value });
+  };
 
   const handleSave = () => {
-    const payload = {
-      storageFeatures: { label: featurename, value: featurevalue, image: imageupload },
-    };
+    const payload = { ...data };
 
-    console.log(payload);
-
-    dispatch(
-      uploadConfiguration({
-        id,
-        payload,
-        refreshConfigurations,
-        closeModal,
-      })
-    );
+    info.length !== 0
+      ? dispatch(
+          updateConfigurations({
+            config: "storage-features",
+            id: identification,
+            payload: payload,
+            refreshConfigurations: refreshConfigurations,
+            closeModal: closeModal,
+            setData: setData,
+            data: data,
+            initialState: initialState,
+            setInfo,
+            setImageupload: setImageupload,
+          })
+        )
+      : dispatch(
+          createConfiguration({
+            config: "storage-features",
+            payload: payload,
+            refreshConfigurations: refreshConfigurations,
+            closeModal: closeModal,
+            setData,
+            initialState,
+            setImageupload: setImageupload,
+          })
+        );
   };
-  // console.log(uploadConfiguration);
+
   const handleChange = async (e) => {
     setLoading(true);
     let img = e.target.files[0];
 
     const formData = new FormData();
     if (formData) {
-      formData.append("id", id);
+      formData.append("id", 0);
       formData.append("key", "media");
       formData.append("media", img);
     }
@@ -62,12 +92,16 @@ const AddFeatureModal = () => {
       };
       const response = await API({
         method: "patch",
-        url: `/admin/configurations/${id}/upload`,
+        // url: `/admin/configurations/${id}/upload`,
+        url: "/admin/configurations/0/upload",
         headers: headers,
         data: formData,
       });
+      console.log(response.data.data);
       setImageupload(response.data.data);
       setLoading(false);
+      setData({ ...data, image: response.data.data });
+
       return response.data.data;
     } catch (error) {
       setLoading(false);
@@ -83,7 +117,12 @@ const AddFeatureModal = () => {
               <h2 className="font-bold text-2xl">Add Feature</h2>
               <label
                 htmlFor="addfeature"
-                className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none absolute right-6 top-6">
+                className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none"
+                onClick={() => {
+                  setInfo([]);
+                  setData(initialState);
+                  setImageupload("");
+                }}>
                 <XIcon className="w-4" />
               </label>
             </div>
@@ -92,7 +131,9 @@ const AddFeatureModal = () => {
             <input
               placeholder="Enter Feature..."
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
-              onChange={(e) => setFeaturename(e.target.value)}
+              name="label"
+              onChange={handleValue}
+              value={data.label}
             />
             <h3 className=" font-semibold text-sm mb-2">Value</h3>
             <p className="mb-2 text-xs">Max 50 characters</p>
@@ -101,7 +142,9 @@ const AddFeatureModal = () => {
               placeholder="Enter Feature..."
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
               maxLength={50}
-              onChange={(e) => setFeaturevalue(e.target.value)}
+              name="value"
+              onChange={handleValue}
+              value={data.value}
             />
             <h3 className="font-semibold text-sm mb-2 ">Feature's Icon</h3>
             <p className="mb-2 text-xs">Only files in png,jpeg and svg formats will be recognized. Max 1mb</p>
@@ -118,8 +161,8 @@ const AddFeatureModal = () => {
                 htmlFor="upload"
                 className={`${
                   loading && "loading"
-                } btn  btn-white text-black border-3 border-accent hover:btn-accent w-[175px] `}>
-                {loading ? "" : "UPLOAD ICON"}
+                } btn  btn-white text-black border-3 border-accent hover:btn-accent md:w-[175px] `}>
+                {loading ? "" : imageupload !== "" ? "CHANGE ICON" : "UPLOAD ICON"}
               </label>
 
               <input
@@ -132,11 +175,17 @@ const AddFeatureModal = () => {
             </div>
             <button
               className={`${
-                uploadConfigurationLoading && "loading"
+                (createConfigurationLoading && "loading") || (updateConfigurationLoading && "loading")
               } btn  w-full disabled:bg-[#DDDDDD] disabled:text-white cursor-pointer bg-black text-white  mt-6 `}
               disabled={disableBtn}
               onClick={handleSave}>
-              {uploadConfigurationLoading ? "" : "SAVE"}
+              {info?.length !== 0
+                ? updateConfigurationLoading
+                  ? ""
+                  : "EDIT"
+                : createConfigurationLoading
+                ? ""
+                : "SAVE"}
             </button>
           </div>
         </label>

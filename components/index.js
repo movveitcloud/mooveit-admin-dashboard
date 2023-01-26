@@ -11,6 +11,7 @@ export { default as TitleBar } from "./navigation/TitleBar";
 export { default as Meta } from "./navigation/Meta";
 export { default as Footer } from "./navigation/Footer";
 export { default as DashboardNavbar } from "./navigation/DashboardNavbar";
+export { default as DashboardNavAccordion } from "./navigation/DashboardNavAccordion";
 
 //LAYOUTS
 export { default as DefaultLayout } from "./layouts/DefaultLayout";
@@ -20,6 +21,7 @@ export { default as HeadLayout } from "./layouts/HeadLayout";
 export { default as AccountLayout } from "./layouts/AccountLayout";
 export { default as AdminLayout } from "./layouts/AdminLayout";
 export { default as ListingsLayout } from "./layouts/ListingsLayout";
+export { default as PaymentLayout } from "./layouts/PaymentLayout";
 
 //DASHBOARD
 export { default as ApprovalLayout } from "./dashboard/Listings/ApprovalLayout";
@@ -49,12 +51,17 @@ export { default as AddFeatureModal } from "./modals/AddFeatureModal";
 export { default as AddStorageTypeModal } from "./modals/AddStorageTypeModal";
 export { default as AddStorageAccessModal } from "./modals/AddStorageAccessModal";
 export { default as AddStorageFloorModal } from "./modals/AddStorageFloorModal";
-export { default as AdditionalServicesModal } from "./modals/AdditionalServicesModal";
+// export { default as AdditionalServicesModal } from "./modals/AdditionalServicesModals";
+export { default as AdditionalServiceModal } from "./modals/AdditionalServiceModal";
 export { default as StorageDimensionModal } from "./modals/StorageDimensionModal";
 export { default as AddAdminModal } from "./modals/AddAdminModal";
 export { default as UpdateAdminModal } from "./modals/UpdateAdminModal";
 export { default as DeleteAdminModal } from "./modals/DeleteAdminModal";
 export { default as VerifyPartnerModal } from "./modals/VerifyPartnerModal";
+export { default as DeleteConfigModal } from "./modals/DeleteConfigModal";
+export { default as AddAccessPeriodModal } from "./modals/AddAccessPeriodModal";
+export { default as AddBookingPeriodModal } from "./modals/AddBookingPeriodModal";
+export { default as AddNoticePeriodModal } from "./modals/AddNoticePeriodModal";
 
 //CONFIGURATIONS
 export { default as StorageFeatures } from "./dashboard/Configurations/StorageFeatures";
@@ -63,7 +70,16 @@ export { default as StorageDimensions } from "./dashboard/Configurations/Storage
 export { default as AdditionalServices } from "./dashboard/Configurations/AdditionalServices";
 export { default as StorageType } from "./dashboard/Configurations/StorageType";
 export { default as StorageFloor } from "./dashboard/Configurations/StorageFloor";
+export { default as StorageAccessPeriod } from "./dashboard/Configurations/StorageAccessPeriod";
+export { default as ShortestBookingPeriod } from "./dashboard/Configurations/ShortestBookingPeriod";
+export { default as StorageNoticePeriod } from "./dashboard/Configurations/StorageNoticeperiod";
 
 //ADMIN
 export { default as Admins } from "./dashboard/Admin/Admins";
 export { default as SuperAdmins } from "./dashboard/Admin/SuperAdmins";
+
+//ACCOUNT
+export { default as Name } from "./dashboard/Account/Name";
+export { default as Email } from "./dashboard/Account/Email";
+export { default as Vat } from "./dashboard/Account/Vat";
+export { default as Document } from "./dashboard/Account/Document";

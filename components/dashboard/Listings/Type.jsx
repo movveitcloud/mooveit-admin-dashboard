@@ -22,13 +22,14 @@ const Type = ({ storageType, storageFloor, storageFeatures }) => {
           <h3 className="mb-2 font-bold">Features</h3>
 
           <div className="items-center flex space-x-2">
-            {storageFeatures != "N/A"
+            {/* {storageFeatures != "N/A"
               ? storageFeatures?.map((val, index) => (
                   <div key={index}>
                     <p className="">{val.name}</p>
                   </div>
                 ))
-              : "N/A"}
+              : "N/A"} */}
+            {storageFeatures}
           </div>
         </div>
       </div>
