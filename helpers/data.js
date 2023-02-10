@@ -16,6 +16,7 @@ import {
   BadgeCheckIcon,
   CogIcon,
   UserIcon,
+  WrenchScrewdriverIcon,
 } from "@heroicons/react/outline";
 import {
   CubeIcon as CubeIconSolid,
@@ -79,6 +80,7 @@ export const dashboardNavLinks = [
     path: "/configurations",
     title: "Configurations",
     icon: <CogIcon className="w-full" />,
+    // icon: <WrenchScrewdriverIcon className="w-full" />,
     iconActive: <CodeIconSolid className="w-full" />,
   },
   {

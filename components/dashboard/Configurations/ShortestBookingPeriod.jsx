@@ -16,7 +16,7 @@ const ShortestBookingPeriod = () => {
   const [editVal, setEditVal] = useState([]);
   const [Id, setId] = useState("");
   const edit = (_id) => {
-    const val = type.filter((val) => _id === val._id);
+    const val = bookingperiod.filter((val) => _id === val._id);
     setEditVal(val);
   };
 
@@ -44,7 +44,10 @@ const ShortestBookingPeriod = () => {
                 <p className=" uppercase text-[12px] md:text-[14px]">{label}</p>
               </div>
               <div className="hidden md:flex items-center gap-6">
-                <label htmlFor="addfeaturetype" className="flex items-center cursor-pointer " onClick={() => edit(_id)}>
+                <label
+                  htmlFor="addbookingperiod"
+                  className="flex items-center cursor-pointer "
+                  onClick={() => edit(_id)}>
                   <PencilAltIcon className="text-primary w-4 mr-2 " />
                   <p>Edit</p>
                 </label>
@@ -67,7 +70,7 @@ const ShortestBookingPeriod = () => {
                   tabIndex="0"
                   className=" cursor-pointer bg-white rounded-sm shadow w-auto p-4 px-4 dropdown-content menu   ">
                   <label
-                    htmlFor="addfeaturetype"
+                    htmlFor="addbookingperiod"
                     className="flex items-center cursor-pointer mb-2 "
                     onClick={() => edit(_id)}>
                     <PencilAltIcon className="text-primary w-4 mr-2 " />

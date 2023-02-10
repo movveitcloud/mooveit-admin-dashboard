@@ -54,8 +54,6 @@ const Configurations = () => {
     dispatch(getNoticePeriod({ config: "notice-period" }));
   }, []);
 
-  // console.log(configurations);
-
   return (
     <DashboardLayout>
       {configurationLoading ? (
@@ -75,8 +73,8 @@ const Configurations = () => {
               <StorageDimensions />
               <StorageAccessPeriod />
               <ShortestBookingPeriod />
-              <AdditionalServices />
               <StorageNoticePeriod />
+              <AdditionalServices />
             </>
 
             {/* <div className="flex justify-end">

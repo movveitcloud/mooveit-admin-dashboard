@@ -132,7 +132,7 @@ const StorageDimensionModal = ({ details }) => {
         data: formData,
       });
       setImageupload(response.data.data);
-      console.log(response.data.data);
+      // console.log(response.data.data);
       setLoading(false);
       setData({ ...data, visualization: response.data.data });
       return response.data.data;
@@ -212,13 +212,14 @@ const StorageDimensionModal = ({ details }) => {
                 className={`${
                   loading && "loading"
                 } btn  btn-white text-black border-3 border-accent hover:btn-accent w-[175px] `}>
-                {loading ? "" : " UPLOAD VISUALIZER"}
+                {loading ? "" : imageupload !== "" ? "EDIT VISUALIZER" : "UPLOAD VISUALIZER"}
               </label>
 
               <input
                 id="dimension"
                 type="file"
-                placeholder="UPLOAD ICON"
+                // placeholder="UPLOAD ICON"
+                placeholder={imageupload !== "" ? "EDIT VISUALIZER" : "UPLOAD VISUALIZER"}
                 onChange={(e) => handleChange(e)}
                 className="hidden"
               />

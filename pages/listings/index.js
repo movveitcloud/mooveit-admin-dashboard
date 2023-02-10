@@ -67,8 +67,8 @@ const Listings = () => {
 
           <div className="bg-white p-8  shadow ">
             <div className="hidden md:flex justify-between mb-10 text-sm ">
-              <div className="flex justify-start xl:w-2/3 mr-4   ">
-                <div className="flex items-center  justify-start w-fit border  lg:mr-8 md:mr-2    rounded-md">
+              <div className="flex justify-start w-2/3 mr-4   ">
+                {/* <div className="flex items-center  justify-start w-fit border  lg:mr-8 md:mr-2    rounded-md">
                   <div className="bg-accent-content border border-l-accent rounded-l-md border-r-none p-3 py-3 text-white whitespace-nowrap cursor-pointer  ">
                     View All
                   </div>
@@ -84,8 +84,8 @@ const Listings = () => {
                     <p>Last Active</p>
                     <ChevronDownIcon className="w-4 text-[#222222] font-normal ml-2" />
                   </div>
-                </div>
-                <div className="flex w-1/2   space-x-2  items-center border bg-white rounded-md p-3 py-3">
+                </div> */}
+                <div className="flex w-full   space-x-2  items-center border bg-white rounded-md p-3 py-3">
                   <SearchIcon className="text-accent-content w-5 md:w-6 mr-1" />
                   <input
                     type="search"
@@ -101,7 +101,7 @@ const Listings = () => {
 
             {/* mobile */}
             <div className="md:hidden mb-4  text-sm">
-              <div className="overflow-auto">
+              {/* <div className="overflow-auto">
                 <div className="flex items-center  justify-start w-fit border  lg:mr-8 md:mr-2 text-center    rounded-md">
                   <div className="bg-accent-content border  rounded-l-md border-r-none p-2 text-white whitespace-nowrap cursor-pointer w-fit text-center font-normal">
                     View All
@@ -119,7 +119,7 @@ const Listings = () => {
                     <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex mt-4 space-x-2 justify-between items-center  ">
                 <div className="flex w-2/3  space-x-2  items-center border  bg-white rounded-md p-2">

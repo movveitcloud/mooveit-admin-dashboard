@@ -76,7 +76,7 @@ const AddAccessPeriodModal = ({ details }) => {
         <label className=" modal-box py-10 relative w-[80%] md:w-[50%] max-w-[500px] rounded-xl z-20">
           <div className="w-[80%] mx-auto text-left">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="font-bold text-2xl">Add Access Period</h2>
+              <h2 className="font-bold text-2xl">Add Booking Period</h2>
               <label
                 htmlFor="addbookingperiod"
                 className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none "

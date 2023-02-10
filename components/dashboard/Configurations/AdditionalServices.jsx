@@ -21,7 +21,7 @@ const AdditionalServices = () => {
         <label
           htmlFor="additionalservice"
           className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent text-[12px] md:text-[14px] md:w-[175px]`}>
-          ADD SERVICES
+          ADD ADDITIONAL SERVICES
         </label>
       </div>
 
@@ -39,7 +39,7 @@ const AdditionalServices = () => {
               </div>
               <div className="hidden md:flex items-center gap-6">
                 <label
-                  htmlFor="additionalservices"
+                  htmlFor="additionalservice"
                   className="flex items-center cursor-pointer "
                   onClick={() => edit(_id)}>
                   <PencilAltIcon className="text-primary w-4 mr-2 " />

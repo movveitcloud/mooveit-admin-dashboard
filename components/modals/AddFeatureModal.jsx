@@ -97,7 +97,7 @@ const AddFeatureModal = ({ details }) => {
         headers: headers,
         data: formData,
       });
-      console.log(response.data.data);
+      //console.log(response.data.data);
       setImageupload(response.data.data);
       setLoading(false);
       setData({ ...data, image: response.data.data });
@@ -162,7 +162,7 @@ const AddFeatureModal = ({ details }) => {
                 className={`${
                   loading && "loading"
                 } btn  btn-white text-black border-3 border-accent hover:btn-accent md:w-[175px] `}>
-                {loading ? "" : imageupload !== "" ? "CHANGE ICON" : "UPLOAD ICON"}
+                {loading ? "" : imageupload !== "" ? "EDIT ICON" : "UPLOAD ICON"}
               </label>
 
               <input

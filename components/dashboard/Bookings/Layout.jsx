@@ -35,8 +35,8 @@ const Layout = () => {
                 <th className="w-[15%] whitespace-nowrap text-start p-4">Partner</th>
 
                 <th className="w-[15%] whitespace-nowrap text-start p-4">User</th>
-                <th className="w-[10%] whitespace-nowrap text-start p-4">With Moving</th>
-                <th className="w-[10%] whitespace-nowrap text-start p-4">With Packing</th>
+                {/* <th className="w-[10%] whitespace-nowrap text-start p-4">With Moving</th>
+                <th className="w-[10%] whitespace-nowrap text-start p-4">With Packing</th> */}
 
                 <th className="w-[10%]"></th>
                 {/* <th className="w-[10%]"></th> */}
@@ -58,9 +58,9 @@ const Layout = () => {
 
                       <td className="w-[20%] p-4 text-sm">{address}</td>
 
-                      <td className="w-[10%] p-4 text-sm ">{`${delivery === false ? "False" : "True"}`}</td>
+                      {/* <td className="w-[10%] p-4 text-sm ">{`${delivery === false ? "False" : "True"}`}</td>
 
-                      <td className="w-[10%] p-4 text-sm">{`${parking === false ? "False" : "True"}`}</td>
+                      <td className="w-[10%] p-4 text-sm">{`${parking === false ? "False" : "True"}`}</td> */}
                       <td className="w-[20%] p-4 text-sm">{address}</td>
 
                       <td className="w-[15%] p-4  mr-0 ">
