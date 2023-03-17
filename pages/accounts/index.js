@@ -20,6 +20,9 @@ const ManageAccounts = () => {
     { name: "Partners", count: count({ role: "partner" }) },
   ];
 
+  const userCounts = [customers.length, partners.length];
+  const userStatus = ["customer", "partner"];
+
   const handleSearch = (e) => {
     const { value } = e.target;
     let result = [];
@@ -57,9 +60,9 @@ const ManageAccounts = () => {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
           <Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabItems={tabItems} />
           <div className="bg-white p-8 shadow">
-            <div className="hidden md:flex justify-between mb-10 text-sm ">
+            {/* <div className="hidden md:flex justify-between mb-10 text-sm ">
               <div className="flex justify-start w-2/3 mr-4   ">
-                {/* <div className="flex items-center  justify-start w-fit border lg:mr-8 md:mr-2    rounded-md">
+                <div className="flex items-center  justify-start w-fit border lg:mr-8 md:mr-2    rounded-md">
                   <div className="bg-accent-content border  rounded-l-md border-r-none p-3 py-3 text-white whitespace-nowrap cursor-pointer  ">
                     View All
                   </div>
@@ -71,7 +74,7 @@ const ManageAccounts = () => {
                     <p>Last Active</p>
                     <ChevronDownIcon className="w-4 text-[#222222] font-normal ml-2" />
                   </div>
-                </div> */}
+                </div>
                 <div className="flex w-full   space-x-2  items-center border  bg-white rounded-md p-3 py-3">
                   <SearchIcon className="text-accent-content w-5 md:w-6 mr-1" />
                   <input
@@ -84,11 +87,11 @@ const ManageAccounts = () => {
               </div>
 
               <DownloadCSV data={appUsers[activeTab]} headers={csvHeaders} filename={csvFilename[activeTab]} />
-            </div>
+            </div> */}
 
             {/* mobile */}
-            <div className="md:hidden mb-4 text-sm">
-              {/* <div className="flex items-center  justify-start w-full border  lg:mr-8 md:mr-2 text-center    rounded-md">
+            {/* <div className="md:hidden mb-4 text-sm">
+              <div className="flex items-center  justify-start w-full border  lg:mr-8 md:mr-2 text-center    rounded-md">
                 <div className="bg-accent-content border border-l-accent rounded-l-md border-r-none p-2 text-white whitespace-nowrap cursor-pointer w-1/3 text-center font-normal">
                   View All
                 </div>
@@ -100,7 +103,7 @@ const ManageAccounts = () => {
                   <p>Last Active</p>
                   <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
                 </div>
-              </div> */}
+              </div>
               <div className="flex mt-4 space-x-2 justify-between items-center  ">
                 <div className="flex w-2/3 space-x-2 items-center border bg-white rounded-md p-2">
                   <SearchIcon className="text-accent-content w-5 md:w-6 mr-1" />
@@ -113,10 +116,31 @@ const ManageAccounts = () => {
                 </div>
                 <DownloadCSV data={appUsers[activeTab]} headers={csvHeaders} filename={csvFilename[activeTab]} />
               </div>
-            </div>
+            </div> */}
             {/* end of mobile */}
+            {userCounts[activeTab] === 0 ? (
+              <div className="font-bold text-xl text-center ">
+                <div className="flex justify-center">
+                  <div className="bg-white rounded-lg w-full md:w-[60%] flex justify-center mt-8">
+                    <div className="px-4 py-24 flex flex-col space-y-4 items-center">
+                      <img src="emptyStorage.svg" alt="empty storage icon" className="w-16 md:w-20" />
+                      <p className="text-center text-[#AAAAAA] text-xl font-bold">{`No ${userStatus[activeTab]}  at this time.`}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <AccountLayout
+                userStatus={userStatus[activeTab]}
+                handleSearch={handleSearch}
+                userData={appUsers}
+                headers={csvHeaders}
+                filename={csvFilename}
+                activeTab={activeTab}
+              />
+            )}
 
-            <AccountLayout name={activeTab === 0 ? "customer" : "partner"} />
+            {/* <AccountLayout name={activeTab === 0 ? "customer" : "partner"} /> */}
           </div>
         </motion.div>
       )}

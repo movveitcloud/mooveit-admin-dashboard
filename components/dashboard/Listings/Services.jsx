@@ -3,13 +3,16 @@ import { ArchiveIcon, ClockIcon, LocationMarkerIcon, MapIcon, TruckIcon } from "
 import Accordion from "../../shared/Accordion";
 
 const Services = ({ delivery, packing, services }) => {
+  console.log(services);
+
+  console.log(delivery);
+  console.log(packing);
   return (
     <Accordion title="services">
-      {/* {!delivery && !packing ? (
+      {!delivery && !packing ? (
         "N/A"
       ) : (
         <div className=" flex gap-6 items-center">
-          
           <div className="flex gap-5 items-center">
             {delivery && (
               <div className="flex flex-row items-center gap-2 text-[#107E7E]">
@@ -32,14 +35,14 @@ const Services = ({ delivery, packing, services }) => {
             )}
           </div>
         </div>
-      )} */}
-      <div className=" flex gap-6 items-center">
+      )}
+      {/* <div className=" flex gap-6 items-center">
         <div className="flex gap-5 items-center">
-          {/* {delivery && ( */}
+          {delivery && (
           {services}
-          {/* )} */}
+          )} 
         </div>
-      </div>
+      </div> */}
     </Accordion>
   );
 };

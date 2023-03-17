@@ -40,3 +40,7 @@ export const deleteConfiguration = ({ config, id }) => API.delete(`/configuratio
 export const createAdmin = ({ payload }) => API.post("/admin/register", payload);
 export const getAdmins = () => API.get("/admin");
 export const deleteAdmin = ({ id }) => API.delete(`/admin/${id}`);
+
+//BOOKING
+export const getBookings = () => API.get("/booking/admin");
+export const getSingleBooking = (id) => API.get(`/booking/admin/${id}`);

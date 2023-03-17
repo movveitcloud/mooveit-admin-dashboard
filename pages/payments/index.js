@@ -85,7 +85,7 @@ const Listings = () => {
                     <ChevronDownIcon className="w-4 text-[#222222] font-normal ml-2" />
                   </div>
                 </div> */}
-                <div className="flex w-full   space-x-2  items-center border bg-white rounded-md p-3 py-3">
+                <div className="flex w-full   space-x-2  items-center border bg-white rounded-md p-2  py-3">
                   <SearchIcon className="text-accent-content w-5 md:w-6 mr-1" />
                   <input
                     type="search"
@@ -122,7 +122,7 @@ const Listings = () => {
               </div> */}
 
               <div className="flex mt-4 space-x-2 justify-between items-center  ">
-                <div className="flex w-2/3  space-x-2  items-center border  bg-white rounded-md p-2">
+                <div className="flex w-2/3  space-x-2  items-center border  bg-white rounded-md p-2 py-3">
                   <SearchIcon className="text-accent-content w-5 md:w-6 mr-1" />
                   <input
                     type="search"

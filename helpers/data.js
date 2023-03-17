@@ -10,13 +10,9 @@ import {
   VideoCameraIcon,
   ViewGridIcon,
   DocumentTextIcon,
-  //WalletIcon,
-  CheckCircleIcon,
-  ChevronDownIcon,
-  BadgeCheckIcon,
   CogIcon,
   UserIcon,
-  WrenchScrewdriverIcon,
+  KeyIcon,
 } from "@heroicons/react/outline";
 import {
   CubeIcon as CubeIconSolid,
@@ -27,6 +23,7 @@ import {
   BadgeCheckIcon as BadgeCheckIconSolid,
   CogIcon as CodeIconSolid,
   UserIcon as UserIconSolid,
+  KeyIcon as KeyIconSolid,
 } from "@heroicons/react/solid";
 
 export const dashboardNavLinks = [
@@ -87,8 +84,8 @@ export const dashboardNavLinks = [
     name: "Settings",
     path: null,
     title: "Settings",
-    icon: <CogIcon className="w-full" />,
-    iconActive: <CodeIconSolid className="w-full" />,
+    icon: <KeyIcon />,
+    iconActive: <KeyIconSolid className="w-full" />,
     subMenus: [
       {
         path: "/update-password",

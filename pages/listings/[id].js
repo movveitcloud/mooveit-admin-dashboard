@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { PulseLoader } from "react-spinners";
 import { motion } from "framer-motion";
 import { ArrowNarrowLeftIcon } from "@heroicons/react/outline";
-import { getValue, getValueArray } from "../../helpers/utils";
+import { getValue, getService, getValueArray } from "../../helpers/utils";
 import {
   getFeatures,
   getFloor,
@@ -73,7 +73,7 @@ const View = () => {
     dispatch(getBookingPeriod({ config: "booking-period" }));
     dispatch(getNoticePeriod({ config: "notice-period" }));
     dispatch(getServices({ config: "notice-period" }));
-    dispatch(getSize({ config: "notice-period" }));
+    dispatch(getSize({ config: "storage-size" }));
   }, []);
 
   const approve = () => {
@@ -91,6 +91,7 @@ const View = () => {
   const { noticeperiod } = useSelector((state) => state.configuration);
   const { size } = useSelector((state) => state.configuration);
   const { services } = useSelector((state) => state.configuration);
+  console.log(List);
 
   return (
     <DashboardLayout>
@@ -117,11 +118,16 @@ const View = () => {
                 storageFloor={getValue({ options: floor, key: List?.storageFloor })}
                 storageFeatures={getValue({ options: features, key: List?.storageFeatures })}
               />
-              {/* <Services delivery={singleListing?.delivery} packing={singleListing?.packing} /> */}
-              <Services services={getValue({ options: size, key: List?.storageFeatures, list: List })} />
+              <Services
+                delivery={getService({ options: "delivery", key: List?.services, list: List, name: "delivery" })}
+                packing={getService({ options: "delivery", key: List?.services, list: List, name: "packing" })}
+              />
+              {/* <Services services={getValueArray({ options: size, key: List?.services, list: List })} /> */}
             </>
             <>
-              <Dimension storageSize={getValue({ options: size, key: List?.storageSize, list: List.storageSize })} />
+              <Dimension
+                storageSize={getValue({ options: size, key: List?.storageSize?.name, list: List.storageSize })}
+              />
               <Media images={singleListing?.media} />
               <Description storageTitle={List?.storageTitle} description={List?.description} />
             </>
@@ -129,8 +135,9 @@ const View = () => {
               <Access
                 storageAccessPeriod={getValue({ options: accessperiod, key: List?.storageAccessPeriod })}
                 storageAccessType={getValue({ options: access, key: List?.storageAccessType })}
-                parkingInstruction={List?.parkingInstruction ? List?.parkingInstruction : "N/A"}
-                parkingPermit={List?.parkingPermit ? "Available" : "N/A"}
+                parkingInstruction={List?.packingInstruction ? List?.packingInstruction : "N/A"}
+                // parkingPermit={List?.parkingPermit ? "Available" : "N/A"}
+                parkingPermit={List?.packingPermit == false ? "No" : List?.parkingPermit == true ? "Yes" : "N/A"}
               />
               <BookingDetails
                 bookingDuration={getValue({ options: bookingperiod, key: List?.bookingDuration })}
@@ -146,9 +153,12 @@ const View = () => {
               <div className="flex justify-end">
                 <div className="flex gap-4">
                   <button
-                    className="btn btn-primary w-[175px] disabled:bg-[#ccc] disabled:text-primary"
+                    className={`${
+                      singleListingLoading && "loading"
+                    } btn btn-primary w-[175px] disabled:bg-[#ccc] disabled:text-primary `}
+                    // className="btn btn-primary w-[175px] disabled:bg-[#ccc] disabled:text-primary"
                     onClick={approve}>
-                    Approve
+                    {singleListingLoading ? "" : "Approve"}
                   </button>
 
                   <label htmlFor="deny" className={`btn text-black btn-outline btn-primary hover:btn-accent w-[175px]`}>

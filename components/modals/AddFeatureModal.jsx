@@ -73,38 +73,45 @@ const AddFeatureModal = ({ details }) => {
 
   const handleChange = async (e) => {
     setLoading(true);
+    const sizeLimit = 1 * 1024 * 1024;
     let img = e.target.files[0];
-
-    const formData = new FormData();
-    if (formData) {
-      formData.append("id", 0);
-      formData.append("key", "media");
-      formData.append("media", img);
-    }
-
-    // for (let [key, value] of formData.entries()) {
-    //   console.log(`${key}:${value}`);
-    // }
-    try {
-      const headers = {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem("admin")).token}`,
-        "Content-Type": "multipart/formdata",
-      };
-      const response = await API({
-        method: "patch",
-        // url: `/admin/configurations/${id}/upload`,
-        url: "/admin/configurations/0/upload",
-        headers: headers,
-        data: formData,
-      });
-      //console.log(response.data.data);
-      setImageupload(response.data.data);
+    //console.log(img.size);
+    console.log(sizeLimit);
+    if (img.size > sizeLimit) {
       setLoading(false);
-      setData({ ...data, image: response.data.data });
+      return errorPopUp({ msg: "image should not be more than 200KB" });
+    } else {
+      const formData = new FormData();
+      if (formData) {
+        formData.append("id", 0);
+        formData.append("key", "media");
+        formData.append("media", img);
+      }
 
-      return response.data.data;
-    } catch (error) {
-      setLoading(false);
+      // for (let [key, value] of formData.entries()) {
+      //   console.log(`${key}:${value}`);
+      // }
+      try {
+        const headers = {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("admin")).token}`,
+          "Content-Type": "multipart/formdata",
+        };
+        const response = await API({
+          method: "patch",
+          // url: `/admin/configurations/${id}/upload`,
+          url: "/admin/configurations/0/upload",
+          headers: headers,
+          data: formData,
+        });
+        //console.log(response.data.data);
+        setImageupload(response.data.data);
+        setLoading(false);
+        setData({ ...data, image: response.data.data });
+
+        return response.data.data;
+      } catch (error) {
+        setLoading(false);
+      }
     }
   };
   return (

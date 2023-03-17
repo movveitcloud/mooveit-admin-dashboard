@@ -66,9 +66,9 @@ const Listings = () => {
           <Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabItems={tabItems} />
 
           <div className="bg-white p-8  shadow ">
-            <div className="hidden md:flex justify-between mb-10 text-sm ">
+            {/* <div className="hidden md:flex justify-between mb-10 text-sm ">
               <div className="flex justify-start w-2/3 mr-4   ">
-                {/* <div className="flex items-center  justify-start w-fit border  lg:mr-8 md:mr-2    rounded-md">
+                <div className="flex items-center  justify-start w-fit border  lg:mr-8 md:mr-2    rounded-md">
                   <div className="bg-accent-content border border-l-accent rounded-l-md border-r-none p-3 py-3 text-white whitespace-nowrap cursor-pointer  ">
                     View All
                   </div>
@@ -84,7 +84,7 @@ const Listings = () => {
                     <p>Last Active</p>
                     <ChevronDownIcon className="w-4 text-[#222222] font-normal ml-2" />
                   </div>
-                </div> */}
+                </div>
                 <div className="flex w-full   space-x-2  items-center border bg-white rounded-md p-3 py-3">
                   <SearchIcon className="text-accent-content w-5 md:w-6 mr-1" />
                   <input
@@ -97,11 +97,11 @@ const Listings = () => {
               </div>
 
               <DownloadCSV data={listingData[activeTab]} headers={csvHeaders} filename={csvFilename[activeTab]} />
-            </div>
+            </div> */}
 
             {/* mobile */}
-            <div className="md:hidden mb-4  text-sm">
-              {/* <div className="overflow-auto">
+            {/* <div className="md:hidden mb-4  text-sm">
+              <div className="overflow-auto">
                 <div className="flex items-center  justify-start w-fit border  lg:mr-8 md:mr-2 text-center    rounded-md">
                   <div className="bg-accent-content border  rounded-l-md border-r-none p-2 text-white whitespace-nowrap cursor-pointer w-fit text-center font-normal">
                     View All
@@ -119,7 +119,7 @@ const Listings = () => {
                     <ChevronDownIcon className="w-4 text-[#222222] ml-2" />
                   </div>
                 </div>
-              </div> */}
+              </div>
 
               <div className="flex mt-4 space-x-2 justify-between items-center  ">
                 <div className="flex w-2/3  space-x-2  items-center border  bg-white rounded-md p-2">
@@ -133,7 +133,7 @@ const Listings = () => {
                 </div>
                 <DownloadCSV data={listingData[activeTab]} headers={csvHeaders} filename={csvFilename[activeTab]} />
               </div>
-            </div>
+            </div> */}
             {/* end of mobile */}
 
             {listingCounts[activeTab] === 0 ? (
@@ -148,7 +148,14 @@ const Listings = () => {
                 </div>
               </div>
             ) : (
-              <ListingsLayout listingStatus={listingStatus[activeTab]} />
+              <ListingsLayout
+                listingStatus={listingStatus[activeTab]}
+                handleSearch={handleSearch}
+                listingData={listingData}
+                headers={csvHeaders}
+                filename={csvFilename}
+                activeTab={activeTab}
+              />
             )}
           </div>
         </motion.div>

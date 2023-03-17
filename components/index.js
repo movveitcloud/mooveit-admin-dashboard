@@ -21,6 +21,7 @@ export { default as HeadLayout } from "./layouts/HeadLayout";
 export { default as AccountLayout } from "./layouts/AccountLayout";
 export { default as AdminLayout } from "./layouts/AdminLayout";
 export { default as ListingsLayout } from "./layouts/ListingsLayout";
+export { default as BookingsLayout } from "./layouts/BookingsLayout";
 export { default as PaymentLayout } from "./layouts/PaymentLayout";
 
 //DASHBOARD
@@ -83,3 +84,10 @@ export { default as Name } from "./dashboard/Account/Name";
 export { default as Email } from "./dashboard/Account/Email";
 export { default as Vat } from "./dashboard/Account/Vat";
 export { default as Document } from "./dashboard/Account/Document";
+
+//BOOKINGS
+
+export { default as RentersInformation } from "./dashboard/Bookings/RentersInformation";
+export { default as RentersBookingPeriod } from "./dashboard/Bookings/RentersBookingPeriod";
+export { default as RentersAdditionalServices } from "./dashboard/Bookings/RentersAdditionalServices";
+export { default as RentersPrice } from "./dashboard/Bookings/RentersPrice";
