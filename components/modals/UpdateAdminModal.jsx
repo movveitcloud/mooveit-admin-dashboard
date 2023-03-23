@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-
-import { createAdmin, getAdmins, updatePassword } from "../../redux/features/admin.slice";
+import { updatePassword } from "../../redux/features/auth.slice";
+import { createAdmin, getAdmins } from "../../redux/features/admin.slice";
 import { XIcon } from "@heroicons/react/outline";
 import { FormPassword } from "../../components";
 import { errorPopUp } from "../../helpers/toastify";

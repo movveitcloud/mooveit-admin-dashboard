@@ -91,7 +91,7 @@ const View = () => {
   const { noticeperiod } = useSelector((state) => state.configuration);
   const { size } = useSelector((state) => state.configuration);
   const { services } = useSelector((state) => state.configuration);
-  console.log(List);
+  //console.log(List.parkingPermit);
 
   return (
     <DashboardLayout>
@@ -137,7 +137,7 @@ const View = () => {
                 storageAccessType={getValue({ options: access, key: List?.storageAccessType })}
                 parkingInstruction={List?.packingInstruction ? List?.packingInstruction : "N/A"}
                 // parkingPermit={List?.parkingPermit ? "Available" : "N/A"}
-                parkingPermit={List?.packingPermit == false ? "No" : List?.parkingPermit == true ? "Yes" : "N/A"}
+                parkingPermit={List?.packingPermit == false ? "No" : List?.packingPermit == true ? "Yes" : "N/A"}
               />
               <BookingDetails
                 bookingDuration={getValue({ options: bookingperiod, key: List?.bookingDuration })}

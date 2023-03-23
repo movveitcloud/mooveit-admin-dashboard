@@ -10,6 +10,7 @@ const Listings = () => {
   const [activeTab, setActiveTab] = useState(0);
   const { listings, filteredListings, listingLoading } = useSelector((state) => state.listing);
   const dispatch = useDispatch();
+  console.log(listings);
 
   const listingType = ({ status }) => filteredListings?.filter((listing) => listing.status === status);
   const approvedListings = listingType({ status: "approved" });
