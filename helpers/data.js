@@ -57,13 +57,13 @@ export const dashboardNavLinks = [
     icon: <DocumentTextIcon className="w-full" />,
     iconActive: <DocumentTextIconSolid className="w-full" />,
   },
-  {
-    name: "Payments",
-    path: "/payments",
-    title: "Payments",
-    icon: <CreditCardIcon className="w-full" />,
-    iconActive: <CreditCardIconSolid className="w-full" />,
-  },
+  // {
+  //   name: "Payments",
+  //   path: "/payments",
+  //   title: "Payments",
+  //   icon: <CreditCardIcon className="w-full" />,
+  //   iconActive: <CreditCardIconSolid className="w-full" />,
+  // },
   {
     name: "Admin",
     path: "/admin",
