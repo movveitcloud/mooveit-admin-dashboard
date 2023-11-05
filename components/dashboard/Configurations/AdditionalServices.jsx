@@ -7,9 +7,9 @@ const AdditionalServices = () => {
   const { configurations } = useSelector((state) => state.configuration);
 
   return (
-    <Accordion title="Additional Services">
+    <Accordion title="Services">
       <div className="flex justify-between items-center mb-6">
-        <p>Add additional services </p>
+        <p>Add service </p>
         <label
           htmlFor="additionalservices"
           className={`btn text-black btn-outline btn-primary border border-accent hover:btn-accent w-[175px]`}>
