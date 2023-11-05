@@ -36,7 +36,7 @@ const Layout = ({ name, admincount, superadmincount }) => {
                 <th className="w-[20%] whitespace-nowrap text-start p-4">Email Address</th>
 
                 <th className="w-[15%] whitespace-nowrap text-start p-4">Role</th>
-                {name === "superdmin" ? <th className="w-[10%]"></th> : null}
+                {name === "superadmin" ? <th className="w-[10%]"></th> : null}
               </tr>
             </thead>
             <tbody className="w-full   ">
