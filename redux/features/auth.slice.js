@@ -5,12 +5,12 @@ import * as api from "../api";
 
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 
-export const login = createAsyncThunk("/admin/login", async ({ payload, reset }, { rejectWithValue }) => {
+export const login = createAsyncThunk("/admin/login", async ({ payload, reset, router }, { rejectWithValue }) => {
   try {
     const response = await api.signIn(payload);
     const bytes = response.data.response ? crypto.AES.decrypt(response.data.response, ENCRYPTION_KEY) : "";
     const admin = JSON.parse(bytes ? bytes.toString(crypto.enc.Utf8) : null);
-    console.log(payload);
+    // console.log(payload);
     successPopUp({
       msg: ` Welcome back ${admin.firstName}`,
       duration: 500,
@@ -24,6 +24,7 @@ export const login = createAsyncThunk("/admin/login", async ({ payload, reset },
     return rejectWithValue(err.response.data);
   }
 });
+
 export const forgotPassword = createAsyncThunk(
   "/admin/forgot-password",
   async ({ payload, reset }, { rejectWithValue }) => {
