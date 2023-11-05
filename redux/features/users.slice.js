@@ -14,7 +14,6 @@ export const getUsers = createAsyncThunk("/users", async ({}, { rejectWithValue 
 export const getSingleUser = createAsyncThunk("/admin/users/userId", async ({ id }, { rejectWithValue }) => {
   try {
     const response = await api.getSingleUser(id);
-
     return response.data;
   } catch (err) {
     errorPopUp({ msg: err.response.data.error });
@@ -26,7 +25,6 @@ export const verifyUser = createAsyncThunk(
   async ({ id, payload, closeModal, refreshUsers }, { rejectWithValue }) => {
     try {
       const response = await api.verifyUser({ id, payload });
-      // console.log(response.data);
       closeModal.current.click();
       refreshUsers();
 

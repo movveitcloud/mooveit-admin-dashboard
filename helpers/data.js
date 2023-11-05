@@ -10,12 +10,9 @@ import {
   VideoCameraIcon,
   ViewGridIcon,
   DocumentTextIcon,
-  //WalletIcon,
-  CheckCircleIcon,
-  ChevronDownIcon,
-  BadgeCheckIcon,
   CogIcon,
   UserIcon,
+  KeyIcon,
 } from "@heroicons/react/outline";
 import {
   CubeIcon as CubeIconSolid,
@@ -26,6 +23,7 @@ import {
   BadgeCheckIcon as BadgeCheckIconSolid,
   CogIcon as CodeIconSolid,
   UserIcon as UserIconSolid,
+  KeyIcon as KeyIconSolid,
 } from "@heroicons/react/solid";
 
 export const dashboardNavLinks = [
@@ -59,13 +57,13 @@ export const dashboardNavLinks = [
     icon: <DocumentTextIcon className="w-full" />,
     iconActive: <DocumentTextIconSolid className="w-full" />,
   },
-  {
-    name: "Payments",
-    path: "/payments",
-    title: "Payments",
-    icon: <CreditCardIcon className="w-full" />,
-    iconActive: <CreditCardIconSolid className="w-full" />,
-  },
+  // {
+  //   name: "Payments",
+  //   path: "/payments",
+  //   title: "Payments",
+  //   icon: <CreditCardIcon className="w-full" />,
+  //   iconActive: <CreditCardIconSolid className="w-full" />,
+  // },
   {
     name: "Admin",
     path: "/admin",
@@ -79,7 +77,25 @@ export const dashboardNavLinks = [
     path: "/configurations",
     title: "Configurations",
     icon: <CogIcon className="w-full" />,
+    // icon: <WrenchScrewdriverIcon className="w-full" />,
     iconActive: <CodeIconSolid className="w-full" />,
+  },
+  {
+    name: "Settings",
+    path: null,
+    title: "Settings",
+    icon: <KeyIcon />,
+    iconActive: <KeyIconSolid className="w-full" />,
+    subMenus: [
+      {
+        path: "/update-password",
+        title: "Update-password",
+      },
+      {
+        path: "/update-profile",
+        title: "Update-profile",
+      },
+    ],
   },
 ];
 export const storageKinds = [

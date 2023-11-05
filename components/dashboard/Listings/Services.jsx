@@ -2,14 +2,17 @@ import React from "react";
 import { ArchiveIcon, ClockIcon, LocationMarkerIcon, MapIcon, TruckIcon } from "@heroicons/react/outline";
 import Accordion from "../../shared/Accordion";
 
-const Services = ({ delivery, packing }) => {
+const Services = ({ delivery, packing, services }) => {
+  console.log(services);
+
+  console.log(delivery);
+  console.log(packing);
   return (
     <Accordion title="services">
       {!delivery && !packing ? (
         "N/A"
       ) : (
         <div className=" flex gap-6 items-center">
-          {/* <h3 className=" font-bold">Delivery services</h3> */}
           <div className="flex gap-5 items-center">
             {delivery && (
               <div className="flex flex-row items-center gap-2 text-[#107E7E]">
@@ -33,6 +36,13 @@ const Services = ({ delivery, packing }) => {
           </div>
         </div>
       )}
+      {/* <div className=" flex gap-6 items-center">
+        <div className="flex gap-5 items-center">
+          {delivery && (
+          {services}
+          )} 
+        </div>
+      </div> */}
     </Accordion>
   );
 };

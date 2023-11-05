@@ -1,41 +1,66 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { uploadConfiguration, getConfigurations } from "../../redux/features/configurations.slice";
+import { createConfiguration, updateConfigurations, getFloor } from "../../redux/features/configurations.slice";
 import { XIcon } from "@heroicons/react/outline";
 
-const AddStorageFloorModal = () => {
-  const { configurations, uploadConfigurationLoading } = useSelector((state) => state.configuration);
+const AddStorageFloorModal = ({ details }) => {
+  const { createConfigurationLoading, updateConfigurationLoading } = useSelector((state) => state.configuration);
   const dispatch = useDispatch();
   const closeModal = useRef(null);
-  const [id, setId] = useState("");
-  const [storagefloor, setStoragefloor] = useState("");
-  const [storagefloorvalue, setStoragefloorvalue] = useState("");
-  const disableBtn = !storagefloor || !storagefloorvalue;
+  const [identification, setIdentification] = useState("");
+  const initialState = { label: "", value: "" };
+  const [data, setData] = useState(initialState);
+  const disableBtn = !data.value || !data.label;
+  const [info, setInfo] = useState([]);
 
   const refreshConfigurations = () => {
-    dispatch(getConfigurations());
+    dispatch(getFloor({ config: "storage-floor" }));
+  };
+  const fomat = [];
+  useEffect(() => {
+    if (details) {
+      fomat = details;
+      setInfo(details);
+      details?.map(({ label, value, _id }) => {
+        setData({ label: label, value: value });
+        setIdentification(_id);
+      });
+    }
+  }, [details]);
+
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setData({ ...data, [name]: value });
   };
 
-  useEffect(() => {
-    configurations?.map(({ _id }) => setId(_id));
-  }, [configurations]);
   const handleSave = (e) => {
-    const payload = {
-      storageFloor: {
-        label: storagefloor,
-        value: storagefloorvalue,
-      },
-    };
+    const payload = { ...data };
 
-    dispatch(
-      uploadConfiguration({
-        id: id,
-        payload: payload,
-        refreshConfigurations: refreshConfigurations,
-        closeModal: closeModal,
-      })
-    );
+    info.length !== 0
+      ? dispatch(
+          updateConfigurations({
+            config: "storage-floor",
+            id: identification,
+            payload: payload,
+            refreshConfigurations: refreshConfigurations,
+            closeModal: closeModal,
+            setData: setData,
+            data: data,
+            initialState: initialState,
+            setInfo,
+          })
+        )
+      : dispatch(
+          createConfiguration({
+            config: "storage-floor",
+            payload: payload,
+            refreshConfigurations: refreshConfigurations,
+            closeModal: closeModal,
+            setData,
+            initialState,
+          })
+        );
   };
 
   return (
@@ -48,7 +73,11 @@ const AddStorageFloorModal = () => {
               <h2 className="font-bold text-2xl">Add Storage Floor</h2>
               <label
                 htmlFor="addstoragefloor"
-                className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none absolute right-6 top-6">
+                className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none "
+                onClick={() => {
+                  setInfo([]);
+                  setData(initialState);
+                }}>
                 <XIcon className="w-4" />
               </label>
             </div>
@@ -57,7 +86,9 @@ const AddStorageFloorModal = () => {
             <input
               placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
-              onChange={(e) => setStoragefloor(e.target.value)}
+              name="label"
+              onChange={handleChange}
+              value={data.label}
             />
 
             <h3 className="font-semibold text-sm mb-2">Value</h3>
@@ -67,16 +98,24 @@ const AddStorageFloorModal = () => {
               placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
               maxLength={50}
-              onChange={(e) => setStoragefloorvalue(e.target.value)}
+              name="value"
+              onChange={handleChange}
+              value={data.value}
             />
 
             <button
               className={`${
-                uploadConfigurationLoading && "loading"
+                (createConfigurationLoading && "loading") || (updateConfigurationLoading && "loading")
               } btn  w-full disabled:bg-[#DDDDDD] disabled:text-white cursor-pointer bg-black text-white  mt-6 `}
               disabled={disableBtn}
               onClick={handleSave}>
-              {uploadConfigurationLoading ? "" : "SAVE"}
+              {info?.length !== 0
+                ? updateConfigurationLoading
+                  ? ""
+                  : "EDIT"
+                : createConfigurationLoading
+                ? ""
+                : "SAVE"}
             </button>
           </div>
         </label>

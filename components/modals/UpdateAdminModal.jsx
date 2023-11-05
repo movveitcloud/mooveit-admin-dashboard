@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-
-import { createAdmin, getAdmins, updatePassword } from "../../redux/features/admin.slice";
+import { updatePassword } from "../../redux/features/auth.slice";
+import { createAdmin, getAdmins } from "../../redux/features/admin.slice";
 import { XIcon } from "@heroicons/react/outline";
 import { FormPassword } from "../../components";
 import { errorPopUp } from "../../helpers/toastify";
@@ -40,7 +40,7 @@ const UpdateAdminModal = ({ id }) => {
 
   return (
     <>
-      <input type="checkbox" id="updateadmin" className=" modal-toggle " />
+      <input type="checkbox" id="updateadmin" className=" modal-toggle  " />
       <label htmlFor="updateadmin" className=" modal ">
         <label className=" modal-box py-10 relative w-[80%] md:w-[50%] max-w-[500px] rounded-xl z-20">
           <div className="w-[80%] mx-auto text-left">

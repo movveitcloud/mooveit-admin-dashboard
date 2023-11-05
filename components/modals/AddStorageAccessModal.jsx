@@ -1,41 +1,65 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { uploadConfiguration, getConfigurations } from "../../redux/features/configurations.slice";
+import { createConfiguration, updateConfigurations, getAccess } from "../../redux/features/configurations.slice";
 import { XIcon } from "@heroicons/react/outline";
 
-const AddStorageAccess = () => {
+const AddStorageAccess = ({ details }) => {
   const dispatch = useDispatch();
-  const { configurations, uploadConfigurationLoading } = useSelector((state) => state.configuration);
-  const [storageaccess, setStorageaccess] = useState("");
-  const [storageaccessvalue, setStorageaccessvalue] = useState("");
+  const { createConfigurationLoading, updateConfigurationLoading } = useSelector((state) => state.configuration);
+  const [identification, setIdentification] = useState("");
   const router = useRouter();
-  const disableBtn = !storageaccess || !storageaccessvalue;
+  const initialState = { label: "", value: "" };
+  const [data, setData] = useState(initialState);
+  const disableBtn = !data.value || !data.label;
+  const [info, setInfo] = useState([]);
   const closeModal = useRef(null);
-  const [id, setId] = useState("");
   const refreshConfigurations = () => {
-    dispatch(getConfigurations());
+    dispatch(getAccess({ config: "storage-access-type" }));
+  };
+  const fomat = [];
+  useEffect(() => {
+    if (details) {
+      fomat = details;
+      setInfo(details);
+      details?.map(({ label, value, _id }) => {
+        setData({ label: label, value: value });
+        setIdentification(_id);
+      });
+    }
+  }, [details]);
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setData({ ...data, [name]: value });
   };
 
-  useEffect(() => {
-    configurations?.map(({ _id }) => setId(_id));
-  }, [configurations]);
   const handleSave = (e) => {
-    const payload = {
-      storageAccessType: {
-        label: storageaccess,
-        value: storageaccessvalue,
-      },
-    };
+    const payload = { ...data };
 
-    dispatch(
-      uploadConfiguration({
-        id: id,
-        payload: payload,
-        refreshConfigurations: refreshConfigurations,
-        closeModal: closeModal,
-      })
-    );
+    info.length !== 0
+      ? dispatch(
+          updateConfigurations({
+            config: "storage-access-type",
+            id: identification,
+            payload: payload,
+            refreshConfigurations: refreshConfigurations,
+            closeModal: closeModal,
+            setData: setData,
+            data: data,
+            initialState: initialState,
+            setInfo,
+          })
+        )
+      : dispatch(
+          createConfiguration({
+            config: "storage-access-type",
+            payload: payload,
+            refreshConfigurations: refreshConfigurations,
+            closeModal: closeModal,
+            setData,
+            initialState,
+          })
+        );
   };
 
   return (
@@ -48,7 +72,11 @@ const AddStorageAccess = () => {
               <h2 className="font-bold text-2xl">Add Access Method</h2>
               <label
                 htmlFor="addfeatureaccess"
-                className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none absolute right-6 top-6">
+                className="btn btn-sm btn-circle bg-accent text-primary hover:text-white border-accent hover:bg-primary hover:border-none "
+                onClick={() => {
+                  setInfo([]);
+                  setData(initialState);
+                }}>
                 <XIcon className="w-4" />
               </label>
             </div>
@@ -57,7 +85,9 @@ const AddStorageAccess = () => {
             <input
               placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
-              onChange={(e) => setStorageaccess(e.target.value)}
+              name="label"
+              onChange={handleChange}
+              value={data.label}
             />
 
             <h3 className="font-semibold text-sm mb-2">Value</h3>
@@ -67,15 +97,23 @@ const AddStorageAccess = () => {
               placeholder=""
               className="px-4 py-2 border border-black w-full mb-4 rounded-md"
               maxLength={50}
-              onChange={(e) => setStorageaccessvalue(e.target.value)}
+              name="value"
+              onChange={handleChange}
+              value={data.value}
             />
             <button
               className={`${
-                uploadConfigurationLoading && "loading"
+                (createConfigurationLoading && "loading") || (updateConfigurationLoading && "loading")
               } btn  w-full disabled:bg-[#DDDDDD] disabled:text-white cursor-pointer bg-black text-white  mt-6 `}
               disabled={disableBtn}
               onClick={handleSave}>
-              {uploadConfigurationLoading ? "" : "SAVE"}
+              {info?.length !== 0
+                ? updateConfigurationLoading
+                  ? ""
+                  : "EDIT"
+                : createConfigurationLoading
+                ? ""
+                : "SAVE"}
             </button>
           </div>
         </label>

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Accordion from "../../shared/Accordion";
 
 const Access = ({ storageAccessPeriod, storageAccessType, parkingInstruction, parkingPermit }) => {
+  console.log(parkingPermit);
   return (
     <Accordion title="access">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 gap-y-4">
