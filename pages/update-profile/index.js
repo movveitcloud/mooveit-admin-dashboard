@@ -5,7 +5,6 @@ import Accordion from "../../components/shared/Accordion";
 import { useDispatch, useSelector } from "react-redux";
 import { authenticatedUser, updateProfileImage } from "../../redux/features/auth.slice";
 import { FadeLoader } from "react-spinners";
-import Image from "next/image";
 import { DashboardLayout } from "../../components";
 import { updateProfile } from "../../redux/features/auth.slice";
 

@@ -7,7 +7,6 @@ import { dashboardNavLinks } from "../../helpers/data";
 import { DashboardNavAccordion } from "../../components";
 // import UpdateAdminModal from "../modals/UpdateAdminModal";
 // import AdditionalServiceModal from "../modals/AdditionalServiceModals";
-import Image from "next/image";
 
 const DashboardNavbar = ({ pathname }) => {
   const [adminData, setAdminData] = useState(null);

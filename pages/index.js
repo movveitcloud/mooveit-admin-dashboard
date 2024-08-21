@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import Link from "next/link";
- import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import {  FormInput, FormPassword,AuthLayout } from "../components";
+import { FormInput, FormPassword, AuthLayout } from "../components";
 
-
- import {  login } from "../redux/features/auth.slice";
+import { login } from "../redux/features/auth.slice";
 
 const Login = () => {
- const  {loading}  = useSelector((state) => state.auth);
- 
-  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.auth);
 
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -20,12 +18,11 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-
-
   const onSubmit = (data, e) => {
     e.preventDefault();
     const payload = { ...data };
-     dispatch(login({ payload, reset }));
+    dispatch(login({ payload, reset }));
+    console.log(process.env);
   };
 
   return (
@@ -33,7 +30,6 @@ const Login = () => {
       <div className="text-center">
         <h1 className="font-semibold text-2xl md:text-3xl text-black mb-10">Account Login</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-        
           <FormInput
             label="Email Address"
             name="email"
@@ -51,7 +47,6 @@ const Login = () => {
           <button className={`${loading && "loading"} btn btn-block btn-primary mt-8`} type="submit">
             {loading ? "" : "Log in"}
           </button>
-         
         </form>
       </div>
     </AuthLayout>

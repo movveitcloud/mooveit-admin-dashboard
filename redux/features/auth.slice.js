@@ -10,7 +10,7 @@ export const login = createAsyncThunk("/admin/login", async ({ payload, reset, r
     const response = await api.signIn(payload);
     const bytes = response.data.response ? crypto.AES.decrypt(response.data.response, ENCRYPTION_KEY) : "";
     const admin = JSON.parse(bytes ? bytes.toString(crypto.enc.Utf8) : null);
-    // console.log(payload);
+
     successPopUp({
       msg: ` Welcome back ${admin.firstName}`,
       duration: 500,

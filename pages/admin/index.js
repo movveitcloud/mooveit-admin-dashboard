@@ -46,7 +46,7 @@ const Admin = () => {
   const appUsers = [admin, superadmin];
   const csvFilename = ["MovveIt_Admins", "MovveIt_SuperAdmins"];
 
-  const adminCounts = [admin.length, superadmin.length];
+  const adminCounts = [admin?.length, superadmin?.length];
   const adminStatus = ["admin", "superadmin"];
 
   return (
