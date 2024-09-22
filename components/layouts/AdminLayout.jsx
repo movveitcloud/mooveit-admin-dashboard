@@ -119,13 +119,16 @@ const AdminLayout = ({ name, userStatus, handleSearch, userData, headers, active
                               <EyeIcon className="w-4 mr-4 mb-4 " />
                               <p>Update Password</p>
                             </label>
-                            <label
-                              htmlFor="deleteadmin"
-                              className="text-[12px] flex cursor-pointer hover:text-red-600"
-                              onClick={() => setIds(_id)}>
-                              <TrashIcon className="w-4 mr-4 " />
-                              <p>Delete Admin</p>
-                            </label>
+
+                            {filteredAdmin.length > 1 && (
+                              <label
+                                htmlFor="deleteadmin"
+                                className="text-[12px] flex cursor-pointer hover:text-red-600"
+                                onClick={() => setIds(_id)}>
+                                <TrashIcon className="w-4 mr-4 " />
+                                <p>Delete Admin</p>
+                              </label>
+                            )}
                           </div>
                         </div>
                       </td>

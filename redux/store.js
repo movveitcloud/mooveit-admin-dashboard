@@ -6,6 +6,7 @@ import {
   configurationReducer,
   adminReducer,
   bookingsReducer,
+  banksReducer,
 } from "./features";
 
 export const store = configureStore({
@@ -16,5 +17,6 @@ export const store = configureStore({
     configuration: configurationReducer,
     admin: adminReducer,
     bookings: bookingsReducer,
+    banks: banksReducer,
   },
 });

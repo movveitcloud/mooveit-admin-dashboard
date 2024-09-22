@@ -44,3 +44,9 @@ export const deleteAdmin = ({ id }) => API.delete(`/admin/${id}`);
 //BOOKING
 export const getBookings = () => API.get("/booking/admin");
 export const getSingleBooking = (id) => API.get(`/booking/admin/${id}`);
+
+//BANKS
+export const getBanks = () => API.get("/banks");
+export const createBank = ({ payload }) => API.post("/admin/banks", payload);
+export const updateBank = ({ id, payload }) => API.patch(`/admin/banks/${id}`, payload);
+export const deleteBank = ({ id }) => API.delete(`/admin/banks/${id}`);

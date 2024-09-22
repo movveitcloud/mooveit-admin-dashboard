@@ -13,6 +13,7 @@ import {
   CogIcon,
   UserIcon,
   KeyIcon,
+  LibraryIcon,
 } from "@heroicons/react/outline";
 import {
   CubeIcon as CubeIconSolid,
@@ -24,6 +25,7 @@ import {
   CogIcon as CodeIconSolid,
   UserIcon as UserIconSolid,
   KeyIcon as KeyIconSolid,
+  LibraryIcon as LibraryIconSolid,
 } from "@heroicons/react/solid";
 
 export const dashboardNavLinks = [
@@ -57,6 +59,7 @@ export const dashboardNavLinks = [
     icon: <DocumentTextIcon className="w-full" />,
     iconActive: <DocumentTextIconSolid className="w-full" />,
   },
+
   // {
   //   name: "Payments",
   //   path: "/payments",
@@ -71,7 +74,13 @@ export const dashboardNavLinks = [
     icon: <UserIcon className="w-full" />,
     iconActive: <UserIconSolid className="w-full" />,
   },
-
+  {
+    name: "Banks",
+    path: "/banks",
+    title: "Banks",
+    icon: <LibraryIcon className="w-full" />,
+    iconActive: <LibraryIconSolid className="w-full" />,
+  },
   {
     name: "Configurations",
     path: "/configurations",
